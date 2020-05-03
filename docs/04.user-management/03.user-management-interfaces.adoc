@@ -1,0 +1,160 @@
+== Interfaces 
+
+[NOTE]
+.Work In Progress
+===============================================
+This section focuses on the externally available functionality published over interfaces, and how these interfaces connect with external systems.
+Each building block contains:
+
+* Description of functionality
+* Component diagram
+* List of exposed interfaces by URL
+* List of services
+
+Each service contains:
+
+* Description of functionality
+* Component diagram
+* List of exposed interfaces by URL
+
+Each interface in the list contains:
+
+* Unique URL (\*)
+* Interface name
+* Used port/communications protocol
+* Endpoint URL
+* Applicable standards
+* Conveyed information
+* Control and data flow descriptions
+
+(\*) URL would be formed as [port]://[building-block].[eoepca.org]/[endpoint], e.g. https://iam.eoepca.org/logout
+===============================================
+
+=== Identity and Authentication management
+* Description of functionality
+
+The solution for IAM is driven by the need for Federated Identity and Authorization in the context of a network of collaborating exploitation platforms and connected services. This federated environment should facilitate an end-user experience in which they can use a single identity across collaborating platforms (Single Sign-On), they can bring their own existing identity to the platforms ('Login With' service), and platforms can access the federated services of other platforms on behalf of the end-user (delegated access and authorization).
+
+The goal of IAM is to uniquely identify the user and limit access to protected resources to those having suitable access rights. We assume an Attribute Based Access Control (ABAC) approach in which authorization decisions are made based upon access policies/rules that define attributes required by resources and possessed (as claims) by users. ABAC is is seen as a more flexible approach than Role Base Access Control (RBAC), affording the ability to express more sophisticated authorizations rules beyond the role(s) of the user - and noting the fact that a role-based ruleset could be implemented within an attribute based approach, (i.e. RBAC is a subset/specialisation of ABAC).
+
+* Component diagram
+
+* List of exposed interfaces
+
+.IAM interfaces
+|===
+|URL |Name 
+
+|https://iam.eoepca.org/authorize
+|authorization_endpoint
+
+|https://iam.eoepca.org/token
+|token_endpoint
+
+|https://iam.eoepca.org/userinfo
+|userinfo_endpoint
+
+|https://iam.eoepca.org/keys
+|jwks_uri
+
+|https://iam.eoepca.org/logout
+|end_session_endpoint
+
+|https://iam.eoepca.org/introspect
+|introspection_endpoint
+
+|https://iam.eoepca.org/revoke
+|revocation_endpoint
+
+|https://iam.eoepca.org/.well-known/openid-configuration
+|OIDC Discovery
+
+|https://iam.eoepca.org/clients
+|registration_endpoint
+
+|https://iam.eoepca.org/.well-known/openid-federation
+|federation_endpoint
+
+|===
+
+https://iam.eoepca.org/authorize
+
+* Description - To initiate the authentication, and to return the access tokens / code grant (depending on flow).
+* Applicable standards -  
+* Conveyed information
+* Control and data flow descriptions
+
+(Unique URL)
+
+* Applicable standards
+* Conveyed information
+* Control and data flow descriptions
+
+(Unique URL)
+
+* Applicable standards
+* Conveyed information
+* Control and data flow descriptions
+
+(Unique URL)
+
+* Applicable standards
+* Conveyed information
+* Control and data flow descriptions
+
+(Unique URL)
+
+* Applicable standards
+* Conveyed information
+* Control and data flow descriptions
+
+==== Login Service
+
+* Description of functionality
+* Component diagram
+
+==== Policy Enforcement Point (PEP)
+* Description of functionality
+* Component diagram
+
+==== Policy Decision Point (PDP)
+* Description of functionality
+* Component diagram
+
+=== Accounting and Billing
+* Description of functionality
+* Component diagram
+* List of exposed interfaces
+
+.AB interfaces
+|===
+|URL |Name 
+
+|Cell 1 1
+|Cell 2 1
+
+|Cell 1 2
+|Cell 2 2
+
+|===
+
+* List of services
+
+=== User profile
+* Description of functionality
+* Component diagram
+* List of exposed interfaces
+
+.UP interfaces
+|===
+|URL |Name 
+
+|Cell 1 1
+|Cell 2 1
+
+|Cell 1 2
+|Cell 2 2
+
+|===
+
+* List of services
