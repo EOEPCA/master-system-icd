@@ -60,6 +60,11 @@ The Travis automated build generates the HTML/PDF from the Asciidoc in the `mast
 
 ## Development
 
+You would need to set up the following environment variables:
+* GH_USER_NAME - Github user name of the account with permission to access the repository
+* GH_USER_EMAIL - Email of said account
+* GH_TOKEN - Token string generated in Github with permissions to access the repository
+
 During document authoring, the scripts used by the Travis automation pipeline can be executed locally.
 
 In particular the document generation step...

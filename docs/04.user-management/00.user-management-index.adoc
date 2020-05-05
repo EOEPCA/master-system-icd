@@ -1,12 +1,4 @@
 [[mainUserManagement,User Management]]
 = User Management
 
-include::01.user-management-functional.adoc[]
-
-<<<
-
-include::02.user-management-architecture.adoc[]
-
-<<<
-
-include::03.user-management-interfaces.adoc[]
+include::01.user-management-interfaces.adoc[]
