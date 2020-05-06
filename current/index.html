@@ -56,8 +56,10 @@
 <ul class="sectlevel3">
 <li><a href="#_identity_and_authentication_management">4.1.1. Identity and Authentication management</a>
 <ul class="sectlevel4">
-<li><a href="#_iam_interfaces">4.1.1.1. IAM interfaces</a></li>
-<li><a href="#_iam_information">4.1.1.2. IAM information</a></li>
+<li><a href="#_iam_authentication">4.1.1.1. IAM &gt; Authentication</a></li>
+<li><a href="#_iam_discovery">4.1.1.2. IAM &gt; Discovery</a></li>
+<li><a href="#_iam_dynamic_client_registration">4.1.1.3. IAM &gt; Dynamic client registration</a></li>
+<li><a href="#_iam_federation">4.1.1.4. IAM &gt; Federation</a></li>
 </ul>
 </li>
 <li><a href="#_accounting_and_billing">4.1.2. Accounting and Billing</a></li>
@@ -70,12 +72,10 @@
 <ul class="sectlevel2">
 <li><a href="#interfacesProcessingAndChaining">5.1. Processing and Chaining interfaces</a>
 <ul class="sectlevel3">
-<li><a href="#_ades_interfaces">5.1.1. ADES interfaces</a>
-<ul class="sectlevel4">
-<li><a href="#_processing_wps_t">5.1.1.1. Processing &gt; WPS-T</a></li>
-<li><a href="#_processing_ogc_api">5.1.1.2. Processing &gt; OGC API</a></li>
-</ul>
-</li>
+<li><a href="#_ades_wps_t_processing">5.1.1. ADES &gt; WPS-T Processing</a></li>
+<li><a href="#_processing_ogc_api">5.1.2. Processing &gt; OGC API</a></li>
+<li><a href="#_authentication_oidc">5.1.3. Authentication &gt; OIDC</a></li>
+<li><a href="#_authorization_oauth">5.1.4. Authorization &gt; OAuth</a></li>
 </ul>
 </li>
 </ul>
@@ -1180,29 +1180,35 @@ Each building block contains:</p>
 <p>Description of functionality</p>
 </li>
 <li>
+<p>Link to building block documentation</p>
+</li>
+<li>
 <p>Component diagram</p>
 </li>
 <li>
-<p>List of exposed interfaces by URL</p>
-</li>
-<li>
-<p>List of services</p>
+<p>List of ports</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Each service contains:</p>
+<p>Each port in the list contains:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Description of functionality</p>
+<p>Port description</p>
 </li>
 <li>
-<p>Component diagram</p>
+<p>Applicable standards</p>
 </li>
 <li>
-<p>List of exposed interfaces by URL</p>
+<p>Control and data flow interactions by port</p>
+</li>
+<li>
+<p>List of exposed interfaces by port</p>
+</li>
+<li>
+<p>Conveyed information</p>
 </li>
 </ul>
 </div>
@@ -1215,19 +1221,10 @@ Each building block contains:</p>
 <p>Unique URI (\*)</p>
 </li>
 <li>
+<p>Operation - (TBD)</p>
+</li>
+<li>
 <p>Description - (TBD)</p>
-</li>
-<li>
-<p>Applicable standards - (TBD)</p>
-</li>
-<li>
-<p>Operations - (TBD)</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
 </li>
 <li>
 <p>Usage examples (TBD)</p>
@@ -1235,7 +1232,7 @@ Each building block contains:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>(\*) URL would be formed as [scheme]://[building-block].[eoepca.org]/[endpoint], e.g. <a href="https://iam.eoepca.org/logout" class="bare">https://iam.eoepca.org/logout</a></p>
+<p>(\*) URI would be formed as [scheme]://[building-block].[eoepca.org]/[endpoint], e.g. <a href="https://iam.eoepca.org/logout" class="bare">https://iam.eoepca.org/logout</a></p>
 </div>
 </td>
 </tr>
@@ -1259,6 +1256,16 @@ Each building block contains:</p>
 <div class="ulist">
 <ul>
 <li>
+<p>Link to building block documentation</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>TBD</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
 <p>Component diagram</p>
 </li>
 </ul>
@@ -1271,12 +1278,30 @@ Each building block contains:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Link to building block documentation (TBD)</p>
+<p>List of ports</p>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_iam_authentication">4.1.1.1. IAM &gt; Authentication</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Port description - The primary endpoints required to support the OIDC flows are as follows (these endpoints are taken, by example, from OKTA OIDC discovery metadata, <a href="https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/.well-known/openid-configuration" class="bare">https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/.well-known/openid-configuration</a>)</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#OIDC">[OIDC]</a></p>
+</li>
+<li>
+<p>Control and data flow interactions by port - (TBD)</p>
+</li>
+<li>
+<p>List of exposed interfaces by port</p>
 </li>
 </ul>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. IAM interfaces</caption>
+<caption class="title">Table 2. IAM authentication interfaces</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1316,20 +1341,126 @@ Each building block contains:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://iam.eoepca.org/revoke" class="bare">https://iam.eoepca.org/revoke</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#revocation">[revocation]</a></p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://iam.eoepca.org/.well-known/openid-configuration" class="bare">https://iam.eoepca.org/.well-known/openid-configuration</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#discovery">[discovery]</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://iam.eoepca.org/clients" class="bare">https://iam.eoepca.org/clients</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#registration">[registration]</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://iam.eoepca.org/.well-known/openid-federation" class="bare">https://iam.eoepca.org/.well-known/openid-federation</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#federation">[federation]</a></p></td>
-</tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="authorization"></a> URI: <a href="https://iam.eoepca.org/authorize" class="bare">https://iam.eoepca.org/authorize</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - To initiate the authentication, and to return the access tokens / code grant (depending on flow).</p>
+</li>
+<li>
+<p>Operations - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="token"></a> URI: <a href="https://iam.eoepca.org/token" class="bare">https://iam.eoepca.org/token</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - To exchange the code grant for the access tokens.</p>
+</li>
+<li>
+<p>Operations - (TBD)</p>
+</li>
+<li>
+<p>Usage examples - (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="userinfo"></a> URI: <a href="https://iam.eoepca.org/userinfo" class="bare">https://iam.eoepca.org/userinfo</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - To obtain the user information ID token in accordance with the scopes requested in the authorization request.</p>
+</li>
+<li>
+<p>Operations - (TBD)</p>
+</li>
+<li>
+<p>Conveyed information - Returns an <a href="#oidc_id_token">[oidc_id_token]</a> that asserts a user’s authenticated identity with integrity, and non-repudiation.</p>
+</li>
+<li>
+<p>Usage examples - (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="jwks"></a> URI: <a href="https://iam.eoepca.org/keys" class="bare">https://iam.eoepca.org/keys</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - To obtain signing keys for Token validation purposes.</p>
+</li>
+<li>
+<p>Operations - (TBD)</p>
+</li>
+<li>
+<p>Usage examples - (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="end"></a> URI: <a href="https://iam.eoepca.org/logout" class="bare">https://iam.eoepca.org/logout</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - To logout the user from the Login Service, i.e. clear session cookies etc. Although, given that the actual IdP is externalised from the Login Service, it would remain the case that any session cookies maintained by the external IdP would still be in place for a future authentication flow.</p>
+</li>
+<li>
+<p>Operations - (TBD)</p>
+</li>
+<li>
+<p>Usage examples - (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="introspection"></a> URI: <a href="https://iam.eoepca.org/introspect" class="bare">https://iam.eoepca.org/introspect</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Used by clients to verify access tokens.</p>
+</li>
+<li>
+<p>Operations - (TBD)</p>
+</li>
+<li>
+<p>Usage examples - (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="revocation"></a> URI: <a href="https://iam.eoepca.org/revoke" class="bare">https://iam.eoepca.org/revoke</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Used for (refresh) token revocation.</p>
+</li>
+<li>
+<p>Operations - (TBD)</p>
+</li>
+<li>
+<p>Usage examples - (TBD)</p>
+</li>
+<li>
+<p>Conveyed information</p>
+</li>
+</ul>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 3. IAM conveyed information</caption>
 <colgroup>
@@ -1349,196 +1480,25 @@ Each building block contains:</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="oidc_id_token"></a> OICD ID token</p>
+</div>
+<div class="paragraph">
+<p>The ID Token is a JWT that is returned to from the /userinfo endpoint of the Login Service. The returned OIDC ID Token has been signed (JWS) by the Login Service and thus results in a token that asserts a user’s authenticated identity with integrity, and non-repudiation.</p>
+</div>
+</div>
 <div class="sect4">
-<h5 id="_iam_interfaces">4.1.1.1. IAM interfaces</h5>
-<div class="paragraph">
-<p>The primary endpoints required to support the OIDC flows are as follows (these endpoints are taken, by example, from OKTA OIDC discovery metadata, <a href="https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/.well-known/openid-configuration" class="bare">https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/.well-known/openid-configuration</a>):</p>
-</div>
-<div class="paragraph">
-<p><a id="authorization"></a> URI: <a href="https://iam.eoepca.org/authorize" class="bare">https://iam.eoepca.org/authorize</a></p>
-</div>
+<h5 id="_iam_discovery">4.1.1.2. IAM &gt; Discovery</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Description - To initiate the authentication, and to return the access tokens / code grant (depending on flow).</p>
+<p>Port description - The following endpoints relate to Discovery.</p>
 </li>
 <li>
-<p>Applicable standards - (TBD)</p>
+<p>Applicable standards - <a href="https://openid.net/specs/openid-connect-discovery-1_0.html" class="bare">https://openid.net/specs/openid-connect-discovery-1_0.html</a></p>
 </li>
 <li>
-<p>Operations - (TBD)</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><a id="token"></a> URI: <a href="https://iam.eoepca.org/token" class="bare">https://iam.eoepca.org/token</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - To exchange the code grant for the access tokens.</p>
-</li>
-<li>
-<p>Applicable standards - (TBD)</p>
-</li>
-<li>
-<p>Operations - (TBD)</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples - (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><a id="userinfo"></a> URI: <a href="https://iam.eoepca.org/userinfo" class="bare">https://iam.eoepca.org/userinfo</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - To obtain the user information ID token in accordance with the scopes requested in the authorization request.</p>
-</li>
-<li>
-<p>Applicable standards - (TBD)</p>
-</li>
-<li>
-<p>Operations - (TBD)</p>
-</li>
-<li>
-<p>Conveyed information - Returns an <a href="#oidc_id_token">[oidc_id_token]</a> that asserts a user’s authenticated identity with integrity, and non-repudiation.</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples - (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><a id="jwks"></a> URI: <a href="https://iam.eoepca.org/keys" class="bare">https://iam.eoepca.org/keys</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - To obtain signing keys for Token validation purposes.</p>
-</li>
-<li>
-<p>Applicable standards - (TBD)</p>
-</li>
-<li>
-<p>Operations - (TBD)</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples - (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><a id="end"></a> URI: <a href="https://iam.eoepca.org/logout" class="bare">https://iam.eoepca.org/logout</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - To logout the user from the Login Service, i.e. clear session cookies etc. Although, given that the actual IdP is externalised from the Login Service, it would remain the case that any session cookies maintained by the external IdP would still be in place for a future authentication flow.</p>
-</li>
-<li>
-<p>Applicable standards - (TBD)</p>
-</li>
-<li>
-<p>Operations - (TBD)</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples - (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><a id="introspection"></a> URI: <a href="https://iam.eoepca.org/introspect" class="bare">https://iam.eoepca.org/introspect</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Used by clients to verify access tokens.</p>
-</li>
-<li>
-<p>Applicable standards - (TBD)</p>
-</li>
-<li>
-<p>Operations - (TBD)</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples - (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><a id="revocation"></a> URI: <a href="https://iam.eoepca.org/revoke" class="bare">https://iam.eoepca.org/revoke</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Used for (refresh) token revocation.</p>
-</li>
-<li>
-<p>Applicable standards - (TBD)</p>
-</li>
-<li>
-<p>Operations - (TBD)</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples - (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The following endpoints relate to Discovery:</p>
-</div>
-<div class="paragraph">
-<p><a id="discovery"></a> URI: <a href="https://iam.eoepca.org/.well-known/openid-configuration" class="bare">https://iam.eoepca.org/.well-known/openid-configuration</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Dynamic discovery of OIDC endpoints by clients.</p>
+<p>Control and data flow interactions by port</p>
 </li>
 </ul>
 </div>
@@ -1567,37 +1527,82 @@ Each building block contains:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Applicable standards - <a href="https://openid.net/specs/openid-connect-discovery-1_0.html" class="bare">https://openid.net/specs/openid-connect-discovery-1_0.html</a></p>
+<p>List of exposed interfaces by port</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4. IAM authentication interfaces</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">URL</th>
+<th class="tableblock halign-left valign-top">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://iam.eoepca.org/.well-known/openid-configuration" class="bare">https://iam.eoepca.org/.well-known/openid-configuration</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#discovery">[discovery]</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a id="discovery"></a> URI: <a href="https://iam.eoepca.org/.well-known/openid-configuration" class="bare">https://iam.eoepca.org/.well-known/openid-configuration</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Dynamic discovery of OIDC endpoints by clients.</p>
 </li>
 <li>
 <p>Operations - (TBD)</p>
 </li>
 <li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
 <p>Usage examples - (TBD)</p>
+</li>
+<li>
+<p>Conveyed information</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>The following endpoints relate to Dynamic Client Registration:</p>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 5. IAM conveyed information</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Information</th>
+<th class="tableblock halign-left valign-top">Interfaces</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#tbd">[tbd]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#tbd">[tbd]</a></p></td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="paragraph">
-<p><a id="registration"></a> URI: <a href="https://iam.eoepca.org/clients" class="bare">https://iam.eoepca.org/clients</a></p>
-</div>
+<div class="sect4">
+<h5 id="_iam_dynamic_client_registration">4.1.1.3. IAM &gt; Dynamic client registration</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Description - Dynamic registration of clients (Authentication Agents).</p>
+<p>Port description - The following endpoints relate to Dynamic Client Registration.</p>
+</li>
+<li>
+<p>Applicable standards - <a href="https://openid.net/specs/openid-connect-registration-1_0.html" class="bare">https://openid.net/specs/openid-connect-registration-1_0.html</a></p>
+</li>
+<li>
+<p>Control and data flow interactions by port - The possibility exists for the OIDC Client (Login Service) to perform auto-registration with the Login Service, using OIDC Client Registration. In doing so the OIDC client obtains its Client ID and Secret.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>The possibility exists for the OIDC Client (Login Service) to perform auto-registration with the Login Service, using OIDC Client Registration. In doing so the OIDC client obtains its Client ID and Secret.</p>
 </div>
 <div class="paragraph">
 <p>This may be of interest in a couple of cases:</p>
@@ -1612,84 +1617,15 @@ Each building block contains:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Applicable standards - <a href="https://openid.net/specs/openid-connect-registration-1_0.html" class="bare">https://openid.net/specs/openid-connect-registration-1_0.html</a></p>
-</li>
-<li>
-<p>Operations - (TBD)</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples - (TBD)</p>
+<p>List of exposed interfaces by port</p>
 </li>
 </ul>
 </div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The following endpoints relate to the establishment of a federation of collaborating Exploitation Platforms through a dynamic trust model:</p>
-</div>
-<div class="paragraph">
-<p><a id="federation"></a> URI: <a href="https://iam.eoepca.org/.well-known/openid-configuration" class="bare">https://iam.eoepca.org/.well-known/openid-configuration</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - OIDC Federation API endpoint through which Entity Statements are published about itself and other entities (such as other Exploitation Platforms).</p>
-</li>
-<li>
-<p>Applicable standards - (TBD)</p>
-</li>
-<li>
-<p>Operations - (TBD)</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples - (TBD)</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_iam_information">4.1.1.2. IAM information</h5>
-<div class="paragraph">
-<p><a id="oidc_id_token"></a> OICD ID token</p>
-</div>
-<div class="paragraph">
-<p>The ID Token is a JWT that is returned to from the /userinfo endpoint of the Login Service. The returned OIDC ID Token has been signed (JWS) by the Login Service and thus results in a token that asserts a user’s authenticated identity with integrity, and non-repudiation.</p>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_accounting_and_billing">4.1.2. Accounting and Billing</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Description of functionality</p>
-</li>
-<li>
-<p>Component diagram</p>
-</li>
-<li>
-<p>Link to building block documentation</p>
-</li>
-<li>
-<p>List of exposed interfaces</p>
 </li>
 </ul>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 4. AB interfaces</caption>
+<caption class="title">Table 6. IAM dynamic client registration interfaces</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1702,19 +1638,142 @@ Each building block contains:</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cell 1 1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cell 2 1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cell 1 2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cell 2 2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://iam.eoepca.org/clients" class="bare">https://iam.eoepca.org/clients</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#registration">[registration]</a></p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="registration"></a> URI: <a href="https://iam.eoepca.org/clients" class="bare">https://iam.eoepca.org/clients</a></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>List of services</p>
+<p>Description - Dynamic registration of clients (Authentication Agents).</p>
+</li>
+<li>
+<p>Operations - (TBD)</p>
+</li>
+<li>
+<p>Usage examples - (TBD)</p>
+</li>
+<li>
+<p>Conveyed information</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 7. IAM conveyed information</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Information</th>
+<th class="tableblock halign-left valign-top">Interfaces</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#tbd">[tbd]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#tbd">[tbd]</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_iam_federation">4.1.1.4. IAM &gt; Federation</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Port description - The following endpoints relate to the establishment of a federation of collaborating Exploitation Platforms through a dynamic trust model.</p>
+</li>
+<li>
+<p>Applicable standards</p>
+</li>
+<li>
+<p>Control and data flow interactions by port</p>
+</li>
+<li>
+<p>List of exposed interfaces by port</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 8. IAM federation interfaces</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">URL</th>
+<th class="tableblock halign-left valign-top">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://iam.eoepca.org/.well-known/openid-federation" class="bare">https://iam.eoepca.org/.well-known/openid-federation</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#federation">[federation]</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a id="federation"></a> URI: <a href="https://iam.eoepca.org/.well-known/openid-configuration" class="bare">https://iam.eoepca.org/.well-known/openid-configuration</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - OIDC Federation API endpoint through which Entity Statements are published about itself and other entities (such as other Exploitation Platforms).</p>
+</li>
+<li>
+<p>Operations - (TBD)</p>
+</li>
+<li>
+<p>Usage examples - (TBD)</p>
+</li>
+<li>
+<p>Conveyed information</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 9. IAM conveyed information</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Information</th>
+<th class="tableblock halign-left valign-top">Interfaces</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#tbd">[tbd]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#tbd">[tbd]</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_accounting_and_billing">4.1.2. Accounting and Billing</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Description of functionality</p>
+</li>
+<li>
+<p>Link to building block documentation</p>
+</li>
+<li>
+<p>Component diagram</p>
+</li>
+<li>
+<p>List of ports</p>
 </li>
 </ul>
 </div>
@@ -1727,43 +1786,13 @@ Each building block contains:</p>
 <p>Description of functionality</p>
 </li>
 <li>
-<p>Component diagram</p>
-</li>
-<li>
 <p>Link to building block documentation</p>
 </li>
 <li>
-<p>List of exposed interfaces</p>
+<p>Component diagram</p>
 </li>
-</ul>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. UP interfaces</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">URL</th>
-<th class="tableblock halign-left valign-top">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cell 1 1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cell 2 1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cell 1 2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cell 2 2</p></td>
-</tr>
-</tbody>
-</table>
-<div class="ulist">
-<ul>
 <li>
-<p>List of services</p>
+<p>List of ports</p>
 </li>
 </ul>
 </div>
@@ -1795,29 +1824,35 @@ Each building block contains:</p>
 <p>Description of functionality</p>
 </li>
 <li>
+<p>Link to building block documentation</p>
+</li>
+<li>
 <p>Component diagram</p>
 </li>
 <li>
-<p>List of exposed interfaces by URL</p>
-</li>
-<li>
-<p>List of services</p>
+<p>List of ports</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Each service contains:</p>
+<p>Each port in the list contains:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Description of functionality</p>
+<p>Port description</p>
 </li>
 <li>
-<p>Component diagram</p>
+<p>Applicable standards</p>
 </li>
 <li>
-<p>List of exposed interfaces by URL</p>
+<p>Control and data flow interactions by port</p>
+</li>
+<li>
+<p>List of exposed interfaces by port</p>
+</li>
+<li>
+<p>Conveyed information</p>
 </li>
 </ul>
 </div>
@@ -1830,19 +1865,10 @@ Each building block contains:</p>
 <p>Unique URI (\*)</p>
 </li>
 <li>
+<p>Operation - (TBD)</p>
+</li>
+<li>
 <p>Description - (TBD)</p>
-</li>
-<li>
-<p>Applicable standards - (TBD)</p>
-</li>
-<li>
-<p>Operations - (TBD)</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
 </li>
 <li>
 <p>Usage examples (TBD)</p>
@@ -1850,7 +1876,7 @@ Each building block contains:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>(\*) URL would be formed as [scheme]://[building-block].[eoepca.org]/[endpoint], e.g. <a href="https://iam.eoepca.org/logout" class="bare">https://iam.eoepca.org/logout</a></p>
+<p>(\*) URI would be formed as [scheme]://[building-block].[eoepca.org]/[endpoint], e.g. <a href="https://iam.eoepca.org/logout" class="bare">https://iam.eoepca.org/logout</a></p>
 </div>
 </td>
 </tr>
@@ -1860,6 +1886,9 @@ Each building block contains:</p>
 <ul>
 <li>
 <p>Description</p>
+</li>
+<li>
+<p>Link to building block documentation - <a href="https://eoepca.github.io/proc-ades" class="bare">https://eoepca.github.io/proc-ades</a></p>
 </li>
 <li>
 <p>Component diagram</p>
@@ -1874,12 +1903,37 @@ Each building block contains:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Link to building block documentation</p>
+<p>List of ports</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_ades_wps_t_processing">5.1.1. ADES &gt; WPS-T Processing</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Port description - This interface specification is used for both the Client &lt; - &gt; EMS, and the EMS &lt; - &gt; ADES interfaces.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>WPS-T extends standard WPS by adding DeployProcess and UndeployProcess operations. Once a process has been deployed to a WPS then the existing wps:Execute operation remains applicable for execution in the standard way.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Control and data flow interactions by port - (TBD)</p>
+</li>
+<li>
+<p>List of exposed interfaces by port</p>
 </li>
 </ul>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 6. ADES interfaces</caption>
+<caption class="title">Table 10. ADES WPS-T interfaces</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1901,27 +1955,27 @@ Each building block contains:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes" class="bare">https://ades.eoepca.org/processes</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#get capabilities">[get capabilities]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#get_capabilities">[get_capabilities]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes" class="bare">https://ades.eoepca.org/processes</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#deploy process">[deploy process]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#deploy_process">[deploy_process]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}" class="bare">https://ades.eoepca.org/processes/{id}</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#describe process">[describe process]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#describe_process">[describe_process]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}" class="bare">https://ades.eoepca.org/processes/{id}</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DELETE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#undeploy process">[undeploy process]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#undeploy_process">[undeploy_process]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/jobs" class="bare">https://ades.eoepca.org/processes/{id}/jobs</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#get jobs">[get jobs]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#get_jobs">[get_jobs]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/jobs" class="bare">https://ades.eoepca.org/processes/{id}/jobs</a></p></td>
@@ -1931,7 +1985,7 @@ Each building block contains:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/jobs/{jobID}" class="bare">https://ades.eoepca.org/processes/{id}/jobs/{jobID}</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#get status">[get status]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#get_status">[get_status]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/jobs/{jobID}" class="bare">https://ades.eoepca.org/processes/{id}/jobs/{jobID}</a></p></td>
@@ -1941,72 +1995,430 @@ Each building block contains:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/jobs/{jobID}/result" class="bare">https://ades.eoepca.org/processes/{id}/jobs/{jobID}/result</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#get result">[get result]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#get_result">[get_result]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/quotations" class="bare">https://ades.eoepca.org/processes/{id}/quotations</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#get quotations list">[get quotations list]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#get_quotations_list">[get_quotations_list]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/quotations" class="bare">https://ades.eoepca.org/processes/{id}/quotations</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#request a process quotation">[request a process quotation]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#request_process_quotation">[request_process_quotation]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/quotations/{quotationID}" class="bare">https://ades.eoepca.org/processes/{id}/quotations/{quotationID}</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve quotation information">[retrieve quotation information]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve_process_quotation_information">[retrieve_process_quotation_information]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/quotations/{quotationID}" class="bare">https://ades.eoepca.org/processes/{id}/quotations/{quotationID}</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#execute quoted process">[execute quoted process]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#execute_quoted_process">[execute_quoted_process]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/visibility" class="bare">https://ades.eoepca.org/processes/{id}/visibility</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve visibility status">[retrieve visibility status]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve_visibility_status">[retrieve_visibility_status]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/visibility" class="bare">https://ades.eoepca.org/processes/{id}/visibility</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PUT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#change visibility status">[change visibility status]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#change_visibility_status">[change_visibility_status]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/quotations" class="bare">https://ades.eoepca.org/quotations</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve list of all quotations">[retrieve list of all quotations]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve_all_quotations">[retrieve_all_quotations]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/quotations/{quotationID}" class="bare">https://ades.eoepca.org/quotations/{quotationID}</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve quotation information">[retrieve quotation information]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve_quotation_information">[retrieve_quotation_information]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/quotations/{quotationID}" class="bare">https://ades.eoepca.org/quotations/{quotationID}</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#execute a quoted process">[execute a quoted process]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#execute_quotation">[execute_quotation]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/bills" class="bare">https://ades.eoepca.org/bills</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve list of all bills">[retrieve list of all bills]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve_all_bills">[retrieve_all_bills]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/bills/{billID}" class="bare">https://ades.eoepca.org/bills/{billID}</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve bill information">[retrieve bill information]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve_bill_information">[retrieve_bill_information]</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/conformance" class="bare">https://ades.eoepca.org/conformance</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve list of all requirements classes">[retrieve list of all requirements classes]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve_all_requirements">[retrieve_all_requirements]</a></p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="landing"></a> URI: <a href="https://ades.eoepca.org/" class="bare">https://ades.eoepca.org/</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - The landing page provides links to the API definition, the Conformance statements and the metadata about the processes offered by this API</p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="get_capabilities"></a> URI: <a href="https://ades.eoepca.org/processes" class="bare">https://ades.eoepca.org/processes</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve available processes</p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="deploy_process"></a> URI: <a href="https://ades.eoepca.org/processes" class="bare">https://ades.eoepca.org/processes</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Deploy a process</p>
+</li>
+<li>
+<p>Operations - POST</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="describe_process"></a> URI: <a href="https://ades.eoepca.org/processes/{id}" class="bare">https://ades.eoepca.org/processes/{id}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve a process description</p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="undeploy_process"></a> URI: <a href="https://ades.eoepca.org/processes/{id}" class="bare">https://ades.eoepca.org/processes/{id}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Undeploy a process</p>
+</li>
+<li>
+<p>Operations - DELETE</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="get_jobs"></a> URI: <a href="https://ades.eoepca.org/processes/{id}/jobs" class="bare">https://ades.eoepca.org/processes/{id}/jobs</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve the list of jobs for a process</p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="execute"></a> URI: <a href="https://ades.eoepca.org/processes/{id}/jobs" class="bare">https://ades.eoepca.org/processes/{id}/jobs</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Execute a process</p>
+</li>
+<li>
+<p>Operations - POST</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="get_status"></a> URI: <a href="https://ades.eoepca.org/processes/{id}/jobs/{jobID}" class="bare">https://ades.eoepca.org/processes/{id}/jobs/{jobID}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve the status of a job</p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="dismiss"></a> URI: <a href="https://ades.eoepca.org/processes/{id}/jobs/{jobID}" class="bare">https://ades.eoepca.org/processes/{id}/jobs/{jobID}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Dismiss a job</p>
+</li>
+<li>
+<p>Operations - DELETE</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="get_result"></a> URI: <a href="https://ades.eoepca.org/processes/{id}/jobs/{jobID}/result" class="bare">https://ades.eoepca.org/processes/{id}/jobs/{jobID}/result</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve the result(s) of a job</p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="request_process_quotation"></a> URI: <a href="https://ades.eoepca.org/processes/{id}/quotations" class="bare">https://ades.eoepca.org/processes/{id}/quotations</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve the list of quotation ids for a given process</p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="retrieve_process_quotation"></a> URI: <a href="https://ades.eoepca.org/processes/{id}/quotations" class="bare">https://ades.eoepca.org/processes/{id}/quotations</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Request a quotation for a given process</p>
+</li>
+<li>
+<p>Operations - POST</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="retrieve_process_quotation_information"></a> URI: <a href="https://ades.eoepca.org/processes/{id}/quotations/{quotationID}" class="bare">https://ades.eoepca.org/processes/{id}/quotations/{quotationID}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve quotation information</p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="execute_quoted_process"></a> URI: <a href="https://ades.eoepca.org/processes/{id}/quotations/{quotationID}" class="bare">https://ades.eoepca.org/processes/{id}/quotations/{quotationID}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Execute a quoted process</p>
+</li>
+<li>
+<p>Operations - POST</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="retrieve_visibility_status"></a> URI: <a href="https://ades.eoepca.org/processes/{id}/visibility" class="bare">https://ades.eoepca.org/processes/{id}/visibility</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve the visibility status for a process</p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="change_visibility_status"></a> URI: <a href="https://ades.eoepca.org/processes/{id}/visibility" class="bare">https://ades.eoepca.org/processes/{id}/visibility</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Change the visibility status for a process</p>
+</li>
+<li>
+<p>Operations - PUT</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="retrieve_all_quotations"></a> URI: <a href="https://ades.eoepca.org/quotations" class="bare">https://ades.eoepca.org/quotations</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve the list of all quotation ids</p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="retrieve_quotation_information"></a> URI: <a href="https://ades.eoepca.org/quotations/{quotationID}" class="bare">https://ades.eoepca.org/quotations/{quotationID}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve quotation information</p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="execute_quotation"></a> URI: <a href="https://ades.eoepca.org/quotations/{quotationID}" class="bare">https://ades.eoepca.org/quotations/{quotationID}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Execute a quoted process</p>
+</li>
+<li>
+<p>Operations - POST</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="retrieve_all_bills"></a> URI: <a href="https://ades.eoepca.org/bills" class="bare">https://ades.eoepca.org/bills</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve the list of all bill identifiers</p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="retrieve_bill_information"></a> URI: <a href="https://ades.eoepca.org/bills/{billID}" class="bare">https://ades.eoepca.org/bills/{billID}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve bill information</p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="retrieve_all_requirements"></a> URI: <a href="https://ades.eoepca.org/conformance" class="bare">https://ades.eoepca.org/conformance</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - list all requirements classes specified in the standard (WPS REST/JSON Binding Core) that the server conforms to</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a>, <a href="#WPS-REST-JSON">[WPS-REST-JSON]</a></p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+<li>
+<p>Conveyed information</p>
+</li>
+</ul>
+</div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. ADES conveyed information</caption>
+<caption class="title">Table 11. ADES conveyed information</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2024,571 +2436,18 @@ Each building block contains:</p>
 </tr>
 </tbody>
 </table>
+</div>
 <div class="sect3">
-<h4 id="_ades_interfaces">5.1.1. ADES interfaces</h4>
-<div class="sect4">
-<h5 id="_processing_wps_t">5.1.1.1. Processing &gt; WPS-T</h5>
-<div class="paragraph">
-<p>This interface specification is used for both the Client &lt; - &gt; EMS, and the EMS &lt; - &gt; ADES interfaces.</p>
+<h4 id="_processing_ogc_api">5.1.2. Processing &gt; OGC API</h4>
+
 </div>
-<div class="paragraph">
-<p>WPS-T extends standard WPS by adding DeployProcess and UndeployProcess operations (see <a href="#WPS-T">[WPS-T]</a>). Once a process has been deployed to a WPS then the existing wps:Execute operation remains applicable for execution in the standard way.</p>
+<div class="sect3">
+<h4 id="_authentication_oidc">5.1.3. Authentication &gt; OIDC</h4>
+
 </div>
-<div class="paragraph">
-<p><a id="landing"></a> URI: <a href="https://ades.eoepca.org/" class="bare">https://ades.eoepca.org/</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - The landing page provides links to the API definition, the Conformance statements and the metadata about the processes offered by this API</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - GET</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[get capabilities]] URI: <a href="https://ades.eoepca.org/processes" class="bare">https://ades.eoepca.org/processes</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Retrieve available processes</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - GET</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[deploy process]] URI: <a href="https://ades.eoepca.org/processes" class="bare">https://ades.eoepca.org/processes</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Deploy a process</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - POST</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[describe process]] URI: <a href="https://ades.eoepca.org/processes/{id}" class="bare">https://ades.eoepca.org/processes/{id}</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Retrieve a process description</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - GET</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><a id="dismiss"></a> URI: <a href="https://ades.eoepca.org/processes/{id}/jobs/{jobID}" class="bare">https://ades.eoepca.org/processes/{id}/jobs/{jobID}</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Undeploy a process</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - DELETE</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[get jobs]] URI: <a href="https://ades.eoepca.org/processes/{id}/jobs" class="bare">https://ades.eoepca.org/processes/{id}/jobs</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Retrieve the list of jobs for a process</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - GET</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><a id="execute"></a> URI: <a href="https://ades.eoepca.org/processes/{id}/jobs" class="bare">https://ades.eoepca.org/processes/{id}/jobs</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Execute a process</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - POST</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[get result]] URI: <a href="https://ades.eoepca.org/processes/{id}/jobs/{jobID}/result" class="bare">https://ades.eoepca.org/processes/{id}/jobs/{jobID}/result</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Retrieve the status of a job</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - GET</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[get quotations list]] URI: <a href="https://ades.eoepca.org/processes/{id}/quotations" class="bare">https://ades.eoepca.org/processes/{id}/quotations</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Dismiss a job</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - GET</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[get result]] URI: <a href="https://ades.eoepca.org/processes/{id}/jobs/{jobID}/result" class="bare">https://ades.eoepca.org/processes/{id}/jobs/{jobID}/result</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Retrieve the result(s) of a job</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - GET</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[request a process quotation]] URI: <a href="https://ades.eoepca.org/processes/{id}/quotations" class="bare">https://ades.eoepca.org/processes/{id}/quotations</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Retrieve the list of quotation ids for a given process</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - GET</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[retrieve quotation information]] URI: <a href="https://ades.eoepca.org/processes/{id}/quotations/{quotationID}" class="bare">https://ades.eoepca.org/processes/{id}/quotations/{quotationID}</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Request a quotation for a given process</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - GET</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[execute quoted process]] URI: <a href="https://ades.eoepca.org/processes/{id}/quotations/{quotationID}" class="bare">https://ades.eoepca.org/processes/{id}/quotations/{quotationID}</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Retrieve quotation information</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - POST</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[execute quoted process]] URI: <a href="https://ades.eoepca.org/processes/{id}/quotations/{quotationID}" class="bare">https://ades.eoepca.org/processes/{id}/quotations/{quotationID}</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Execute a quoted process</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - POST</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[retrieve visibility status]] URI: <a href="https://ades.eoepca.org/processes/{id}/visibility" class="bare">https://ades.eoepca.org/processes/{id}/visibility</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Retrieve the visibility status for a process</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - GET</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[change visibility status]] URI: <a href="https://ades.eoepca.org/processes/{id}/visibility" class="bare">https://ades.eoepca.org/processes/{id}/visibility</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Change the visibility status for a process</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - PUT</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[retrieve list of all quotations]] URI: <a href="https://ades.eoepca.org/quotations" class="bare">https://ades.eoepca.org/quotations</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Retrieve the list of all quotation ids</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - GET</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[retrieve quotation information]] URI: <a href="https://ades.eoepca.org/quotations/{quotationID}" class="bare">https://ades.eoepca.org/quotations/{quotationID}</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Retrieve quotation information</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - GET</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[execute a quoted process]] URI: <a href="https://ades.eoepca.org/quotations/{quotationID}" class="bare">https://ades.eoepca.org/quotations/{quotationID}</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Execute a quoted process</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - POST</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[retrieve list of all bills]] URI: <a href="https://ades.eoepca.org/bills" class="bare">https://ades.eoepca.org/bills</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Retrieve the list of all bill identifiers</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - GET</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[retrieve bill information]] URI: <a href="https://ades.eoepca.org/bills/{billID}" class="bare">https://ades.eoepca.org/bills/{billID}</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - Retrieve bill information</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
-</li>
-<li>
-<p>Operations - GET</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>[[retrieve list of all requirements classes]] URI: <a href="https://ades.eoepca.org/conformance" class="bare">https://ades.eoepca.org/conformance</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Description - list all requirements classes specified in the standard (WPS REST/JSON Binding Core) that the server conforms to</p>
-</li>
-<li>
-<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a>, <a href="#WPS-REST-JSON">[WPS-REST-JSON]</a></p>
-</li>
-<li>
-<p>Operations - GET</p>
-</li>
-<li>
-<p>Conveyed information - (TBD)</p>
-</li>
-<li>
-<p>Control and data flow descriptions - (TBD)</p>
-</li>
-<li>
-<p>Usage examples (TBD)</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_processing_ogc_api">5.1.1.2. Processing &gt; OGC API</h5>
+<div class="sect3">
+<h4 id="_authorization_oauth">5.1.4. Authorization &gt; OAuth</h4>
 <div style="page-break-after: always;"></div>
-</div>
 </div>
 </div>
 </div>
@@ -2596,12 +2455,164 @@ Each building block contains:</p>
 <div class="sect1">
 <h2 id="mainResourceManagement">6. Resource Management Interfaces</h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Work In Progress</div>
+<div class="paragraph">
+<p>This section focuses on the externally available functionality published over interfaces, and how these interfaces connect with external systems.<br>
+Each building block contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description of functionality</p>
+</li>
+<li>
+<p>Link to building block documentation</p>
+</li>
+<li>
+<p>Component diagram</p>
+</li>
+<li>
+<p>List of ports</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each port in the list contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Port description</p>
+</li>
+<li>
+<p>Applicable standards</p>
+</li>
+<li>
+<p>Control and data flow interactions by port</p>
+</li>
+<li>
+<p>List of exposed interfaces by port</p>
+</li>
+<li>
+<p>Conveyed information</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each interface in the list contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Unique URI (\*)</p>
+</li>
+<li>
+<p>Operation - (TBD)</p>
+</li>
+<li>
+<p>Description - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>(\*) URI would be formed as [scheme]://[building-block].[eoepca.org]/[endpoint], e.g. <a href="https://iam.eoepca.org/logout" class="bare">https://iam.eoepca.org/logout</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="mainPlatformApi">7. Platform API</h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Work In Progress</div>
+<div class="paragraph">
+<p>This section focuses on the externally available functionality published over interfaces, and how these interfaces connect with external systems.<br>
+Each building block contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description of functionality</p>
+</li>
+<li>
+<p>Link to building block documentation</p>
+</li>
+<li>
+<p>Component diagram</p>
+</li>
+<li>
+<p>List of ports</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each port in the list contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Port description</p>
+</li>
+<li>
+<p>Applicable standards</p>
+</li>
+<li>
+<p>Control and data flow interactions by port</p>
+</li>
+<li>
+<p>List of exposed interfaces by port</p>
+</li>
+<li>
+<p>Conveyed information</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each interface in the list contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Unique URI (\*)</p>
+</li>
+<li>
+<p>Operation - (TBD)</p>
+</li>
+<li>
+<p>Description - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>(\*) URI would be formed as [scheme]://[building-block].[eoepca.org]/[endpoint], e.g. <a href="https://iam.eoepca.org/logout" class="bare">https://iam.eoepca.org/logout</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>The Platform API defines standard interfaces at both service and programmatic levels, with the goal of encouraging interoperation between platforms and providing a consistent and portable programming paradigm for expert users. The Service API and its associated Client Library together present a standard platform interface against which analysis and exploitation activities may be developed, and through which platform services can be federated.</p>
 </div>
@@ -3016,6 +3027,82 @@ print(result)</code></pre>
 <div class="sect1">
 <h2 id="mainWebPortal">8. Web Portal Interfaces</h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Work In Progress</div>
+<div class="paragraph">
+<p>This section focuses on the externally available functionality published over interfaces, and how these interfaces connect with external systems.<br>
+Each building block contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description of functionality</p>
+</li>
+<li>
+<p>Link to building block documentation</p>
+</li>
+<li>
+<p>Component diagram</p>
+</li>
+<li>
+<p>List of ports</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each port in the list contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Port description</p>
+</li>
+<li>
+<p>Applicable standards</p>
+</li>
+<li>
+<p>Control and data flow interactions by port</p>
+</li>
+<li>
+<p>List of exposed interfaces by port</p>
+</li>
+<li>
+<p>Conveyed information</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each interface in the list contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Unique URI (\*)</p>
+</li>
+<li>
+<p>Operation - (TBD)</p>
+</li>
+<li>
+<p>Description - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>(\*) URI would be formed as [scheme]://[building-block].[eoepca.org]/[endpoint], e.g. <a href="https://iam.eoepca.org/logout" class="bare">https://iam.eoepca.org/logout</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <hr>
 <div class="paragraph large">
 <p>&lt;&lt; End of Document &gt;&gt;</p>
