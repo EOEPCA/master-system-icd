@@ -70,7 +70,11 @@
 <ul class="sectlevel2">
 <li><a href="#interfacesProcessingAndChaining">5.1. Processing and Chaining interfaces</a>
 <ul class="sectlevel3">
-<li><a href="#_ades_interfaces">5.1.1. ADES interfaces</a></li>
+<li><a href="#_ades_interfaces">5.1.1. ADES interfaces</a>
+<ul class="sectlevel4">
+<li><a href="#_processing">5.1.1.1. Processing</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1876,19 +1880,127 @@ Each building block contains:</p>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 6. ADES interfaces</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">URL</th>
+<th class="tableblock halign-left valign-top">Operation</th>
 <th class="tableblock halign-left valign-top">Name</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/(TBD" class="bare">https://ades.eoepca.org/(TBD</a>)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#tbd">[tbd]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/" class="bare">https://ades.eoepca.org/</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#landing">[landing]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes" class="bare">https://ades.eoepca.org/processes</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#get capabilities">[get capabilities]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes" class="bare">https://ades.eoepca.org/processes</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#deploy process">[deploy process]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}" class="bare">https://ades.eoepca.org/processes/{id}</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#describe process">[describe process]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}" class="bare">https://ades.eoepca.org/processes/{id}</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DELETE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#undeploy process">[undeploy process]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/jobs" class="bare">https://ades.eoepca.org/processes/{id}/jobs</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#get jobs">[get jobs]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/jobs" class="bare">https://ades.eoepca.org/processes/{id}/jobs</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#execute">[execute]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/jobs/{jobID}" class="bare">https://ades.eoepca.org/processes/{id}/jobs/{jobID}</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#get status">[get status]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/jobs/{jobID}" class="bare">https://ades.eoepca.org/processes/{id}/jobs/{jobID}</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DELETE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#dismiss">[dismiss]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/jobs/{jobID}/result" class="bare">https://ades.eoepca.org/processes/{id}/jobs/{jobID}/result</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#get result">[get result]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/quotations" class="bare">https://ades.eoepca.org/processes/{id}/quotations</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#get quotations list">[get quotations list]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/quotations" class="bare">https://ades.eoepca.org/processes/{id}/quotations</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#request a process quotation">[request a process quotation]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/quotations/{quotationID}" class="bare">https://ades.eoepca.org/processes/{id}/quotations/{quotationID}</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve quotation information">[retrieve quotation information]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/quotations/{quotationID}" class="bare">https://ades.eoepca.org/processes/{id}/quotations/{quotationID}</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#execute quoted process">[execute quoted process]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/visibility" class="bare">https://ades.eoepca.org/processes/{id}/visibility</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve visibility status">[retrieve visibility status]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/processes/{id}/visibility" class="bare">https://ades.eoepca.org/processes/{id}/visibility</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#change visibility status">[change visibility status]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/quotations" class="bare">https://ades.eoepca.org/quotations</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve list of all quotations">[retrieve list of all quotations]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/quotations/{quotationID}" class="bare">https://ades.eoepca.org/quotations/{quotationID}</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve quotation information">[retrieve quotation information]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/quotations/{quotationID}" class="bare">https://ades.eoepca.org/quotations/{quotationID}</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#execute a quoted process">[execute a quoted process]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/bills" class="bare">https://ades.eoepca.org/bills</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve list of all bills">[retrieve list of all bills]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/bills/{billID}" class="bare">https://ades.eoepca.org/bills/{billID}</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve bill information">[retrieve bill information]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ades.eoepca.org/conformance" class="bare">https://ades.eoepca.org/conformance</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#retrieve list of all requirements classes">[retrieve list of all requirements classes]</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -1913,6 +2025,14 @@ Each building block contains:</p>
 </table>
 <div class="sect3">
 <h4 id="_ades_interfaces">5.1.1. ADES interfaces</h4>
+<div class="sect4">
+<h5 id="_processing">5.1.1.1. Processing</h5>
+<div class="paragraph">
+<p>This interface specification is used for both the Client &lt; - &gt; EMS, and the EMS &lt; - &gt; ADES interfaces.</p>
+</div>
+<div class="paragraph">
+<p>WPS-T extends standard WPS by adding DeployProcess and UndeployProcess operations. Once a process has been deployed to a WPS then the existing wps:Execute operation remains applicable for execution in the standard way.</p>
+</div>
 <div class="paragraph">
 <p><a id="tbd"></a> URI:</p>
 </div>
@@ -1939,6 +2059,7 @@ Each building block contains:</p>
 </ul>
 </div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 </div>
