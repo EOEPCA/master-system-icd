@@ -72,7 +72,8 @@
 <ul class="sectlevel3">
 <li><a href="#_ades_interfaces">5.1.1. ADES interfaces</a>
 <ul class="sectlevel4">
-<li><a href="#_processing">5.1.1.1. Processing</a></li>
+<li><a href="#_processing_wps_t">5.1.1.1. Processing &gt; WPS-T</a></li>
+<li><a href="#_processing_ogc_api">5.1.1.2. Processing &gt; OGC API</a></li>
 </ul>
 </li>
 </ul>
@@ -2026,26 +2027,26 @@ Each building block contains:</p>
 <div class="sect3">
 <h4 id="_ades_interfaces">5.1.1. ADES interfaces</h4>
 <div class="sect4">
-<h5 id="_processing">5.1.1.1. Processing</h5>
+<h5 id="_processing_wps_t">5.1.1.1. Processing &gt; WPS-T</h5>
 <div class="paragraph">
 <p>This interface specification is used for both the Client &lt; - &gt; EMS, and the EMS &lt; - &gt; ADES interfaces.</p>
 </div>
 <div class="paragraph">
-<p>WPS-T extends standard WPS by adding DeployProcess and UndeployProcess operations. Once a process has been deployed to a WPS then the existing wps:Execute operation remains applicable for execution in the standard way.</p>
+<p>WPS-T extends standard WPS by adding DeployProcess and UndeployProcess operations (see <a href="#WPS-T">[WPS-T]</a>). Once a process has been deployed to a WPS then the existing wps:Execute operation remains applicable for execution in the standard way.</p>
 </div>
 <div class="paragraph">
-<p><a id="tbd"></a> URI:</p>
+<p><a id="landing"></a> URI: <a href="https://ades.eoepca.org/" class="bare">https://ades.eoepca.org/</a></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Description - (TBD)</p>
+<p>Description - The landing page provides links to the API definition, the Conformance statements and the metadata about the processes offered by this API</p>
 </li>
 <li>
-<p>Applicable standards - (TBD)</p>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
 </li>
 <li>
-<p>Operations - (TBD)</p>
+<p>Operations - GET</p>
 </li>
 <li>
 <p>Conveyed information - (TBD)</p>
@@ -2058,6 +2059,534 @@ Each building block contains:</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>[[get capabilities]] URI: <a href="https://ades.eoepca.org/processes" class="bare">https://ades.eoepca.org/processes</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve available processes</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[deploy process]] URI: <a href="https://ades.eoepca.org/processes" class="bare">https://ades.eoepca.org/processes</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Deploy a process</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - POST</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[describe process]] URI: <a href="https://ades.eoepca.org/processes/{id}" class="bare">https://ades.eoepca.org/processes/{id}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve a process description</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="dismiss"></a> URI: <a href="https://ades.eoepca.org/processes/{id}/jobs/{jobID}" class="bare">https://ades.eoepca.org/processes/{id}/jobs/{jobID}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Undeploy a process</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - DELETE</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[get jobs]] URI: <a href="https://ades.eoepca.org/processes/{id}/jobs" class="bare">https://ades.eoepca.org/processes/{id}/jobs</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve the list of jobs for a process</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="execute"></a> URI: <a href="https://ades.eoepca.org/processes/{id}/jobs" class="bare">https://ades.eoepca.org/processes/{id}/jobs</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Execute a process</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - POST</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[get result]] URI: <a href="https://ades.eoepca.org/processes/{id}/jobs/{jobID}/result" class="bare">https://ades.eoepca.org/processes/{id}/jobs/{jobID}/result</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve the status of a job</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[get quotations list]] URI: <a href="https://ades.eoepca.org/processes/{id}/quotations" class="bare">https://ades.eoepca.org/processes/{id}/quotations</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Dismiss a job</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[get result]] URI: <a href="https://ades.eoepca.org/processes/{id}/jobs/{jobID}/result" class="bare">https://ades.eoepca.org/processes/{id}/jobs/{jobID}/result</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve the result(s) of a job</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[request a process quotation]] URI: <a href="https://ades.eoepca.org/processes/{id}/quotations" class="bare">https://ades.eoepca.org/processes/{id}/quotations</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve the list of quotation ids for a given process</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[retrieve quotation information]] URI: <a href="https://ades.eoepca.org/processes/{id}/quotations/{quotationID}" class="bare">https://ades.eoepca.org/processes/{id}/quotations/{quotationID}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Request a quotation for a given process</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[execute quoted process]] URI: <a href="https://ades.eoepca.org/processes/{id}/quotations/{quotationID}" class="bare">https://ades.eoepca.org/processes/{id}/quotations/{quotationID}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve quotation information</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - POST</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[execute quoted process]] URI: <a href="https://ades.eoepca.org/processes/{id}/quotations/{quotationID}" class="bare">https://ades.eoepca.org/processes/{id}/quotations/{quotationID}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Execute a quoted process</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - POST</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[retrieve visibility status]] URI: <a href="https://ades.eoepca.org/processes/{id}/visibility" class="bare">https://ades.eoepca.org/processes/{id}/visibility</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve the visibility status for a process</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[change visibility status]] URI: <a href="https://ades.eoepca.org/processes/{id}/visibility" class="bare">https://ades.eoepca.org/processes/{id}/visibility</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Change the visibility status for a process</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - PUT</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[retrieve list of all quotations]] URI: <a href="https://ades.eoepca.org/quotations" class="bare">https://ades.eoepca.org/quotations</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve the list of all quotation ids</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[retrieve quotation information]] URI: <a href="https://ades.eoepca.org/quotations/{quotationID}" class="bare">https://ades.eoepca.org/quotations/{quotationID}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve quotation information</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[execute a quoted process]] URI: <a href="https://ades.eoepca.org/quotations/{quotationID}" class="bare">https://ades.eoepca.org/quotations/{quotationID}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Execute a quoted process</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - POST</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[retrieve list of all bills]] URI: <a href="https://ades.eoepca.org/bills" class="bare">https://ades.eoepca.org/bills</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve the list of all bill identifiers</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[retrieve bill information]] URI: <a href="https://ades.eoepca.org/bills/{billID}" class="bare">https://ades.eoepca.org/bills/{billID}</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - Retrieve bill information</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a></p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>[[retrieve list of all requirements classes]] URI: <a href="https://ades.eoepca.org/conformance" class="bare">https://ades.eoepca.org/conformance</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description - list all requirements classes specified in the standard (WPS REST/JSON Binding Core) that the server conforms to</p>
+</li>
+<li>
+<p>Applicable standards - <a href="#WPS-T">[WPS-T]</a>, <a href="#WPS-REST-JSON">[WPS-REST-JSON]</a></p>
+</li>
+<li>
+<p>Operations - GET</p>
+</li>
+<li>
+<p>Conveyed information - (TBD)</p>
+</li>
+<li>
+<p>Control and data flow descriptions - (TBD)</p>
+</li>
+<li>
+<p>Usage examples (TBD)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_processing_ogc_api">5.1.1.2. Processing &gt; OGC API</h5>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
