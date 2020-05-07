@@ -1,4 +1,4 @@
-== Interfaces 
+== User Management interfaces 
 
 [NOTE]
 .Work In Progress
@@ -7,27 +7,26 @@ This section focuses on the externally available functionality published over in
 Each building block contains:
 
 * Description of functionality
+* Link to building block documentation 
 * Component diagram
-* List of exposed interfaces by URL
-* List of services
+* List of ports
 
-Each service contains:
+Each port in the list contains:
 
-* Description of functionality
-* Component diagram
-* List of exposed interfaces by URL
+* Port description
+* Applicable standards
+* Control and data flow interactions by port
+* List of exposed interfaces by port
+* Conveyed information
 
 Each interface in the list contains:
 
-* Unique URL (\*)
-* Interface name
-* Used port/communications protocol
-* Endpoint URL
-* Applicable standards
-* Conveyed information
-* Control and data flow descriptions
+* Unique URI (\*)
+* Operation - (TBD)
+* Description - (TBD)
+* Usage examples (TBD)
 
-(\*) URL would be formed as [port]://[building-block].[eoepca.org]/[endpoint], e.g. https://iam.eoepca.org/logout
+(\*) URI would be formed as [scheme]://[building-block].[eoepca.org]/[endpoint], e.g. https://iam.eoepca.org/logout
 ===============================================
 
 === Identity and Authentication management
@@ -37,13 +36,25 @@ The solution for IAM is driven by the need for Federated Identity and Authorizat
 
 The goal of IAM is to uniquely identify the user and limit access to protected resources to those having suitable access rights. We assume an Attribute Based Access Control (ABAC) approach in which authorization decisions are made based upon access policies/rules that define attributes required by resources and possessed (as claims) by users. ABAC is is seen as a more flexible approach than Role Base Access Control (RBAC), affording the ability to express more sophisticated authorizations rules beyond the role(s) of the user - and noting the fact that a role-based ruleset could be implemented within an attribute based approach, (i.e. RBAC is a subset/specialisation of ABAC).
 
+* Link to building block documentation
+
+TBD
+
 * Component diagram
 
 image::iam-interfaces.jpg[IAM component diagram]
 
-* Link to building block documentation
+* List of ports
 
-.IAM interfaces
+==== Authentication > OIDC
+
+* Port description - The primary endpoints required to support the OIDC flows are as follows (these endpoints are taken, by example, from OKTA OIDC discovery metadata, https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/.well-known/openid-configuration)
+
+* Applicable standards - <<OIDC>>
+* Control and data flow interactions by port - (TBD)
+* List of exposed interfaces by port
+
+.IAM authentication interfaces
 |===
 |URL |Name 
 
@@ -68,16 +79,53 @@ image::iam-interfaces.jpg[IAM component diagram]
 |https://iam.eoepca.org/revoke
 |<<revocation>>
 
-|https://iam.eoepca.org/.well-known/openid-configuration
-|<<discovery>>
-
-|https://iam.eoepca.org/clients
-|<<registration>>
-
-|https://iam.eoepca.org/.well-known/openid-federation
-|<<federation>>
-
 |===
+
+
+[[authorization]] URI: https://iam.eoepca.org/authorize
+
+* Description - To initiate the authentication, and to return the access tokens / code grant (depending on flow).
+* Operations - (TBD)
+* Usage examples (TBD)
+
+[[token]] URI: https://iam.eoepca.org/token
+
+* Description - To exchange the code grant for the access tokens.
+* Operations - (TBD)
+* Usage examples - (TBD)
+
+[[userinfo]] URI: https://iam.eoepca.org/userinfo
+
+* Description - To obtain the user information ID token in accordance with the scopes requested in the authorization request.
+* Operations - (TBD)
+* Conveyed information - Returns an <<oidc_id_token>> that asserts a user’s authenticated identity with integrity, and non-repudiation.
+* Usage examples - (TBD)
+
+[[jwks]] URI: https://iam.eoepca.org/keys
+
+* Description - To obtain signing keys for Token validation purposes.
+* Operations - (TBD)
+* Usage examples - (TBD)
+
+[[end]] URI: https://iam.eoepca.org/logout
+
+* Description - To logout the user from the Login Service, i.e. clear session cookies etc. Although, given that the actual IdP is externalised from the Login Service, it would remain the case that any session cookies maintained by the external IdP would still be in place for a future authentication flow.
+* Operations - (TBD)
+* Usage examples - (TBD)
+
+[[introspection]] URI: https://iam.eoepca.org/introspect
+
+* Description - Used by clients to verify access tokens. 
+* Operations - (TBD)
+* Usage examples - (TBD)
+
+[[revocation]] URI: https://iam.eoepca.org/revoke
+
+* Description - Used for (refresh) token revocation.
+* Operations - (TBD)
+* Usage examples - (TBD)
+
+* Conveyed information
 
 .IAM conveyed information
 |===
@@ -88,78 +136,15 @@ image::iam-interfaces.jpg[IAM component diagram]
 
 |===
 
-==== IAM interfaces
+[[oidc_id_token]] OICD ID token
 
-The primary endpoints required to support the OIDC flows are as follows (these endpoints are taken, by example, from OKTA OIDC discovery metadata, https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/.well-known/openid-configuration):
+The ID Token is a JWT that is returned to from the /userinfo endpoint of the Login Service. The returned OIDC ID Token has been signed (JWS) by the Login Service and thus results in a token that asserts a user’s authenticated identity with integrity, and non-repudiation.
 
-[[authorization]] URI: https://iam.eoepca.org/authorize
+==== Discovery > OIDC
 
-* Description - To initiate the authentication, and to return the access tokens / code grant (depending on flow).
-* Applicable standards - 
-* Operations - 
-* Conveyed information
-* Control and data flow descriptions
-* Usage examples
-
-[[token]] URI: https://iam.eoepca.org/token
-
-* Description - To exchange the code grant for the access tokens.
-* Applicable standards
-* Operations -
-* Conveyed information
-* Control and data flow descriptions
-* Usage examples
-
-[[userinfo]] URI: https://iam.eoepca.org/userinfo
-
-* Description - To obtain the user information ID token in accordance with the scopes requested in the authorization request.
-* Applicable standards
-* Operations -
-* Conveyed information - Returns an <<oidc_id_token>> that asserts a user’s authenticated identity with integrity, and non-repudiation.
-* Control and data flow descriptions
-* Usage examples
-
-[[jwks]] URI: https://iam.eoepca.org/keys
-
-* Description - To obtain signing keys for Token validation purposes.
-* Applicable standards
-* Operations -
-* Conveyed information
-* Control and data flow descriptions
-* Usage examples
-
-[[end]] URI: https://iam.eoepca.org/logout
-
-* Description - To logout the user from the Login Service, i.e. clear session cookies etc. Although, given that the actual IdP is externalised from the Login Service, it would remain the case that any session cookies maintained by the external IdP would still be in place for a future authentication flow.
-* Applicable standards
-* Operations -
-* Conveyed information
-* Control and data flow descriptions
-* Usage examples
-
-[[introspection]] URI: https://iam.eoepca.org/introspect
-
-* Description - Used by clients to verify access tokens. 
-* Applicable standards
-* Operations -
-* Conveyed information
-* Control and data flow descriptions
-* Usage examples
-
-[[revocation]] URI: https://iam.eoepca.org/revoke
-
-* Description - Used for (refresh) token revocation.
-* Applicable standards
-* Operations -
-* Conveyed information
-* Control and data flow descriptions
-* Usage examples
-
-The following endpoints relate to Discovery:
-
-[[discovery]] URI: https://iam.eoepca.org/.well-known/openid-configuration
-
-* Description - Dynamic discovery of OIDC endpoints by clients.
+* Port description - The following endpoints relate to Discovery.
+* Applicable standards - https://openid.net/specs/openid-connect-discovery-1_0.html
+* Control and data flow interactions by port
 
 OpenID Connect makes provision for two types of discovery:
 
@@ -173,19 +158,40 @@ Regarding discovery type 2), the Login Service exposes an OIDC Provider interfac
 
 This is of most interest in the case of access to federated resources in other EPs, where a resource server in one EP may be acting as an OIDC client of the Login Service in another EP – in which case auto-discovery might be more attractive.
 
-* Applicable standards - https://openid.net/specs/openid-connect-discovery-1_0.html
-* Operations -
+* List of exposed interfaces by port
+
+.IAM authentication interfaces
+|===
+|URL |Name 
+
+|https://iam.eoepca.org/.well-known/openid-configuration
+|<<discovery>>
+
+|===
+
+[[discovery]] URI: https://iam.eoepca.org/.well-known/openid-configuration
+
+* Description - Dynamic discovery of OIDC endpoints by clients.
+* Operations - (TBD)
+* Usage examples - (TBD)
+
+
 * Conveyed information
-* Control and data flow descriptions
-* Usage examples
 
-The following endpoints relate to Dynamic Client Registration:
+.IAM conveyed information
+|===
+|Information |Interfaces
 
-[[registration]] URI: https://iam.eoepca.org/clients
+|<<tbd>>
+|<<tbd>>
 
-* Description - Dynamic registration of clients (Authentication Agents).
+|===
 
-The possibility exists for the OIDC Client (Login Service) to perform auto-registration with the Login Service, using OIDC Client Registration. In doing so the OIDC client obtains its Client ID and Secret.
+==== Dynamic client registration > OIDC
+
+* Port description - The following endpoints relate to Dynamic Client Registration.
+* Applicable standards - https://openid.net/specs/openid-connect-registration-1_0.html
+* Control and data flow interactions by port - The possibility exists for the OIDC Client (Login Service) to perform auto-registration with the Login Service, using OIDC Client Registration. In doing so the OIDC client obtains its Client ID and Secret.
 
 This may be of interest in a couple of cases:
 
@@ -193,65 +199,77 @@ This may be of interest in a couple of cases:
 
 ** The case where a common Login Service is deployed outside of the context of a given Exploitation Platform, acting as an IdP Proxy. In this case, the local Login Service deployed in each EP would register as an OIDC Client of the IdP Proxy.
 
-* Applicable standards - https://openid.net/specs/openid-connect-registration-1_0.html
-* Operations -
-* Conveyed information
-* Control and data flow descriptions
-* Usage examples
+* List of exposed interfaces by port
 
-The following endpoints relate to the establishment of a federation of collaborating Exploitation Platforms through a dynamic trust model:
+.IAM dynamic client registration interfaces
+|===
+|URL |Name 
+
+|https://iam.eoepca.org/clients
+|<<registration>>
+
+|===
+
+
+[[registration]] URI: https://iam.eoepca.org/clients
+
+* Description - Dynamic registration of clients (Authentication Agents).
+* Operations - (TBD)
+* Usage examples - (TBD)
+
+* Conveyed information
+
+.IAM conveyed information
+|===
+|Information |Interfaces
+
+|<<tbd>>
+|<<tbd>>
+
+|===
+
+
+==== Federation > OIDC
+
+* Port description - The following endpoints relate to the establishment of a federation of collaborating Exploitation Platforms through a dynamic trust model.
+* Applicable standards
+* Control and data flow interactions by port
+* List of exposed interfaces by port
+
+.IAM federation interfaces
+|===
+|URL |Name 
+
+|https://iam.eoepca.org/.well-known/openid-federation
+|<<federation>>
+
+|===
 
 [[federation]] URI: https://iam.eoepca.org/.well-known/openid-configuration
 
 * Description - OIDC Federation API endpoint through which Entity Statements are published about itself and other entities (such as other Exploitation Platforms).
-* Applicable standards
-* Operations -
+* Operations - (TBD)
+* Usage examples - (TBD)
+
 * Conveyed information
-* Control and data flow descriptions
-* Usage examples
 
-==== IAM information
+.IAM conveyed information
+|===
+|Information |Interfaces
 
-[[oidc_id_token]] OICD ID token
+|<<tbd>>
+|<<tbd>>
 
-The ID Token is a JWT that is returned to from the /userinfo endpoint of the Login Service. The returned OIDC ID Token has been signed (JWS) by the Login Service and thus results in a token that asserts a user’s authenticated identity with integrity, and non-repudiation.
+|===
 
 === Accounting and Billing
 * Description of functionality
+* Link to building block documentation 
 * Component diagram
-* Link to building block documentation
-* List of exposed interfaces
-
-.AB interfaces
-|===
-|URL |Name 
-
-|Cell 1 1
-|Cell 2 1
-
-|Cell 1 2
-|Cell 2 2
-
-|===
-
-* List of services
+* List of ports
 
 === User profile
 * Description of functionality
+* Link to building block documentation 
 * Component diagram
-* Link to building block documentation
-* List of exposed interfaces
-
-.UP interfaces
-|===
-|URL |Name 
-
-|Cell 1 1
-|Cell 2 1
-
-|Cell 1 2
-|Cell 2 2
-
-|===
-
-* List of services
+* List of ports

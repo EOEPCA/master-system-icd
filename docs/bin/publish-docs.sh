@@ -23,6 +23,7 @@ then
 fi
 
 # Clone the 'gh-pages' branch
+echo $GH_TOKEN
 git clone --branch gh-pages --single-branch "https://${GH_TOKEN}@github.com/EOEPCA/${GH_REPOS_NAME}" repos
 
 # Move generated doc outputs to the repos

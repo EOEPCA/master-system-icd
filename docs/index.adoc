@@ -56,7 +56,7 @@ include::04.user-management/00.user-management-index.adoc[]
 
 <<<
 
-include::05.processing-chaining/00.processing-chaining.adoc[]
+include::05.processing-chaining/00.processing-index.adoc[]
 
 <<<
 
