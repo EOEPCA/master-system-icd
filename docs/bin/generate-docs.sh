@@ -24,6 +24,9 @@ else
   export DOCKER_RM="--rm"
 fi
 
+# Delete transient repos directory
+if [ -d "./repos" ]; then rm -rf ./repos; fi
+
 # Prepare output/ directory
 echo -n "Prepare output/ directory... "
 rm -rf output

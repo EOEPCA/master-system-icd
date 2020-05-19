@@ -23,7 +23,7 @@ then
 fi
 
 # Clone the 'gh-pages' branch
-echo $GH_TOKEN
+if [ -n "${GH_TOKEN}" ]; then git config user.email "${GH_USER_EMAIL}"; else echo "GH_TOKEN not set"; exit 1; fi
 git clone --branch gh-pages --single-branch "https://${GH_TOKEN}@github.com/EOEPCA/${GH_REPOS_NAME}" repos
 
 # Move generated doc outputs to the repos
@@ -36,8 +36,8 @@ if [ ! -e index.html ]; then cp ../gh-page-root.html index.html; fi
 if [ ! -e README.adoc ]; then cp ../gh-page-README.adoc README.adoc; fi
 
 # Config git profile for commits
-if [ -n "${GH_USER_NAME}" ]; then git config user.name "${GH_USER_NAME}"; fi
-if [ -n "${GH_USER_EMAIL}" ]; then git config user.email "${GH_USER_EMAIL}"; fi
+if [ -n "${GH_USER_NAME}" ]; then git config user.name "${GH_USER_NAME}"; else echo "GH_USER_NAME not set"; exit 1; fi
+if [ -n "${GH_USER_EMAIL}" ]; then git config user.email "${GH_USER_EMAIL}"; else echo "GH_USER_EMAIL not set"; exit 1; fi
 
 # Commit the newly generated docs, and push to upstream
 git add . ; git commit -m "Deploy to GitHub Pages @ $(date -u)"
