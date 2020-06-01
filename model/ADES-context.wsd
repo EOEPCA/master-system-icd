@@ -1,0 +1,32 @@
+@startuml "ADES Context"
+
+/'------------------------------------------------------------------------------
+  Components
+------------------------------------------------------------------------------'/
+[ADES] as ADES #00ff00
+[EMS] as EMS
+[Resource Catalogue] as CATALOG
+[Kubernetes] as K8S
+[Application] as APP
+[PEP] as PEP
+[Login Service] as LOGIN
+[Data Access Gateway] as DAG
+[Workspace] as WORKSPACE
+
+/'------------------------------------------------------------------------------
+  Top row
+------------------------------------------------------------------------------'/
+[EMS] --> [ADES]: process management
+[CATALOG] <-- [ADES]: input data indirection
+[K8S] <-- [ADES]: container execution
+[APP] <-- [ADES]: data stage-in/out
+
+/'------------------------------------------------------------------------------
+  Bottom row
+------------------------------------------------------------------------------'/
+[ADES] <-- [PEP]: user attributes
+[ADES] --> [LOGIN]: uma client
+[ADES] <-- [DAG]: input data
+[ADES] --> [WORKSPACE]: output data
+
+@enduml
