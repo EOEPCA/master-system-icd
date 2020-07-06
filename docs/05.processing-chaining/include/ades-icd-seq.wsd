@@ -1,0 +1,107 @@
+@startuml sequence
+
+participant EMS
+participant PEP
+participant ADES
+participant "Processing\nCluster" as pc
+participant "Resources\nManager" as rm
+
+== Deploy Application ==
+
+EMS -> PEP : Requests\nDeploy App 
+activate PEP
+
+PEP -> ADES : Requests\nDeploy App\n+Auth (JWT)
+activate ADES
+
+ADES -> ADES : Deploy App &\n Build Service
+
+ADES -> PEP : Service\nLocation
+deactivate ADES
+
+PEP -> EMS : Service\nLocation
+deactivate PEP
+
+== Submit Job ==
+
+EMS -> PEP : Job Request
+activate PEP
+
+PEP -> ADES : Job Request\n+Auth (JWT)
+activate ADES
+
+ADES -> PEP : Job Id
+PEP -> EMS : Job Id
+deactivate PEP
+group "Data Stage-In"
+
+activate ADES #DarkSalmon
+ADES -> AUTH : Request Token
+activate AUTH
+AUTH -> ADES : ID Token
+deactivate AUTH
+ADES <-> rm : Get Data\n+Auth
+end
+deactivate ADES #DarkSalmon
+
+ADES -> ADES : Data References
+
+group "Workflow Execution"
+
+activate ADES #Crimson
+ADES -> pc : Send Workflow Execution
+activate pc
+== Monitor Job ==
+...
+
+loop until Job Status is Done
+
+EMS -> PEP : Get Status\n(Job ID)
+activate PEP
+
+PEP -> ADES : Get Status\n(Job ID)\n+Auth (JWT)
+activate ADES #Khaki
+ADES <-> pc : Get Workflow Status
+ADES -> PEP : Job Status
+deactivate ADES
+PEP -> EMS : Job Status
+deactivate PEP
+
+pc <-> ADES : Workflow Complete
+deactivate pc
+end
+
+deactivate ADES
+
+end
+
+ADES -> ADES : Results References
+
+group "Data Stage-Out"
+activate ADES #LightGreen
+
+ADES -> AUTH : Request Token
+activate AUTH
+AUTH -> ADES : ID Token
+deactivate AUTH
+ADES <-> rm : Publish Results\n+Auth
+
+deactivate ADES
+ADES -> ADES : Store Results Reference
+deactivate ADES
+end
+
+== Get Results ==
+
+EMS -> PEP : Get Results\n(Job ID)
+activate PEP
+
+PEP -> ADES : Get Results\n(Job ID)\n+Auth (JWT)
+activate ADES
+ADES -> ADES : Get Job Results References
+ADES -> PEP : Job Results
+deactivate ADES
+PEP -> EMS : Job Status
+deactivate PEP
+
+@enduml
