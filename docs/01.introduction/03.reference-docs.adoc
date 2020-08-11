@@ -26,18 +26,25 @@ EMSS-EOPS-TN-17-002
 | Issue 1, +
 12/12/2017
 
-| [[WPS-T]][WPS-T]
-| OGC Testbed-14: WPS-T Engineering Report, +
-OGC 18-036r1, +
-http://docs.opengeospatial.org/per/18-036r1.html
-| 18-036r1, +
-07/02/2019
+| [[OGC-WPS]][OGC-WPS]
+| OGC Web Processing Service, +
+OGC 05-007, +
+http://portal.opengeospatial.org/files/?artifact_id=24151
+| 05-007r7, +
+08/06/2007
 
-| [[WPS-REST-JSON]][WPS-REST-JSON]
+| [[OGC-WPS2]][OGC-WPS2]
+| OGC® WPS 2.0 Interface Standard, +
+OGC 14-065, +
+http://docs.opengeospatial.org/is/14-065/14-065.html
+| 14-065r2, +
+05/03/2015
+
+| [[OGC-API-PROC]][OGC-API-PROC]
 | OGC WPS 2.0 REST/JSON Binding Extension, Draft, +
 OGC 18-062, +
-https://raw.githubusercontent.com/opengeospatial/wps-rest-binding/develop/docs/18-062.pdf
-| 1.0-draft
+https://github.com/opengeospatial/wps-rest-binding
+| 1.0-draft.4
 
 | [[CWL]][CWL]
 | Common Workflow Language Specifications, +

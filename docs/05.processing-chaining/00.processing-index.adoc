@@ -1,4 +1,134 @@
 [[mainProcessingAndChaining,Processing and Chaining]]
 = Processing and Chaining
 
-include::01.processing-interfaces.adoc[]
+[NOTE]
+.Work In Progress
+===============================================
+This section focuses on the externally available functionality published over interfaces, and how these interfaces connect with external systems.
+Each building block contains:
+
+* Description of functionality
+* Link to building block documentation 
+* Component interactions diagram
+* External Interfaces
+* System Dependencies
+* Sample Scenario with a sequence diagram
+
+Each interface in the list contains:
+
+* Interface description
+* Applicable standards
+* Base URL of the interface
+* List of exposed ports by interface
+
+Each dependency in the list contains:
+
+* Dependency description
+* Applicable standards
+
+===============================================
+
+== Application, Deployment and Execution Service (ADES)
+
+=== Description
+
+The ADES provides processing services interfaces via WPS 1.0 & 2.0 service ports as well as an OGC API Processes compliant API. It is responsible for the execution of the processing service (as a WPS request) within the ‘target’ Exploitation Platform (i.e. one that is close to the data). In the global scenario, we assume that the EMS ensures that the processor is deployed as a WPS service before it is invoked.
+
+Refer to ADES component documentation - https://eoepca.github.io/proc-ades/master
+
+=== Component interactions diagram
+
+The following diagram identifies the major components interfacing with the ADES:
+
+* The EOEPCA **<<Execution Management Service,Execution Management Service (EMS)>>** is the main client of the ADES that (un)deploys applications, executes & monitor jobs. It interacts indirectly with the ADES through the <<Policy Enforcment Point>>
+* The EOEPCA **<<Identity and Authentication management,Identity and Authentication management>>** has 2 roles as it
+** plays a **Policy Enforcment Point** that is is charge of proxying the requests to the ADES with the proper identity attributes
+** is used by the ADES to request a user identity when it needs to authenticate requests to Resource Managers
+* The **Processing Cluster** as the ICT provisioner for the workflows execution
+* The **Resources Managers** that are used mainly for data flow in input or in output.
+
+
+.ADES External Interfaces component diagram
+[plantuml, diagram-ades-icd, png] 
+....
+include::include/ades-icd.wsd[]
+....
+
+=== External Interfaces
+
+==== Web Processing Services 
+
+The ADES enables interfaces for the processing based on the OGC "Web Processing Service". It exposes 2 web services:
+
+* OGC Web Services Common <<OGC-COMMON>> hosting <<WPS 1.0.0 & 2.0.0>> processing services
+* OGC API Processes <<OGC-API-PROC>> hosting WPS in RESTful core OpenAPI
+
+===== WPS 1.0.0 & 2.0.0
+
+The https://www.ogc.org/standards/wps[OpenGIS® Web Processing Service (WPS)] Interface Standard provides rules for standardizing how inputs and outputs (requests and responses) for geospatial processing services, such as polygon overlay. The standard also defines how a client can request the execution of a process, and how the output from the process is handled. It defines an interface that facilitates the publishing of geospatial processes and clients’ discovery of and binding to those processes. The data required by the WPS can be delivered across a network or they can be available at the server. 
+
+* Applicable standards - <<OGC-WPS>> <<OGC-WPS2>>
+
+include::include/wps1and2-interface.adoc[]
+
+
+===== OGC API Processes
+
+The OGC API - Processes enables the execution of computing processes and the retrieval of metadata describing their purpose and functionality. Typically, these processes combine raster, vector, and/or coverage data with well-defined algorithms to produce new raster, vector, and/or coverage information.
+
+* Applicable standards - <<OGC-API-PROC>>
+
+URL: https://ades.eoepca.org/api
+
+include::include/ogcwps-summary.adoc[]
+
+
+=== System Dependencies
+
+==== Processing Cluster
+
+This is the interface to a Kubernetes Cluster to execte the Workflow
+
+_TBD_
+
+===== Applicable standards
+
+_TBD_
+
+==== Authorization
+
+This is the interface used to get the user authentication and token to be used to the Resource managers to idnetify user and resource access
+
+_TBD_
+
+===== Applicable standards
+
+_TBD_
+
+==== Resources API
+
+This dependency is quite abstrcat since it may be implemented by various interfaces and protocols. Basically, the ADES interacts with the resource API to get access to
+
+* Resources catalogs
+** ATOM feed
+** STAC catalogs===== Applicable standards
+
+_TBD_
+* Data
+** HTTP(S)
+** S3
+** Direct access (NFS,Posix FS)
+** WebDAV
+
+===== Applicable standards
+
+_TBD_
+
+=== Sample Scenario
+
+.ADES Service Components Diagram
+[plantuml, diagram-ades-icd-seq, png] 
+....
+include::include/ades-icd-seq.wsd[]
+....
+

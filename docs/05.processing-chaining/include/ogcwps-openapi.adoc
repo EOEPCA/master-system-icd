@@ -1,0 +1,2253 @@
+
+
+[.Capabilities]
+=== Capabilities
+
+
+[.getLandingPage]
+==== GET /
+
+Operation Id:: getLandingPage
+
+
+landing page of this API
+
+===== Description 
+
+The landing page provides links to the API definition, the conformance declaration and the metadata about the processes offered by this service.
+
+
+// markup not found, no include::{specDir}GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<landingPage>>
+
+
+===== Content Type
+
+* application/json
+* text/html
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| The landing page provides links to the API definition (link relations &#x60;service-desc&#x60; and &#x60;service-doc&#x60;), the Conformance declaration (path &#x60;/conformance&#x60;, link relation &#x60;conformance&#x60;), and to other resources.
+|  <<landingPage>>
+
+
+| 500
+| A server error occurred.
+|  <<exception>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.ConformanceDeclaration]
+=== ConformanceDeclaration
+
+
+[.getConformanceClasses]
+==== GET /conformance
+
+Operation Id:: getConformanceClasses
+
+
+information about standards that this API conforms to
+
+===== Description 
+
+Lists all requirements classes specified in the standard (e.g., OGC API - Processes Part 1: Core) that the server conforms to
+
+
+// markup not found, no include::{specDir}conformance/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<confClasses>>
+
+
+===== Content Type
+
+* application/json
+* text/html
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| The URIs of all conformance classes supported by the server.  To support \&quot;generic\&quot; clients that want to access multiple OGC API - Processes implementations - and not \&quot;just\&quot; a specific API / server, the server declares the conformance classes it implements and conforms to.
+|  <<confClasses>>
+
+
+| 500
+| A server error occurred.
+|  <<exception>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}conformance/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}conformance/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :conformance/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}conformance/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.Dismiss]
+=== Dismiss
+
+
+[.dismiss]
+==== DELETE /processes/{processId}/jobs/{jobId}
+
+Operation Id:: dismiss
+
+
+cancel a job execution, remove a finished job
+
+===== Description 
+
+Cancel a job execution and remove it from the jobs list.
+
+
+// markup not found, no include::{specDir}processes/\{processId\}/jobs/\{jobId\}/DELETE/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| processId 
+| local identifier of a process  
+| X 
+| null 
+|  
+
+| jobId 
+| local identifier of a job  
+| X 
+| null 
+|  
+
+|===         
+
+
+
+
+
+
+===== Return Type
+
+<<statusInfo>>
+
+
+===== Content Type
+
+* application/json
+* text/html
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| The status of a job.
+|  <<statusInfo>>
+
+
+| 404
+| The requested URI was not found.
+|  <<exception>>
+
+
+| 500
+| A server error occurred.
+|  <<exception>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}processes/\{processId\}/jobs/\{jobId\}/DELETE/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}processes/\{processId\}/jobs/\{jobId\}/DELETE/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :processes/{processId}/jobs/{jobId}/DELETE/DELETE.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}processes/\{processId\}/jobs/\{jobId\}/DELETE/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.Execute]
+=== Execute
+
+
+[.execute]
+==== POST /processes/{processId}/jobs
+
+Operation Id:: execute
+
+
+execute a process.
+
+===== Description 
+
+Submits a new job.
+
+
+// markup not found, no include::{specDir}processes/\{processId\}/jobs/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| processId 
+| local identifier of a process  
+| X 
+| null 
+|  
+
+|===         
+
+====== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| Execute 
+| Mandatory execute request JSON <<Execute>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* application/json
+* text/html
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<>>
+
+
+| 201
+| Started asynchronous execution. Created job.
+|  <<>>
+
+
+| 404
+| The requested URI was not found.
+|  <<exception>>
+
+
+| 500
+| A server error occurred.
+|  <<exception>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}processes/\{processId\}/jobs/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}processes/\{processId\}/jobs/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :processes/{processId}/jobs/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}processes/\{processId\}/jobs/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.JobCollection]
+=== JobCollection
+
+
+[.getJobs]
+==== GET /processes/{processId}/jobs
+
+Operation Id:: getJobs
+
+
+retrieve the list of jobs for a process.
+
+===== Description 
+
+Lists available jobs of a process.
+
+
+// markup not found, no include::{specDir}processes/\{processId\}/jobs/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| processId 
+| local identifier of a process  
+| X 
+| null 
+|  
+
+|===         
+
+
+
+
+
+
+===== Return Type
+
+array[<<jobInfo>>]
+
+
+===== Content Type
+
+* application/json
+* text/html
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| A collection of jobs for this process.
+| List[<<jobInfo>>] 
+
+
+| 404
+| The requested URI was not found.
+|  <<exception>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}processes/\{processId\}/jobs/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}processes/\{processId\}/jobs/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :processes/{processId}/jobs/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}processes/\{processId\}/jobs/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.ProcessCollection]
+=== ProcessCollection
+
+
+[.getProcesses]
+==== GET /processes
+
+Operation Id:: getProcesses
+
+
+retrieve available processes
+
+===== Description 
+
+Lists all available processes this server offers.
+
+
+// markup not found, no include::{specDir}processes/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+array[<<processSummary>>]
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Information about the available processes
+| List[<<processSummary>>] 
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}processes/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}processes/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :processes/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}processes/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.ProcessDescription]
+=== ProcessDescription
+
+
+[.getProcessDescription]
+==== GET /processes/{processId}
+
+Operation Id:: getProcessDescription
+
+
+retrieve a process description
+
+===== Description 
+
+Describes a process.
+
+
+// markup not found, no include::{specDir}processes/\{processId\}/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| processId 
+| local identifier of a process  
+| X 
+| null 
+|  
+
+|===         
+
+
+
+
+
+
+===== Return Type
+
+<<process>>
+
+
+===== Content Type
+
+* application/json
+* text/html
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| A process description.
+|  <<process>>
+
+
+| 404
+| The requested URI was not found.
+|  <<exception>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}processes/\{processId\}/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}processes/\{processId\}/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :processes/{processId}/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}processes/\{processId\}/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.Result]
+=== Result
+
+
+[.getResult]
+==== GET /processes/{processId}/jobs/{jobId}/results
+
+Operation Id:: getResult
+
+
+retrieve the result(s) of a job
+
+===== Description 
+
+Lists available results of a job. In case of a failure, lists exceptions instead.
+
+
+// markup not found, no include::{specDir}processes/\{processId\}/jobs/\{jobId\}/results/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| processId 
+| local identifier of a process  
+| X 
+| null 
+|  
+
+| jobId 
+| local identifier of a job  
+| X 
+| null 
+|  
+
+|===         
+
+
+
+
+
+
+===== Return Type
+
+array[<<outputInfo>>]
+
+
+===== Content Type
+
+* application/json
+* text/html
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| The results of a job.
+| List[<<outputInfo>>] 
+
+
+| 404
+| The requested URI was not found.
+|  <<exception>>
+
+
+| 500
+| A server error occurred.
+|  <<exception>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}processes/\{processId\}/jobs/\{jobId\}/results/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}processes/\{processId\}/jobs/\{jobId\}/results/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :processes/{processId}/jobs/{jobId}/results/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}processes/\{processId\}/jobs/\{jobId\}/results/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.Status]
+=== Status
+
+
+[.getStatus]
+==== GET /processes/{processId}/jobs/{jobId}
+
+Operation Id:: getStatus
+
+
+retrieve the status of a job
+
+===== Description 
+
+Shows the status of a job.
+
+
+// markup not found, no include::{specDir}processes/\{processId\}/jobs/\{jobId\}/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| processId 
+| local identifier of a process  
+| X 
+| null 
+|  
+
+| jobId 
+| local identifier of a job  
+| X 
+| null 
+|  
+
+|===         
+
+
+
+
+
+
+===== Return Type
+
+<<statusInfo>>
+
+
+===== Content Type
+
+* application/json
+* text/html
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| The status of a job.
+|  <<statusInfo>>
+
+
+| 404
+| The requested URI was not found.
+|  <<exception>>
+
+
+| 500
+| A server error occurred.
+|  <<exception>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}processes/\{processId\}/jobs/\{jobId\}/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}processes/\{processId\}/jobs/\{jobId\}/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :processes/{processId}/jobs/{jobId}/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}processes/\{processId\}/jobs/\{jobId\}/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[#models]
+== Models
+
+
+[#AdditionalParameter]
+=== _AdditionalParameter_ 
+
+
+
+[.fields-AdditionalParameter]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| name 
+| X 
+| String  
+| 
+|  
+
+| value 
+| X 
+| List  of <<oneOf&lt;string,number,integer,array,object&gt;>> 
+| 
+|  
+
+|===
+
+
+[#AnyValue]
+=== _AnyValue_ 
+
+
+
+[.fields-AnyValue]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| anyValue 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
+[#BoundingBoxData]
+=== _BoundingBoxData_ 
+
+
+
+[.fields-BoundingBoxData]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| crs 
+|  
+| URI  
+| 
+| uri 
+
+| bbox 
+| X 
+| List  of <<number>> 
+| 
+|  
+
+|===
+
+
+[#BoundingBoxDataType]
+=== _BoundingBoxDataType_ 
+
+
+
+[.fields-BoundingBoxDataType]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| supportedCRS 
+| X 
+| List  of <<supportedCRS>> 
+| 
+|  
+
+|===
+
+
+[#ComplexData]
+=== _ComplexData_ 
+
+
+
+[.fields-ComplexData]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| format 
+|  
+| format  
+| 
+|  
+
+| value 
+| X 
+| valueType  
+| 
+|  
+
+|===
+
+
+[#ComplexDataAllOf]
+=== _ComplexDataAllOf_ 
+
+
+
+[.fields-ComplexDataAllOf]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| value 
+| X 
+| valueType  
+| 
+|  
+
+|===
+
+
+[#ComplexDataType]
+=== _ComplexDataType_ 
+
+
+
+[.fields-ComplexDataType]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| formats 
+| X 
+| List  of <<formatDescription>> 
+| 
+|  
+
+|===
+
+
+[#ConfClasses]
+=== _ConfClasses_ 
+
+
+
+[.fields-ConfClasses]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| conformsTo 
+| X 
+| List  of <<string>> 
+| 
+|  
+
+|===
+
+
+[#DataDescriptionType]
+=== _DataDescriptionType_ 
+
+
+
+[.fields-DataDescriptionType]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+| X 
+| String  
+| 
+|  
+
+| title 
+|  
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| keywords 
+|  
+| List  of <<string>> 
+| 
+|  
+
+| metadata 
+|  
+| List  of <<metadata>> 
+| 
+|  
+
+| additionalParameters 
+|  
+| metadata  
+| 
+|  
+
+|===
+
+
+[#DataType]
+=== _DataType_ 
+
+
+
+[.fields-DataType]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| format 
+|  
+| format  
+| 
+|  
+
+|===
+
+
+[#DescriptionType]
+=== _DescriptionType_ 
+
+
+
+[.fields-DescriptionType]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+| X 
+| String  
+| 
+|  
+
+| title 
+|  
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| keywords 
+|  
+| List  of <<string>> 
+| 
+|  
+
+| metadata 
+|  
+| List  of <<metadata>> 
+| 
+|  
+
+| additionalParameters 
+|  
+| metadata  
+| 
+|  
+
+|===
+
+
+[#Exception]
+=== _Exception_ 
+
+
+
+[.fields-Exception]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| code 
+| X 
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+|===
+
+
+[#Execute]
+=== _Execute_ 
+
+
+
+[.fields-Execute]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| inputs 
+|  
+| List  of <<input>> 
+| 
+|  
+
+| outputs 
+| X 
+| List  of <<output>> 
+| 
+|  
+
+| mode 
+| X 
+| String  
+| 
+|  _Enum:_ sync, async, auto, 
+
+| response 
+| X 
+| String  
+| 
+|  _Enum:_ raw, document, 
+
+| subscriber 
+|  
+| subscriber  
+| 
+|  
+
+|===
+
+
+[#Format]
+=== _Format_ 
+
+
+
+[.fields-Format]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| mimeType 
+| X 
+| String  
+| 
+|  
+
+| schema 
+|  
+| String  
+| 
+|  
+
+| encoding 
+|  
+| String  
+| 
+|  
+
+|===
+
+
+[#FormatDescription]
+=== _FormatDescription_ 
+
+
+
+[.fields-FormatDescription]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| mimeType 
+| X 
+| String  
+| 
+|  
+
+| schema 
+|  
+| String  
+| 
+|  
+
+| encoding 
+|  
+| String  
+| 
+|  
+
+| maximumMegabytes 
+|  
+| Integer  
+| 
+|  
+
+| default 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
+[#FormatDescriptionAllOf]
+=== _FormatDescriptionAllOf_ 
+
+
+
+[.fields-FormatDescriptionAllOf]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| maximumMegabytes 
+|  
+| Integer  
+| 
+|  
+
+| default 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
+[#InlineValue]
+=== _InlineValue_ 
+
+
+
+[.fields-InlineValue]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| inlineValue 
+| X 
+| oneOf&lt;string,number,boolean,object&gt;  
+| 
+|  
+
+|===
+
+
+[#Input]
+=== _Input_ 
+
+
+
+[.fields-Input]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+| X 
+| String  
+| 
+|  
+
+| input 
+| X 
+| oneOf&lt;complexData,literalData,boundingBoxData,input&gt;  
+| 
+|  
+
+|===
+
+
+[#InputDescription]
+=== _InputDescription_ 
+
+
+
+[.fields-InputDescription]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+| X 
+| String  
+| 
+|  
+
+| title 
+|  
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| keywords 
+|  
+| List  of <<string>> 
+| 
+|  
+
+| metadata 
+|  
+| List  of <<metadata>> 
+| 
+|  
+
+| additionalParameters 
+|  
+| metadata  
+| 
+|  
+
+| input 
+|  
+| oneOf&lt;complexDataType,literalDataType,boundingBoxDataType&gt;  
+| 
+|  
+
+| minOccurs 
+|  
+| Integer  
+| 
+|  
+
+| maxOccurs 
+|  
+| oneOf&lt;integer,string&gt;  
+| 
+|  
+
+|===
+
+
+[#InputDescriptionAllOf]
+=== _InputDescriptionAllOf_ 
+
+
+
+[.fields-InputDescriptionAllOf]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| input 
+|  
+| oneOf&lt;complexDataType,literalDataType,boundingBoxDataType&gt;  
+| 
+|  
+
+| minOccurs 
+|  
+| Integer  
+| 
+|  
+
+| maxOccurs 
+|  
+| oneOf&lt;integer,string&gt;  
+| 
+|  
+
+|===
+
+
+[#JobControlOptions]
+=== _JobControlOptions_ 
+
+
+
+[.fields-JobControlOptions]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+|===
+
+
+[#JobInfo]
+=== _JobInfo_ 
+
+
+
+[.fields-JobInfo]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+| X 
+| String  
+| 
+|  
+
+| infos 
+| X 
+| statusInfo  
+| 
+|  
+
+|===
+
+
+[#LandingPage]
+=== _LandingPage_ 
+
+
+
+[.fields-LandingPage]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| title 
+|  
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| links 
+| X 
+| List  of <<link>> 
+| 
+|  
+
+|===
+
+
+[#Link]
+=== _Link_ 
+
+
+
+[.fields-Link]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| href 
+| X 
+| String  
+| 
+|  
+
+| rel 
+|  
+| String  
+| 
+|  
+
+| type 
+|  
+| String  
+| 
+|  
+
+| hreflang 
+|  
+| String  
+| 
+|  
+
+| title 
+|  
+| String  
+| 
+|  
+
+|===
+
+
+[#LiteralData]
+=== _LiteralData_ 
+
+
+
+[.fields-LiteralData]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| value 
+|  
+| String  
+| 
+|  
+
+| dataType 
+|  
+| nameReferenceType  
+| 
+|  
+
+| uom 
+|  
+| nameReferenceType  
+| 
+|  
+
+|===
+
+
+[#LiteralDataDomain]
+=== _LiteralDataDomain_ 
+
+
+
+[.fields-LiteralDataDomain]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| valueDefinition 
+|  
+| oneOf&lt;array,anyValue,URI&gt;  
+| 
+|  
+
+| defaultValue 
+|  
+| String  
+| 
+|  
+
+| dataType 
+|  
+| nameReferenceType  
+| 
+|  
+
+| uom 
+|  
+| nameReferenceType  
+| 
+|  
+
+|===
+
+
+[#LiteralDataType]
+=== _LiteralDataType_ 
+
+
+
+[.fields-LiteralDataType]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| literalDataDomains 
+| X 
+| List  of <<literalDataDomain>> 
+| 
+|  
+
+|===
+
+
+[#Metadata]
+=== _Metadata_ 
+
+
+
+[.fields-Metadata]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| title 
+|  
+| String  
+| 
+|  
+
+| role 
+|  
+| String  
+| 
+|  
+
+| href 
+|  
+| String  
+| 
+|  
+
+|===
+
+
+[#NameReferenceType]
+=== _NameReferenceType_ 
+
+
+
+[.fields-NameReferenceType]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| name 
+| X 
+| String  
+| 
+|  
+
+| reference 
+|  
+| URI  
+| 
+| uri 
+
+|===
+
+
+[#Output]
+=== _Output_ 
+
+
+
+[.fields-Output]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| format 
+|  
+| format  
+| 
+|  
+
+| id 
+|  
+| String  
+| 
+|  
+
+| transmissionMode 
+|  
+| transmissionMode  
+| 
+|  
+
+|===
+
+
+[#OutputAllOf]
+=== _OutputAllOf_ 
+
+
+
+[.fields-OutputAllOf]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+|  
+| String  
+| 
+|  
+
+| transmissionMode 
+|  
+| transmissionMode  
+| 
+|  
+
+|===
+
+
+[#OutputDescription]
+=== _OutputDescription_ 
+
+
+
+[.fields-OutputDescription]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+| X 
+| String  
+| 
+|  
+
+| title 
+|  
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| keywords 
+|  
+| List  of <<string>> 
+| 
+|  
+
+| metadata 
+|  
+| List  of <<metadata>> 
+| 
+|  
+
+| additionalParameters 
+|  
+| metadata  
+| 
+|  
+
+| output 
+|  
+| oneOf&lt;complexDataType,literalDataType,boundingBoxDataType&gt;  
+| 
+|  
+
+|===
+
+
+[#OutputDescriptionAllOf]
+=== _OutputDescriptionAllOf_ 
+
+
+
+[.fields-OutputDescriptionAllOf]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| output 
+|  
+| oneOf&lt;complexDataType,literalDataType,boundingBoxDataType&gt;  
+| 
+|  
+
+|===
+
+
+[#OutputInfo]
+=== _OutputInfo_ 
+
+
+
+[.fields-OutputInfo]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+| X 
+| String  
+| 
+|  
+
+| value 
+| X 
+| valueType  
+| 
+|  
+
+|===
+
+
+[#Process]
+=== _Process_ 
+
+
+
+[.fields-Process]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+| X 
+| String  
+| 
+|  
+
+| title 
+|  
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| keywords 
+|  
+| List  of <<string>> 
+| 
+|  
+
+| metadata 
+|  
+| List  of <<metadata>> 
+| 
+|  
+
+| additionalParameters 
+|  
+| metadata  
+| 
+|  
+
+| version 
+| X 
+| String  
+| 
+|  
+
+| jobControlOptions 
+|  
+| List  of <<jobControlOptions>> 
+| 
+|  
+
+| outputTransmission 
+|  
+| List  of <<transmissionMode>> 
+| 
+|  
+
+| links 
+|  
+| List  of <<link>> 
+| 
+|  
+
+| inputs 
+|  
+| List  of <<inputDescription>> 
+| 
+|  
+
+| outputs 
+|  
+| List  of <<outputDescription>> 
+| 
+|  
+
+|===
+
+
+[#ProcessAllOf]
+=== _ProcessAllOf_ 
+
+
+
+[.fields-ProcessAllOf]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| inputs 
+|  
+| List  of <<inputDescription>> 
+| 
+|  
+
+| outputs 
+|  
+| List  of <<outputDescription>> 
+| 
+|  
+
+| links 
+|  
+| List  of <<link>> 
+| 
+|  
+
+|===
+
+
+[#ProcessSummary]
+=== _ProcessSummary_ 
+
+
+
+[.fields-ProcessSummary]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+| X 
+| String  
+| 
+|  
+
+| title 
+|  
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| keywords 
+|  
+| List  of <<string>> 
+| 
+|  
+
+| metadata 
+|  
+| List  of <<metadata>> 
+| 
+|  
+
+| additionalParameters 
+|  
+| metadata  
+| 
+|  
+
+| version 
+| X 
+| String  
+| 
+|  
+
+| jobControlOptions 
+|  
+| List  of <<jobControlOptions>> 
+| 
+|  
+
+| outputTransmission 
+|  
+| List  of <<transmissionMode>> 
+| 
+|  
+
+| links 
+|  
+| List  of <<link>> 
+| 
+|  
+
+|===
+
+
+[#ProcessSummaryAllOf]
+=== _ProcessSummaryAllOf_ 
+
+
+
+[.fields-ProcessSummaryAllOf]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+| X 
+| String  
+| 
+|  
+
+| version 
+| X 
+| String  
+| 
+|  
+
+| jobControlOptions 
+|  
+| List  of <<jobControlOptions>> 
+| 
+|  
+
+| outputTransmission 
+|  
+| List  of <<transmissionMode>> 
+| 
+|  
+
+| links 
+|  
+| List  of <<link>> 
+| 
+|  
+
+|===
+
+
+[#ReferenceValue]
+=== _ReferenceValue_ 
+
+
+
+[.fields-ReferenceValue]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| href 
+| X 
+| String  
+| 
+|  
+
+|===
+
+
+[#StatusInfo]
+=== _StatusInfo_ 
+
+
+
+[.fields-StatusInfo]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| jobID 
+| X 
+| String  
+| 
+|  
+
+| status 
+| X 
+| String  
+| 
+|  _Enum:_ accepted, running, successful, failed, dismissed, 
+
+| message 
+|  
+| String  
+| 
+|  
+
+| progress 
+|  
+| Integer  
+| 
+|  
+
+| links 
+|  
+| List  of <<link>> 
+| 
+|  
+
+|===
+
+
+[#Subscriber]
+=== _Subscriber_ 
+
+Optional URIs for callbacks for this job.
+
+Support for this parameter is not required and the parameter may be
+removed from the API definition, if conformance class **&#39;callback&#39;**
+is not listed in the conformance declaration under &#x60;/conformance&#x60;.
+
+[.fields-Subscriber]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| successUri 
+|  
+| URI  
+| 
+| uri 
+
+| inProgressUri 
+|  
+| URI  
+| 
+| uri 
+
+| failedUri 
+|  
+| URI  
+| 
+| uri 
+
+|===
+
+
+[#SupportedCRS]
+=== _SupportedCRS_ 
+
+
+
+[.fields-SupportedCRS]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| crs 
+|  
+| String  
+| 
+|  
+
+| default 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
+[#TransmissionMode]
+=== _TransmissionMode_ 
+
+
+
+[.fields-TransmissionMode]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+|===
+
+
+[#ValueType]
+=== _ValueType_ 
+
+
+
+[.fields-ValueType]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| inlineValue 
+| X 
+| oneOf&lt;string,number,boolean,object&gt;  
+| 
+|  
+
+| href 
+| X 
+| String  
+| 
+|  
+
+|===
+
+
