@@ -27,6 +27,8 @@ The following acronyms and abbreviations have been used in this report.
 | K8s | Kubernetes
 | KVP | Key-value Pair
 | M2M | Machine-to-machine
+| MSDD | (EOEPCA) Master System Design Document
+| MSICD | (EOEPCA) Master System Interface Control Document
 | OGC | Open Geospatial Consortium
 | PDE | Processor Development Environment
 | PDP | Policy Decision Point

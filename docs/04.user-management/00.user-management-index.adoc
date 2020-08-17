@@ -1,4 +1,0 @@
-[[mainUserManagement,User Management]]
-= User Management
-
-include::01.user-management-interfaces.adoc[]

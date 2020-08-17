@@ -9,7 +9,7 @@ The Amendment Record Sheet below records the history and issue status of this do
 [cols="^1h,^2,<5"]
 |===
 | ISSUE | DATE | REASON
-| 0.1 | 28/04/2020 | Inistial in-progress draft
+| 0.1 | dd/mm/yyyy | In-progress draft
 |===
 
 '''

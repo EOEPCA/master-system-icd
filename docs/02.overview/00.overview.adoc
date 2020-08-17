@@ -1,0 +1,41 @@
+[[mainOverview]]
+= Overview
+
+This Master System Interface Control Document (MSICD) is a companion to the Master System Design Document <<EOEPCA-MSDD>>.
+
+<<EOEPCA-MSDD>> defines system building-blocks organised within three domain areas...
+
+* *User Management:* Responsible for all aspects related to user identity, authentication, authorization, accounting and billing in a federated system-of-systems environment.
+
+* *Processing and Chaining:* Provides access to a variety of processing functions, tools and applications, as well as execution environments in which to deploy them.
+
+* *Resource Management:* Responsible for maintaining an inventory of platform and federated resources, and providing services for data access and visualisation.
+
+The MSICD provides a system-level specification of the interfaces between all building-blocks comprising the EOEPCA system architecture. The document is organised by domain, and by building-block. The context of each building block is expressed by enumeration of the interfaces it *provides*, and the interfaces of other building blocks and external entities that it *consumes*. Provided interfaces are consumed by other building blocks, and may also be presented as platform 'public' interfaces for external consumption.
+
+Section <<mainUserManagement>>::
+Provides the interface specification for the following building blocks:
+* <<mainLoginService>>
+* <<mainPEP>>
+* <<mainPDP>>
+* <<mainUserProfile>>
+* <<mainLicenseManager>>
+* <<mainBillingService>>
+* <<mainPricingEngine>>
+
+Section <<mainProcessingAndChaining>>::
+Provides the interface specification for the following building blocks:
+* <<mainADES>>
+* <<mainEMS>>
+* <<mainWorkflowEngine>>
+* <<mainPDE>>
+* <<mainIAT>>
+
+Section <<mainResourceManagement>>::
+Provides the interface specification for the following building blocks:
+* <<mainResourceCatalogue>>
+* <<mainDataAccessServices>>
+* <<mainDataAccessGateway>>
+* <<mainDataAccessLibrary>>
+* <<mainDataIngestion>>
+* <<mainWorkspace>>

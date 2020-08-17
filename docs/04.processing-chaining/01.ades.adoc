@@ -1,0 +1,86 @@
+[[mainADES]]
+= Application Deployment and Execution Service (ADES)
+
+Refer to ADES component documentation - https://eoepca.github.io/proc-ades/master
+
+== Description
+
+The ADES provides processing services interfaces via WPS 1.0 & 2.0 service ports as well as an OGC API Processes compliant API. It is responsible for the execution of the processing service (as a WPS request) within the ‘target’ Exploitation Platform (i.e. one that is close to the data). In the global scenario, we assume that the EMS ensures that the processor is deployed as a WPS service before it is invoked.
+
+== Provided Interfaces
+
+The ADES enables interfaces for the processing based on the OGC "Web Processing Service". It exposes 2 web services:
+
+* OGC Web Services Common <<OGC-COMMON>> hosting <<WPS 1.0.0 & 2.0.0>> processing services
+* OGC API Processes <<OGC-API-PROC>> hosting WPS in RESTful core OpenAPI
+
+=== WPS 1.0.0 & 2.0.0
+
+The https://www.ogc.org/standards/wps[OpenGIS® Web Processing Service (WPS)] Interface Standard provides rules for standardizing how inputs and outputs (requests and responses) for geospatial processing services, such as polygon overlay. The standard also defines how a client can request the execution of a process, and how the output from the process is handled. It defines an interface that facilitates the publishing of geospatial processes and clients’ discovery of and binding to those processes. The data required by the WPS can be delivered across a network or they can be available at the server. 
+
+==== Applicable Standards
+
+* OGC Web Processing Service 1.0 - <<OGC-WPS>>
+* OGC Web Processing Service 2.0 - <<OGC-WPS2>>
+
+==== Endpoints
+
+URL: https://ades.eoepca.org/ows
+
+The WPS server is self-contained, it provides an initial endpoint that can be used by a WPS client to determine the server’s capabilities. GET, POST operations according to the payload of the requested service, with bindings defined for HTTP/POST+XML and HTTP/GET+KVP.
+
+*_Standard Operations_*
+
+Examples with HTTP/GET+KVP binding...
+
+GetCapabilities::
+`http://hostname:port/path?service=WPS&request=GetCapabilities` +
+Allows a client to retrieve service metadata, basic process offerings, and the available processes present on a WPS server
+
+DescribeProcess::
+`http://hostname:port/path?service=WPS&version=2.0.0&request=DescribeProcess&identifier=ALL` +
+Allows WPS clients to query detailed process descriptions for the process offerings
+
+GetStatus::
+`http://hostname:port/path?service=WPS&version=2.0.0&request=GetStatus&jobid=FB6DD4B0-A2BB-11E3-A5E2-0800200C9A66` +
+Allows WPS clients to query the status of an asynchronously executed job
+
+GetResult::
+`http://hostname:port/path?service=WPS&version=2.0.0&request=GetResult&jobid=FB6DD4B0-A2BB-11E3-A5E2-0800200C9A66` +
+Allows WPS clients to query the result of a finished processing job
+
+Only HTTP/POST+XML binding for execute...
+
+Execute::
+`http://hostname:port/path?service=WPS` + XML POST data +
+Allows WPS clients to run a specified process implemented by a server
+
+*_EOEPCA Extension Operations_*
+
+DeployProcess::
+`Execute` operation with a process identifier of `eoepcadeployprocess` +
+Allows a client to deploy a custom process to be made available via the WPS service
+
+UndeployProcess::
+`Execute` operation with a process identifier of `eoepcaundeployprocess` +
+Allows a client to undeploy a previously deployed custom WPS process
+
+=== OGC API Processes
+
+The OGC API - Processes enables the execution of computing processes and the retrieval of metadata describing their purpose and functionality. Typically, these processes combine raster, vector, and/or coverage data with well-defined algorithms to produce new raster, vector, and/or coverage information.
+
+==== Applicable Standards
+
+* OGC API - Processes ~ <<OGC-API-PROC>>
+
+==== Endpoints
+
+URL: https://ades.eoepca.org/api
+
+*_Standard Operations_*
+
+include::include/ogc-api-processes.adoc[]
+
+*_Transactional Extension_*
+
+include::include/ogc-api-processes-t.adoc[]

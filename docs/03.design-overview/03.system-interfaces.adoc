@@ -1,8 +1,0 @@
-= System interfaces
-
-<<img_systemInterfaces>> provides a simplified structural view that illustrates the broad interactions between parts of the Exploitation Platform and its external actors, presented in the context of the infrastructure in which it is hosted and the end-users performing exploitation activities.
-
-[#img_systemInterfaces,reftext='{figure-caption} {counter:figure-num}']
-.System interfaces
-image::eoepca-interfaces.jpg[width=80%,pdfwidth=80%,align="center"]
-

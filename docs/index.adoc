@@ -44,31 +44,23 @@ include::01.introduction/00.introduction.adoc[]
 
 <<<
 
-include::02.context/00.context.adoc[]
+include::02.overview/00.overview.adoc[]
 
 <<<
 
-include::03.design-overview/00.design-overview.adoc[]
+include::03.user-management/00.user-management-index.adoc[]
 
 <<<
 
-include::04.user-management/00.user-management-index.adoc[]
+include::04.processing-chaining/00.processing-index.adoc[]
 
 <<<
 
-include::05.processing-chaining/00.processing-index.adoc[]
+include::04x.processing-chaining/00.processing-index.adoc[]
 
 <<<
 
-include::06.resource-management/00.resource-management.adoc[]
-
-<<<
-
-include::07.platform-api/00.platform-api.adoc[]
-
-<<<
-
-include::08.web-portal/00.web-portal.adoc[]
+include::05.resource-management/00.resource-management-index.adoc[]
 
 '''
 

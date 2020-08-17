@@ -1,0 +1,24 @@
+[[mainProcessingAndChaining]]
+= Processing & Chaining
+
+:leveloffset: +1
+
+include::01.ades.adoc[]
+
+<<<
+
+include::02.ems.adoc[]
+
+<<<
+
+include::03.workflow-engine.adoc[]
+
+<<<
+
+include::04.pde.adoc[]
+
+<<<
+
+include::05.iat.adoc[]
+
+:leveloffset: -1

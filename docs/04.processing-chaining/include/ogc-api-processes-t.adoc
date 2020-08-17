@@ -1,0 +1,17 @@
+
+.ADES OGC API Processes (transactional extension)
+[cols="20,10,50,25a"]
+|===
+| Resource | Method | Description | Operation
+
+| `/processes`
+| POST
+| Allows a client to deploy a custom process to be made available via the Processing service
+| DeployProcess
+
+| `/processes/{id}`
+| DELETE
+| Allows a client to undeploy a previously deployed custom process
+| UndeployProcess
+
+|===

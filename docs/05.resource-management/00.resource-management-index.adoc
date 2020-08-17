@@ -1,0 +1,28 @@
+[[mainResourceManagement,Resource Management]]
+= Resource Management
+
+:leveloffset: +1
+
+include::01.resource-catalogue.adoc[]
+
+<<<
+
+include::02.data-access-services.adoc[]
+
+<<<
+
+include::03.data-access-gateway.adoc[]
+
+<<<
+
+include::04.data-access-library.adoc[]
+
+<<<
+
+include::05.data-ingestion.adoc[]
+
+<<<
+
+include::06.workspace.adoc[]
+
+:leveloffset: -1
