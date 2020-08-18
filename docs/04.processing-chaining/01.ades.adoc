@@ -58,11 +58,11 @@ Allows WPS clients to run a specified process implemented by a server
 *_EOEPCA Extension Operations_*
 
 DeployProcess::
-`Execute` operation with a process identifier of `eoepcadeployprocess` +
+`Execute` operation with a process identifier of `eoepcaadesdeployprocess` +
 Allows a client to deploy a custom process to be made available via the WPS service
 
 UndeployProcess::
-`Execute` operation with a process identifier of `eoepcaundeployprocess` +
+`Execute` operation with a process identifier of `eoepcaadesundeployprocess` +
 Allows a client to undeploy a previously deployed custom WPS process
 
 === OGC API Processes
@@ -84,3 +84,28 @@ include::include/ogc-api-processes.adoc[]
 *_Transactional Extension_*
 
 include::include/ogc-api-processes-t.adoc[]
+
+=== Application Invocation
+
+TBD - need to describe the interface (contract) between the ADES and the application...
+
+* stage-in
+* stage-out
+* more?
+
+== Required Interfaces
+
+TBD
+
+The ADES communicates to other components through the interfaces described in this section...
+
+* resource catalogue for input data
+* data access services for data stage-in
+* cluster infrastructure for processing execution
+* Stage-out, either:
+** workspace for data stage-out
+** resource catalogue for output data? - or maybe ingestion does this
+* Stage-out, or:
+** ingestion for data stage-out
+
+TBD - design decision regarding whether stage-out is handed-off to the ingestion component. Nevertheless the ADES needs to know the 'published' location of the output in order to pass to user/EMS.
