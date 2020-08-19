@@ -7,12 +7,41 @@ Refer to ADES component documentation - https://eoepca.github.io/proc-ades/maste
 
 The ADES provides processing services interfaces via WPS 1.0 & 2.0 service ports as well as an OGC API Processes compliant API. It is responsible for the execution of the processing service (as a WPS request) within the ‘target’ Exploitation Platform (i.e. one that is close to the data). In the global scenario, we assume that the EMS ensures that the processor is deployed as a WPS service before it is invoked.
 
+== Context
+
+The following context diagram identifies the major components interfacing with the ADES: +
+([red]#RED# ~ consumers of ADES provided interfaces, [blue]#BLUE# ~ providers of interfaces consumed by the ADES)
+
+[.text-center]
+[#img_adesContext,reftext='{figure-caption} {counter:figure-num}']
+.ADES context diagram
+[plantuml, ades-context, png] 
+....
+include::include/ades-context.wsd[]
+....
+
+The EOEPCA **<<mainEMS>>** is the main client of the ADES that (un)deploys applications, executes & monitor jobs.
+
+All interactions with the ADES should be via the **<<mainPEP>>** that filters authorized requests, and provides user attributes to the ADES, allowing the user's context to be propagated through onward requests. The ADES obtains authorization policy information, as required, from the policy endpoint of the **<<mainPDP>>**.
+
+The ADES resolves input data references via the **<<mainResourceCatalogue>>**, with the data retrieved through the **<<mainDataAccessServices>>** referenced by the catalogue. The ADES interfaces with the user application to orchestrate its execution (incl. data stage-in/out). The ADES interfaces to the Kubernetes cluster for execution of the requested application. Processing outputs are persisted to the **<<mainWorkspace>>**.
+
 == Provided Interfaces
+
+[.text-center]
+[#img_adesContext,reftext='{figure-caption} {counter:figure-num}']
+.ADES provided interfaces
+[plantuml, ades-provided-interfaces, png] 
+....
+include::include/ades-provided-interfaces.wsd[]
+....
 
 The ADES enables interfaces for the processing based on the OGC "Web Processing Service". It exposes 2 web services:
 
 * OGC Web Services Common <<OGC-COMMON>> hosting <<WPS 1.0.0 & 2.0.0>> processing services
 * OGC API Processes <<OGC-API-PROC>> hosting WPS in RESTful core OpenAPI
+
+In addition, the ADES establishes standard conventions with the application being invoked, through which the application receives its inputs and provides its outputs, (ref. <<Application Orchestration>>).
 
 === WPS 1.0.0 & 2.0.0
 
@@ -85,9 +114,9 @@ include::include/ogc-api-processes.adoc[]
 
 include::include/ogc-api-processes-t.adoc[]
 
-=== Application Invocation
+=== Application Orchestration
 
-TBD - need to describe the interface (contract) between the ADES and the application...
+TBD - need to describe the interface (contract) between the ADES and the application, e.g. use of STAC files etc...
 
 * stage-in
 * stage-out

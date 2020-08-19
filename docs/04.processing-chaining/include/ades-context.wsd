@@ -1,0 +1,49 @@
+@startuml "ADES Context"
+
+hide stereotype
+
+/'------------------------------------------------------------------------------
+  Components
+------------------------------------------------------------------------------'/
+[ADES] as ADES <<ades>>
+[EMS] as EMS <<consumer>>
+[Resource\nCatalogue] as CATALOG <<provider>>
+[Kubernetes] as K8S <<provider>>
+[User\nApplication] as APP <<consumer>>
+[PEP] as PEP <<provider>>
+[PDP] as PDP <<provider>>
+[Data\nAccess\nServices] as DAG <<provider>>
+[Workspace] as WORKSPACE <<provider>>
+
+/'------------------------------------------------------------------------------
+  Top row
+------------------------------------------------------------------------------'/
+[EMS] -- [ADES]: process\nmanagement
+[CATALOG] -- [ADES]: input data\nreference
+[K8S] -- [ADES]: container\nexecution
+[APP] -- [ADES]: data\nstage-in/out
+
+/'------------------------------------------------------------------------------
+  Bottom row
+------------------------------------------------------------------------------'/
+[ADES] -- [PEP]: user\nattributes
+[ADES] -- [PDP]: authz\npolicy
+[ADES] -- [DAG]: input data
+[ADES] -- [WORKSPACE]: output data
+
+skinparam component<<ades>> {
+    BackgroundColor #77ff77
+    BorderColor #007700
+}
+
+skinparam component<<consumer>> {
+    BackgroundColor #ff7777
+    BorderColor #770000
+}
+
+skinparam component<<provider>> {
+    BackgroundColor #7777ff
+    BorderColor #000077
+}
+
+@enduml
