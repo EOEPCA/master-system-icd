@@ -53,6 +53,13 @@ OGC 18-062, +
 https://github.com/opengeospatial/wps-rest-binding
 | 1.0-draft.4
 
+| [[OGC-COMMON]][OGC-COMMON]
+| OGC Web Services Common Standard, +
+OGC 06-121r9, +
+https://portal.ogc.org/files/?artifact_id=38867&version=2
+| 06-121r9 v2.0.0, +
+07/04/2010
+
 | [[CWL]][CWL]
 | Common Workflow Language Specifications, +
 https://www.commonwl.org/v1.0/

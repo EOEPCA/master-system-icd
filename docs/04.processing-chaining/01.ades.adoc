@@ -24,12 +24,12 @@ The EOEPCA **<<mainEMS>>** is the main client of the ADES that (un)deploys appli
 
 All interactions with the ADES should be via the **<<mainPEP>>** that filters authorized requests, and provides user attributes to the ADES, allowing the user's context to be propagated through onward requests. The ADES obtains authorization policy information, as required, from the policy endpoint of the **<<mainPDP>>**.
 
-The ADES resolves input data references via the **<<mainResourceCatalogue>>**, with the data retrieved through the **<<mainDataAccessServices>>** referenced by the catalogue. The ADES interfaces with the user application to orchestrate its execution (incl. data stage-in/out). The ADES interfaces to the Kubernetes cluster for execution of the requested application. Processing outputs are persisted to the **<<mainWorkspace>>**.
+The ADES resolves input data references via the **<<mainResourceCatalogue>>**, with the data retrieved through the **<<mainDataAccessServices>>** referenced by the catalogue. The ADES interfaces with the **_User Application_** to orchestrate its execution (incl. data stage-in/out). The ADES interfaces to the Kubernetes cluster for execution of the requested application. Processing outputs are persisted to the **<<mainWorkspace>>**.
 
 == Provided Interfaces
 
 [.text-center]
-[#img_adesContext,reftext='{figure-caption} {counter:figure-num}']
+[#img_adesProvidedInterfaces,reftext='{figure-caption} {counter:figure-num}']
 .ADES provided interfaces
 [plantuml, ades-provided-interfaces, png] 
 ....
@@ -38,11 +38,12 @@ include::include/ades-provided-interfaces.wsd[]
 
 The ADES enables interfaces for the processing based on the OGC "Web Processing Service". It exposes 2 web services:
 
-* OGC Web Services Common <<OGC-COMMON>> hosting <<WPS 1.0.0 & 2.0.0>> processing services
-* OGC API Processes <<OGC-API-PROC>> hosting WPS in RESTful core OpenAPI
+* Web services for processing:
+** <<mainWPS>> - OGC Web Services Common <<OGC-COMMON>> hosting <<WPS 1.0.0 & 2.0.0>> processing services
+** <<mainOgcApiProc>> - OGC API Processes <<OGC-API-PROC>> hosting WPS in RESTful core OpenAPI
+* <<Application Invocation>> - the ADES establishes standard conventions with the application being invoked, through which the application receives its inputs and provides its outputs
 
-In addition, the ADES establishes standard conventions with the application being invoked, through which the application receives its inputs and provides its outputs, (ref. <<Application Orchestration>>).
-
+[[mainWPS]]
 === WPS 1.0.0 & 2.0.0
 
 The https://www.ogc.org/standards/wps[OpenGIS® Web Processing Service (WPS)] Interface Standard provides rules for standardizing how inputs and outputs (requests and responses) for geospatial processing services, such as polygon overlay. The standard also defines how a client can request the execution of a process, and how the output from the process is handled. It defines an interface that facilitates the publishing of geospatial processes and clients’ discovery of and binding to those processes. The data required by the WPS can be delivered across a network or they can be available at the server. 
@@ -94,6 +95,7 @@ UndeployProcess::
 `Execute` operation with a process identifier of `eoepcaadesundeployprocess` +
 Allows a client to undeploy a previously deployed custom WPS process
 
+[[mainOgcApiProc]]
 === OGC API Processes
 
 The OGC API - Processes enables the execution of computing processes and the retrieval of metadata describing their purpose and functionality. Typically, these processes combine raster, vector, and/or coverage data with well-defined algorithms to produce new raster, vector, and/or coverage information.
@@ -114,7 +116,7 @@ include::include/ogc-api-processes.adoc[]
 
 include::include/ogc-api-processes-t.adoc[]
 
-=== Application Orchestration
+=== Application Invocation
 
 TBD - need to describe the interface (contract) between the ADES and the application, e.g. use of STAC files etc...
 
@@ -124,9 +126,17 @@ TBD - need to describe the interface (contract) between the ADES and the applica
 
 == Required Interfaces
 
-TBD
+The ADES communicates to other components through the interfaces described in this section.
 
-The ADES communicates to other components through the interfaces described in this section...
+[.text-center]
+[#img_adesRequiredInterfaces,reftext='{figure-caption} {counter:figure-num}']
+.ADES Required (consumed) Interfaces
+[plantuml, ades-required-interfaces, png] 
+....
+include::include/ades-required-interfaces.wsd[]
+....
+
+TBD:
 
 * resource catalogue for input data
 * data access services for data stage-in
@@ -138,3 +148,18 @@ The ADES communicates to other components through the interfaces described in th
 ** ingestion for data stage-out
 
 TBD - design decision regarding whether stage-out is handed-off to the ingestion component. Nevertheless the ADES needs to know the 'published' location of the output in order to pass to user/EMS.
+
+== Example Scenarios
+
+This section provides examples of the ADES interfacing flows.
+
+=== ADES Processing Flows
+
+[.text-center]
+[#img_adesProcessingFlows,reftext='{figure-caption} {counter:figure-num}']
+.ADES Processing Flows
+[plantuml, ades-processing-flows, png] 
+....
+include::include/ades-processing-flows.wsd[]
+....
+

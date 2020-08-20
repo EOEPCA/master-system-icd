@@ -7,15 +7,15 @@ component "ADES" as ades <<ades>>
 ades -up- wpsapi
 () "OGC API Processes" as ogcapi <<provided>>
 ades -up- ogcapi
-() "app-orchestrate" as apporch <<provided>>
-ades -down- apporch
+() "app-invocation" as invoke <<provided>>
+ades -down- invoke
 
 component "EMS" as ems <<consumer>>
 ems -down-( wpsapi
 ems -down-( ogcapi
 
 component "User App" as userapp <<consumer>>
-  userapp -up-( apporch
+  userapp -up-( invoke
 
 skinparam component<<ades>> {
     BackgroundColor #77ff77

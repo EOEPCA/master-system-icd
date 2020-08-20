@@ -1,0 +1,52 @@
+@startuml component
+
+hide stereotype
+
+component "Policy Enforcement\nPoint (PEP)" as pep <<provider>>
+() "Access Filter" as pepauth <<consumed>>
+pep -down- pepauth
+
+component "Resource\nCatalogue" as catalog <<provider>>
+() "OGC OpenSearch" as opensearch <<consumed>>
+catalog -down- opensearch
+
+component "Data\nAccess\nServices" as dataaccess <<provider>>
+() "WCS,WFS,S3,etc." as dataserve <<consumed>>
+dataaccess -down- dataserve
+
+component "Policy Decision\nPoint (PDP)" as pdp <<provider>>
+() "Policy API" as policyapi <<consumed>>
+pdp -up- policyapi
+
+component [Processing\nCluster] as proccluster <<provider>>
+() "Kubernetes API" as kubeapi <<consumed>>
+proccluster -up- kubeapi
+
+component "Workspace" as workspace <<provider>>
+() "WebDAV (TBD)" as wsapi <<consumed>>
+workspace -up- wsapi
+
+component "ADES" as ades <<ades>>
+ades -up-( pepauth
+ades -up-( opensearch
+ades -up-( dataserve
+ades -down-( kubeapi
+ades -down-( policyapi
+ades -down-( wsapi
+
+skinparam component<<ades>> {
+    BackgroundColor #77ff77
+    BorderColor #007700
+}
+
+skinparam interface<<consumed>> {
+    BackgroundColor #7777ff
+    BorderColor #000077
+}
+
+skinparam component<<provider>> {
+    BackgroundColor #7777ff
+    BorderColor #000077
+}
+
+@enduml

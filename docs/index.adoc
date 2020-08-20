@@ -15,7 +15,7 @@
 :sectnums:
 :sectnumlevels: 5
 :toc: left
-:toclevels: 5
+:toclevels: 4
 :toc-title: Master System Interface Control Document
 //:toc-title:
 :description: Master System Interface Control Document for the Common Architecture
@@ -53,10 +53,6 @@ include::03.user-management/00.user-management-index.adoc[]
 <<<
 
 include::04.processing-chaining/00.processing-index.adoc[]
-
-<<<
-
-include::04x.processing-chaining/00.processing-index.adoc[]
 
 <<<
 
