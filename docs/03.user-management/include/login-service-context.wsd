@@ -1,0 +1,43 @@
+@startuml "Login Service Context"
+
+hide stereotype
+
+/'------------------------------------------------------------------------------
+  Components
+------------------------------------------------------------------------------'/
+["Login Service"] as "Login Service" <<login_service>>
+["OIDC Client"] as "OIDC Client" <<consumer>>
+["UMA Client"] as "UMA Client" <<consumer>>
+["SCIM Client"] as "SCIM Client" <<consumer>>
+["Web Client"] as "Web Client" <<consumer>>
+[PDP] as PDP <<provider>>
+
+/'------------------------------------------------------------------------------
+  Top row
+------------------------------------------------------------------------------'/
+["OIDC Client"] -- ["Login Service"]: authentication
+["UMA Client"] -- ["Login Service"]: authorization
+["SCIM Client"] -- ["Login Service"]: end-user attribute\nprovisioning
+
+/'------------------------------------------------------------------------------
+  Bottom row
+------------------------------------------------------------------------------'/
+["Login Service"] -- ["Web Client"]: administration & operation
+["Login Service"] -- [PDP]: XACML requests
+
+skinparam component<<login_service>> {
+    BackgroundColor #77ff77
+    BorderColor #007700
+}
+
+skinparam component<<consumer>> {
+    BackgroundColor #ff7777
+    BorderColor #770000
+}
+
+skinparam component<<provider>> {
+    BackgroundColor #7777ff
+    BorderColor #000077
+}
+
+@enduml

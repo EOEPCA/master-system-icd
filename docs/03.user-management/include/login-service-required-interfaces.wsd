@@ -1,0 +1,28 @@
+@startuml component
+
+hide stereotype
+
+component "Policy Decision\nPoint (PDP)" as pdp <<provider>>
+() "XACML Endpoint" as policyapi <<consumed>>
+pdp -up- policyapi
+
+
+component "Login Service" as login_service <<login_service>>
+login_service -down-( policyapi
+
+skinparam component<<login_service>> {
+    BackgroundColor #77ff77
+    BorderColor #007700
+}
+
+skinparam interface<<consumed>> {
+    BackgroundColor #7777ff
+    BorderColor #000077
+}
+
+skinparam component<<provider>> {
+    BackgroundColor #7777ff
+    BorderColor #000077
+}
+
+@enduml

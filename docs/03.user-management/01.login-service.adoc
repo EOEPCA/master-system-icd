@@ -1,4 +1,114 @@
 [[mainLoginService]]
 = Login Service
 
-TBD
+Refer to Login Service component documentation - https://eoepca.github.io/um-login-service/master
+
+== Description
+
+The Login Service building block provides an OIDC and UMA compliant solution enabling authentication and authorization mechanisms within an Exploitation Platform. Other building blocks, such as the Policy Decision Point, Policy Enforcement Point and User Profile rely on this Building Block to provide several standard interfaces.
+
+== Context
+
+The following context diagram identifies the major components interfacing with the Login Service: +
+([red]#RED# ~ consumers of Login Service provided interfaces, [blue]#BLUE# ~ providers of interfaces consumed by the Login Service)
+
+[.text-center]
+[#img_loginServiceContext,reftext='{figure-caption} {counter:figure-num}']
+.Login Service context diagram
+[plantuml, login-service-context, png] 
+....
+include::include/login-service-context.wsd[]
+....
+
+The EOEPCA Login Service provides implementations of the state-of-the-art standards and supports all building blocks that require authentication (through OIDC), authorization (through UMA) and user management capabilities (through SCIM). In addition to this, the Login Service exposes a Web Interface that can be used to perform monitoring and configuration management by operators. 
+
+The Login Service can also rely on XACML-based flows to verify access rights during an authorization flow, contacting mainly the XACML endpoints exposed by **<<mainPDP>>**.
+
+== Provided Interfaces
+
+[.text-center]
+[#img_loginServicerovidedInterfaces,reftext='{figure-caption} {counter:figure-num}']
+.Login Service provided interfaces
+[plantuml, login-service-provided-interfaces, png] 
+....
+include::include/login-service-provided-interfaces.wsd[]
+....
+
+The Login Service enables the following interfaces:
+
+* <<adminWeb>> - Web Administration interface meant for Operators
+* <<mainOIDC>> - OIDC compliant endpoint allowing acting as OpenID Provider (OP)
+* <<mainUMA>> - UMA compliant endpoints acting as Authorization Server (AS)
+* <<mainSCIM>> - SCIM compliant endpoints allowing User Management and user information retrieval mechanisms
+
+[[adminWeb]]
+=== Administration Web Interface
+
+The login service provides administration functionality for users with elevated priviledges. This allows admins to have an overview of the entire system, as well as configure anything necessary from this interface.
+
+This interface allows manual editing, creation and removal of OIDC Client configurations, UMA Scopes, Custom Polices and base configuration parameters.
+
+==== Applicable Standards
+
+No applicable standards besides Hypertext Transfer Protocol (HTTP) as means to serve the information to the End-User 
+
+==== Endpoints
+
+URL: https://login.eoepca.org/
+
+By default, the Login Service administration portal resides on the root path of the deployment. This root path usually redirects to the management service located at:
+
+URL: https://login.eoepca.org/identity
+
+[[mainOIDC]]
+=== OIDC Interface
+
+<Description>
+
+==== Applicable Standards
+
+* IETF - OpenID Connect 1.0 ~ 
+
+==== Endpoints
+
+=== UMA Interface
+
+<Description>
+
+==== Applicable Standards
+
+* Kantara Innitiative - UMA 2.0 ~ 
+
+==== Endpoints
+
+=== SCIM Interface
+
+<Description>
+
+==== Applicable Standards
+
+* IETF RFC 7644 - System for Cross-domain Identity Management ~ 
+
+==== Endpoints
+
+== Required Interfaces
+
+[.text-center]
+[#img_loginServiceRequiredInterfaces,reftext='{figure-caption} {counter:figure-num}']
+.Login Service required interfaces
+[plantuml, login-service-required-interfaces, png] 
+....
+include::include/login-service-required-interfaces.wsd[]
+....
+
+The Login Service utilizes the following interfaces:
+
+* <<loginServiceXACML>> - XACML compliant interface used to perform queries against a Policy Decision Point (PDP).
+
+=== XACML Queries
+
+== Example Scenarios
+
+=== End-User Authentication
+
+=== Resource Access (move to PEP)
