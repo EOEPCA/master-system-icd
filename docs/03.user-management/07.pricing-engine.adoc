@@ -1,4 +1,5 @@
 [[mainPricingEngine]]
 = Pricing Engine
 
-TBD
+Not in the scope of Release 0.2
+

@@ -1,4 +1,67 @@
 [[mainPDP]]
 = Policy Decision Point (PDP)
 
-TBD
+Refer to PDP building block documentation - https://eoepca.github.io/um-pdp-engine/master
+
+== Description
+
+== Context
+
+The following context diagram identifies the major components interfacing with the PDP: +
+([red]#RED# ~ consumers of PDP provided interfaces, [blue]#BLUE# ~ providers of interfaces consumed by the PDP)
+
+[.text-center]
+[#img_pdpContext,reftext='{figure-caption} {counter:figure-num}']
+.Policy Decision Point context diagram
+[plantuml, pdp-context, png] 
+....
+include::include/pdp-context.wsd[]
+....
+
+== Provided Interfaces
+
+[.text-center]
+[#img_pdpProvidedInterfaces,reftext='{figure-caption} {counter:figure-num}']
+.Policy Decision Point provided interfaces
+[plantuml, pdp-provided-interfaces, png] 
+....
+include::include/pdp-provided-interfaces.wsd[]
+....
+
+=== Platform Policy API
+
+==== Applicable Standards
+==== Endpoints
+
+=== XACML Policy Checks
+
+==== Applicable Standards
+==== Endpoints
+
+== Required Interfaces
+
+[.text-center]
+[#img_pdpRequiredInterfaces,reftext='{figure-caption} {counter:figure-num}']
+.Policy Decision Point required interfaces
+[plantuml, pdp-required-interfaces, png] 
+....
+include::include/pdp-required-interfaces.wsd[]
+....
+
+=== OIDC Authentication
+==== Applicable Standards
+==== Remote Endpoints
+
+=== SCIM Identity Management
+==== Applicable Standards
+==== Remote Endpoints
+
+=== UMA Authorization
+==== Applicable Standards
+==== Remote Endpoints
+
+== Example Scenarios
+
+=== Policy Access Check
+=== Policy Management
+

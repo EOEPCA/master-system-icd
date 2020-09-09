@@ -1,4 +1,4 @@
 [[mainLicenseManager]]
 = License Manager
 
-TBD
+Not in the scope of Release 0.2

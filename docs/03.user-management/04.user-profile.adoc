@@ -1,4 +1,63 @@
 [[mainUserProfile]]
 = User Profile
 
-TBD
+Refer to User Profile building block documentation - https://eoepca.github.io/um-user-profile/master
+
+== Description
+
+== Context
+
+The following context diagram identifies the major components interfacing with the User Profile: +
+([red]#RED# ~ consumers of User Profile provided interfaces, [blue]#BLUE# ~ providers of interfaces consumed by the User Profile)
+
+[.text-center]
+[#img_user-profileContext,reftext='{figure-caption} {counter:figure-num}']
+.Policy Decision Point context diagram
+[plantuml, user-profile-context, png] 
+....
+include::include/user-profile-context.wsd[]
+....
+
+== Provided Interfaces
+
+[.text-center]
+[#img_user-profileProvidedInterfaces,reftext='{figure-caption} {counter:figure-num}']
+.Policy Decision Point provided interfaces
+[plantuml, user-profile-provided-interfaces, png] 
+....
+include::include/user-profile-provided-interfaces.wsd[]
+....
+
+=== Profile Management Web Interface
+
+==== Applicable Standards
+==== Endpoints
+
+
+== Required Interfaces
+
+[.text-center]
+[#img_user-profileRequiredInterfaces,reftext='{figure-caption} {counter:figure-num}']
+.Policy Decision Point required interfaces
+[plantuml, user-profile-required-interfaces, png] 
+....
+include::include/user-profile-required-interfaces.wsd[]
+....
+
+=== OIDC Authentication
+==== Applicable Standards
+==== Remote Endpoints
+
+=== SCIM Identity Management
+==== Applicable Standards
+==== Remote Endpoints
+
+=== UMA Authorization
+==== Applicable Standards
+==== Remote Endpoints
+
+== Example Scenarios
+
+=== Attribute Edition
+=== Account Deletion
+

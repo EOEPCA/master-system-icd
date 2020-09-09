@@ -1,4 +1,68 @@
 [[mainPEP]]
 = Policy Enforcement Point (PEP)
 
-TBD
+Refer to PEP building block documentation - https://eoepca.github.io/um-pep-engine/master
+
+
+== Description
+
+== Context
+
+The following context diagram identifies the major components interfacing with the PEP: +
+([red]#RED# ~ consumers of PEP provided interfaces, [blue]#BLUE# ~ providers of interfaces consumed by the PEP)
+
+[.text-center]
+[#img_pepContext,reftext='{figure-caption} {counter:figure-num}']
+.Policy Enforcement Point context diagram
+[plantuml, pep-context, png] 
+....
+include::include/pep-context.wsd[]
+....
+
+== Provided Interfaces
+
+[.text-center]
+[#img_pepProvidedInterfaces,reftext='{figure-caption} {counter:figure-num}']
+.Policy Enforcement Point provided interfaces
+[plantuml, pep-provided-interfaces, png] 
+....
+include::include/pep-provided-interfaces.wsd[]
+....
+
+=== Platform Resource API
+
+==== Applicable Standards
+==== Endpoints
+
+=== Secured Proxy
+
+==== Applicable Standards
+==== Endpoints
+
+== Required Interfaces
+
+[.text-center]
+[#img_pepRequiredInterfaces,reftext='{figure-caption} {counter:figure-num}']
+.Policy Enforcement Point required interfaces
+[plantuml, pep-required-interfaces, png] 
+....
+include::include/pep-required-interfaces.wsd[]
+....
+
+=== OIDC Authentication
+==== Applicable Standards
+==== Remote Endpoints
+
+=== UMA Authorization
+==== Applicable Standards
+==== Remote Endpoints
+
+=== Protected Resource Server
+==== Applicable Standards
+==== Remote Endpoints
+
+== Example Scenarios
+
+=== Resource Access
+=== Resource Management
+

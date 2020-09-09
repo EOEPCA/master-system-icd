@@ -44,7 +44,7 @@ The Login Service enables the following interfaces:
 [[adminWeb]]
 === Administration Web Interface
 
-The login service provides administration functionality for users with elevated priviledges. This allows admins to have an overview of the entire system, as well as configure anything necessary from this interface.
+The Login Service provides administration functionality for users with elevated priviledges. This allows admins to have an overview of the entire system, as well as configure anything necessary from this interface.
 
 This interface allows manual editing, creation and removal of OIDC Client configurations, UMA Scopes, Custom Polices and base configuration parameters.
 
@@ -54,42 +54,56 @@ No applicable standards besides Hypertext Transfer Protocol (HTTP) as means to s
 
 ==== Endpoints
 
-URL: https://login.eoepca.org/
+URL(1): /
+URL(2): /identity
 
 By default, the Login Service administration portal resides on the root path of the deployment. This root path usually redirects to the management service located at:
-
-URL: https://login.eoepca.org/identity
 
 [[mainOIDC]]
 === OIDC Interface
 
-<Description>
+The Login Service provides an OIDC compliant interface that allows Requesting Parties to authenticate End-Users through their use of credentials. It mainly acts as an identity layer on top of OAuth2.0
 
 ==== Applicable Standards
 
-* IETF - OpenID Connect 1.0 ~ 
+* IETF - OpenID Connect 1.0 
 
 ==== Endpoints
+
+URL: /.well-known/openid-configuration
+
+The Login Service exposes the standard discovery document, a JSON showcasing all the necessary metadata and endpoint enumeration for a client application to dynamically load all the needed endpoints.
 
 === UMA Interface
 
-<Description>
+The Login Service provides a UMA compliant interface that allows Resource Servers (or Policy Enforcement Points running in front of these) to request valid Requesting Party Tokens (RPTs). UMA is a custom profile of OAuth2.0 that introduces a ticket-based profile, similar to the "authorization code" flow but keeping it agnostic in terms of authentication.
+
+UMA mainly manages the notion of "resource" as the main managed object, with tickets being a representation of an attempt to access any given resource within a specific realm. In order to facilitate this, several resource management endpoints (registration, deletion, scope assignment) are made available and the standard intentionally leaves Policy resolution (access checks) out of the specification to facilitate integration with other technologies (XACML, and any given policy language).
+
 
 ==== Applicable Standards
 
-* Kantara Innitiative - UMA 2.0 ~ 
+* Kantara Innitiative - UMA 2.0 
 
 ==== Endpoints
 
+URL: /.well-known/uma2-configuration
+
+The Login Service exposes a dicovery document very much similar to OIDC well-known documents. Although this is not implicitly stated as necessary part of a UMA-compliant solution, serving a well-known endpoint makes client integration more familiar to developers that may be used to OIDC Client integration.
+
 === SCIM Interface
 
-<Description>
+The Login Service provides a SCIM compliant interface, designed to make managing user identities in cloud-based applications and services easier due to its well-defined schemas and endpoints. 
 
 ==== Applicable Standards
 
 * IETF RFC 7644 - System for Cross-domain Identity Management ~ 
 
 ==== Endpoints
+
+URL: /.well-known/scim-configuration
+
+Similarly to OIDC and UMA endpoints, this well-known endpoint allows to discover all relevant SCIM operations. Although this strategy is not enforced, serving a well-known endpoint makes client integration more familiar to developers that may be used to OIDC Client integration.
 
 == Required Interfaces
 
@@ -105,10 +119,31 @@ The Login Service utilizes the following interfaces:
 
 * <<loginServiceXACML>> - XACML compliant interface used to perform queries against a Policy Decision Point (PDP).
 
-=== XACML Queries
+=== XACML Policy Checks
+
+The Login Service might delegate policy checks, as part of its UMA workflow execution, to an external service that exposes an XACML-compliant interface (in this architecture, this could be provided by the Policy Decision Point). This standard mostly covers request and response format for a policy decision service, and includes a JSON binding that fully maps the original XML schemas to JSON schemas that can be used in XACML compliant request generation and response parsing.
+
+==== Applicable Standards
+
+* OASIS - eXtensible Access Control Markup Language (XACML) Version 3.0 ~
+* OASIS (Public Draft) - JSON Profile of XACML 3.0 Version 1.1 ~
+
+==== Remote Endpoints 
+
+URL: <pdp_instance>/policy/validate
+
+Within EOEPCA, the remote endpoint stated above and exposed by the PDP will accept XACML compliant requests.
 
 == Example Scenarios
 
 === End-User Authentication
 
-=== Resource Access (move to PEP)
+TODO: Insert authentication scenario
+
+=== Resource Access
+
+For an in detail scenario involving resource access, please refer to the Policy Enforcement Point section and its use of the UMA Endpoints
+
+=== Identity Management
+
+For an in detail scenario involving identity resource management, please refer to the Policy Decision Point section and its use of the SCIM Endpoints
