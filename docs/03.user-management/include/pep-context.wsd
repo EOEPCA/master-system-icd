@@ -1,0 +1,41 @@
+@startuml "PEP Context"
+
+hide stereotype
+
+/'------------------------------------------------------------------------------
+  Components
+------------------------------------------------------------------------------'/
+[PEP] as PEP <<pep>>
+["OIDC Client"] as "OIDC Client" <<provider>>
+["UMA Client"] as "UMA Client" <<provider>>
+["SCIM Client"] as "SCIM Client" <<provider>>
+[Placeholder] as Placeholder <<consumer>>
+
+/'------------------------------------------------------------------------------
+  Top row
+------------------------------------------------------------------------------'/
+["OIDC Client"] -- [PEP]: authentication
+["UMA Client"] -- [PEP]: authorization
+["SCIM Client"] -- [PEP]: end-user attribute\nprovisioning
+
+/'------------------------------------------------------------------------------
+  Bottom row
+------------------------------------------------------------------------------'/
+[PEP] -- [Placeholder]: placeholder
+
+skinparam component<<pep>> {
+    BackgroundColor #77ff77
+    BorderColor #007700
+}
+
+skinparam component<<consumer>> {
+    BackgroundColor #ff7777
+    BorderColor #770000
+}
+
+skinparam component<<provider>> {
+    BackgroundColor #7777ff
+    BorderColor #000077
+}
+
+@enduml
