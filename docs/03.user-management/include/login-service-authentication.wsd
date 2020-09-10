@@ -1,0 +1,14 @@
+@startuml
+"End-User/User-Agent" -> Client: 1. Request for Authentication
+Client -> "End-User/User-Agent": 2. HTTP 302: /authorization
+"End-User/User-Agent" -> "Login Service": 3. /authorization Request
+"Login Service" -> "End-User/User-Agent": 4. Request for End-User consent 
+"End-User/User-Agent" -> "Login Service": 5. End-User Consent
+"Login Service" -> "End-User/User-Agent": 6. HTTP 302: /callback URL [+code]
+"End-User/User-Agent" -> Client: 7. /callback URL [+code]
+Client -> "Login Service": 8. POST /token [+code +client_credentials]
+"Login Service"-> Client: 9. HTTP 200 [access_token]
+Client -> "Login Service": 10. /userinfo {Authorization: Bearer [access_token]}
+"Login Service" -> Client: 11. HTTP 200 [End-User claims]
+Client -> "End-User/User-Agent": (Login succeed.)
+@enduml

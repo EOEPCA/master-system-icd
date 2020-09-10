@@ -138,7 +138,13 @@ Within EOEPCA, the remote endpoint stated above and exposed by the PDP will acce
 
 === End-User Authentication
 
-TODO: Insert authentication scenario
+[.text-center]
+[#img_loginServiceAuthentication,reftext='{figure-caption} {counter:figure-num}']
+.Login Service provided interfaces
+[plantuml, login-service-authentication, png] 
+....
+include::include/login-service-authentication.wsd[]
+....
 
 === Resource Access
 
