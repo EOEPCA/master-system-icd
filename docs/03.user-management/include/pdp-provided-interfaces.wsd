@@ -3,11 +3,15 @@
 hide stereotype
 
 component PDP <<pdp>>
-() "PDP Endpoints" as pdpendpoints <<provided>>
+() "Platform Policy API" as pdpendpoints <<provided>>
+() "XACML Policy Checks" as xacml_checks <<provided>>
 PDP -down- pdpendpoints
+PDP -down- xacml_checks
 
 component "Login Service" as login_service <<consumer>>
+component "Client Application" as client_app <<consumer>>
 login_service -up-( pdpendpoints
+client_app -up-( xacml_checks
 
   
 skinparam component<<pdp>> {

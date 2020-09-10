@@ -1,0 +1,28 @@
+@startuml component
+
+hide stereotype
+
+component "User Profile" as user_profile <<user_profile>>
+() "Web Interface" as web <<provided>>
+user_profile -down- web
+
+component User <<consumer>>
+User -up-( web
+
+  
+skinparam component<<user_profile>> {
+    BackgroundColor #77ff77
+    BorderColor #007700
+}
+
+skinparam interface<<provided>> {
+    BackgroundColor #ff7777
+    BorderColor #770000
+}
+
+skinparam component<<consumer>> {
+    BackgroundColor #ff7777
+    BorderColor #770000
+}
+
+@enduml

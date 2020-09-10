@@ -10,6 +10,8 @@ hide stereotype
 ["UMA Client"] as "UMA Client" <<provider>>
 ["SCIM Client"] as "SCIM Client" <<provider>>
 ["Login Service"] as "Login Service" <<consumer>>
+["Client Application"] as "Client Application" <<consumer>>
+["Login Service 2"] as "Login Service" <<provider>>
 
 /'------------------------------------------------------------------------------
   Top row
@@ -17,11 +19,15 @@ hide stereotype
 ["OIDC Client"] -- [PDP]: authentication
 ["UMA Client"] -- [PDP]: authorization
 ["SCIM Client"] -- [PDP]: end-user attribute\nprovisioning
+["Login Service 2"] -- ["OIDC Client"]
+["Login Service 2"] -- ["UMA Client"]
+["Login Service 2"] -- ["SCIM Client"]
 
 /'------------------------------------------------------------------------------
   Bottom row
 ------------------------------------------------------------------------------'/
 [PDP] -- ["Login Service"]
+[PDP] -- ["Client Application"]
 
 skinparam component<<pdp>> {
     BackgroundColor #77ff77

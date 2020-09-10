@@ -3,11 +3,15 @@
 hide stereotype
 
 component PEP <<pep>>
-() "PEP Endpoints" as pependpoints <<provided>>
+() "Platform Resource API" as pependpoints <<provided>>
+() "Secured Proxy" as secured_proxy <<provided>>
+
 PEP -down- pependpoints
+PEP -down- secured_proxy
 
 component "Client Application" as client <<consumer>>
 client -up-( pependpoints
+client -up-( secured_proxy
 
   
 skinparam component<<pep>> {

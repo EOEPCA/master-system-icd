@@ -1,33 +1,32 @@
-@startuml "PEP Context"
+@startuml "User Profile Context"
 
 hide stereotype
 
 /'------------------------------------------------------------------------------
   Components
 ------------------------------------------------------------------------------'/
-[PEP] as PEP <<pep>>
+["User Profile"] as "User Profile" <<user_profile>>
 ["OIDC Client"] as "OIDC Client" <<provider>>
-["UMA Client"] as "UMA Client" <<provider>>
+["Email Service"] as "Email Service" <<provider>>
 ["SCIM Client"] as "SCIM Client" <<provider>>
-["Client Application"] as "Client Application" <<consumer>>
 ["Login Service"] as "Login Service" <<provider>>
+["User"] as "User" <<consumer>>
 
 /'------------------------------------------------------------------------------
   Top row
 ------------------------------------------------------------------------------'/
-["OIDC Client"] -- [PEP]: authentication
-["UMA Client"] -- [PEP]: authorization
-["SCIM Client"] -- [PEP]: end-user attribute\nprovisioning
+["OIDC Client"] -- ["User Profile"]: authentication
+["Email Service"] -- ["User Profile"]: notification
+["SCIM Client"] -- ["User Profile"]: end-user attribute\nprovisioning
 ["Login Service"] -- ["OIDC Client"]
-["Login Service"] -- ["UMA Client"]
 ["Login Service"] -- ["SCIM Client"]
 
 /'------------------------------------------------------------------------------
   Bottom row
 ------------------------------------------------------------------------------'/
-[PEP] -- ["Client Application"]
+["User Profile"] -- ["User"]: Web Interface
 
-skinparam component<<pep>> {
+skinparam component<<user_profile>> {
     BackgroundColor #77ff77
     BorderColor #007700
 }
