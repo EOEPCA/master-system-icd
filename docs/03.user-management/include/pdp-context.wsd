@@ -1,29 +1,29 @@
-@startuml "PEP Context"
+@startuml "PDP Context"
 
 hide stereotype
 
 /'------------------------------------------------------------------------------
   Components
 ------------------------------------------------------------------------------'/
-[PEP] as PEP <<pep>>
+[PDP] as PDP <<pdp>>
 ["OIDC Client"] as "OIDC Client" <<provider>>
 ["UMA Client"] as "UMA Client" <<provider>>
 ["SCIM Client"] as "SCIM Client" <<provider>>
-["Client Application"] as "Client Application" <<consumer>>
+["Login Service"] as "Login Service" <<consumer>>
 
 /'------------------------------------------------------------------------------
   Top row
 ------------------------------------------------------------------------------'/
-["OIDC Client"] -- [PEP]: authentication
-["UMA Client"] -- [PEP]: authorization
-["SCIM Client"] -- [PEP]: end-user attribute\nprovisioning
+["OIDC Client"] -- [PDP]: authentication
+["UMA Client"] -- [PDP]: authorization
+["SCIM Client"] -- [PDP]: end-user attribute\nprovisioning
 
 /'------------------------------------------------------------------------------
   Bottom row
 ------------------------------------------------------------------------------'/
-[PEP] -- ["Client Application"]
+[PDP] -- ["Login Service"]
 
-skinparam component<<pep>> {
+skinparam component<<pdp>> {
     BackgroundColor #77ff77
     BorderColor #007700
 }

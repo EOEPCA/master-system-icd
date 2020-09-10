@@ -1,0 +1,28 @@
+@startuml component
+
+hide stereotype
+
+component PDP <<pdp>>
+() "PDP Endpoints" as pdpendpoints <<provided>>
+PDP -down- pdpendpoints
+
+component "Login Service" as login_service <<consumer>>
+login_service -up-( pdpendpoints
+
+  
+skinparam component<<pdp>> {
+    BackgroundColor #77ff77
+    BorderColor #007700
+}
+
+skinparam interface<<provided>> {
+    BackgroundColor #ff7777
+    BorderColor #770000
+}
+
+skinparam component<<consumer>> {
+    BackgroundColor #ff7777
+    BorderColor #770000
+}
+
+@enduml
