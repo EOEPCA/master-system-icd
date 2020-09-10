@@ -5,6 +5,8 @@ Refer to User Profile building block documentation - https://eoepca.github.io/um
 
 == Description
 
+In order to support the Billing Service, the User Profile building block allows to identify users (leaving a reference to their home IdP), to assign them Billing Identities, Service API keys, License keys and to record Terms and Conditions acceptance. It’s a persistence service with interfaces that will be queried by other building blocks (License Manager, Billing Service, Policy Decision Point) and modified by both the License Manager and the Login Service (during creation of a new user profile or assignment of new Licenses).
+
 == Context
 
 The following context diagram identifies the major components interfacing with the User Profile: +
@@ -18,6 +20,8 @@ The following context diagram identifies the major components interfacing with t
 include::include/user-profile-context.wsd[]
 ....
 
+TODO context description
+
 == Provided Interfaces
 
 [.text-center]
@@ -28,10 +32,18 @@ include::include/user-profile-context.wsd[]
 include::include/user-profile-provided-interfaces.wsd[]
 ....
 
+TODO interface description
+
 === Profile Management Web Interface
 
+TODO
+
 ==== Applicable Standards
+
+No applicable standards besides Hypertext Transfer Protocol (HTTP) as means to serve the information to the End-User
+
 ==== Endpoints
+URL(1): TODO
 
 
 == Required Interfaces
@@ -45,18 +57,48 @@ include::include/user-profile-required-interfaces.wsd[]
 ....
 
 === OIDC Authentication
+
+The User Profile utilizes an OIDC Client implementation to consume OIDC endpoints, authenticate itself as trusted platform component, generate JWT documents containing End-User information, and secure its Platform Resource API endpoints.
+
 ==== Applicable Standards
+
+* IETF - OpenID Connect 1.0
+
 ==== Remote Endpoints
+
+URL: <um-login-service>/.well-known/openid-configuration
+
+The Login Service exposes the standard discovery document, a JSON showcasing all the necessary metadata and endpoint enumeration for a client application to dynamically load all the needed endpoints.
 
 === SCIM Identity Management
+
+The User profile utilizes a SCIM Client implementation to consume SCIM endpoints, designed to make managing user identities in cloud-based applications and services easier due to its well-defined schemas and endpoints. 
+
 ==== Applicable Standards
+
+* IETF RFC 7644 - System for Cross-domain Identity Management
+
 ==== Remote Endpoints
 
-=== UMA Authorization
+URL: /.well-known/scim-configuration
+
+This well-known endpoint allows to discover all relevant SCIM operations. Although this strategy is not enforced, serving a well-known endpoint makes client integration more familiar to developers that may be used to OIDC Client integration.
+
+=== Email Service
+
+TODO
+
 ==== Applicable Standards
+
+* IETF RFC 2822 - Internet Message Format
+
 ==== Remote Endpoints
+
+TODO
 
 == Example Scenarios
+
+TODO
 
 === Attribute Edition
 === Account Deletion
