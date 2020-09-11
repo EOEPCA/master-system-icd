@@ -5,7 +5,7 @@ Refer to User Profile building block documentation - https://eoepca.github.io/um
 
 == Description
 
-In order to support the Billing Service, the User Profile building block allows to identify users (leaving a reference to their home IdP), to assign them Billing Identities, Service API keys, License keys and to record Terms and Conditions acceptance. It’s a persistence service with interfaces that will be queried by other building blocks (License Manager, Billing Service, Policy Decision Point) and modified by both the License Manager and the Login Service (during creation of a new user profile or assignment of new Licenses).
+The User Profile building block serves to encapsulate profile actions (such as edit or removal) into a web interface, while at the same time providing the infrastructure upon which to implement other building blocks, such as Billing and Licensing.
 
 == Context
 
@@ -20,7 +20,7 @@ The following context diagram identifies the major components interfacing with t
 include::include/user-profile-context.wsd[]
 ....
 
-TODO context description
+In order to support the Billing Service, the User Profile building block allows to identify users (leaving a reference to their home IdP), to assign them Billing Identities, Service API keys, License keys and to record Terms and Conditions acceptance. It’s a persistence service with interfaces that will be queried by other building blocks (License Manager, Billing Service, Policy Decision Point) and modified by both the License Manager and the Login Service (during creation of a new user profile or assignment of new Licenses).
 
 == Provided Interfaces
 
@@ -32,18 +32,16 @@ TODO context description
 include::include/user-profile-provided-interfaces.wsd[]
 ....
 
-TODO interface description
-
 === Profile Management Web Interface
 
-TODO
+A web service is made available for users to perform actions related to the building block, such as account removal.
 
 ==== Applicable Standards
 
 No applicable standards besides Hypertext Transfer Protocol (HTTP) as means to serve the information to the End-User
 
 ==== Endpoints
-URL(1): TODO
+URL: <um-login-service>/web_ui
 
 
 == Required Interfaces
@@ -86,7 +84,7 @@ This well-known endpoint allows to discover all relevant SCIM operations. Althou
 
 === Email Service
 
-TODO
+The User Profile building block also implements a SMTP Client, that allows for the sending of email notifications that serves as, and implements, a confirmation action in an account removal scenario.
 
 ==== Applicable Standards
 
@@ -94,12 +92,27 @@ TODO
 
 ==== Remote Endpoints
 
-TODO
+URL: <um-login-service>/confirmation_mail
 
 == Example Scenarios
 
-TODO
-
 === Attribute Edition
+
+[.text-center]
+[#img_userProfileEdit,reftext='{figure-caption} {counter:figure-num}']
+.User Profile attribute editing
+[plantuml, user-profile-edit, png] 
+....
+include::include/user-profile-edit.wsd[]
+....
+
 === Account Deletion
+
+[.text-center]
+[#img_userProfileRemoval,reftext='{figure-caption} {counter:figure-num}']
+.User Profile account removal
+[plantuml, user-profile-removal, png] 
+....
+include::include/user-profile-removal.wsd[]
+....
 

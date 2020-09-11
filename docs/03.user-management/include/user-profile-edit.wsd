@@ -1,0 +1,24 @@
+@startuml
+actor User
+participant "Web Interface" as web
+participant "User Profile" as bb
+
+User -> web: Select profile management option
+web -> bb: profile_management(access_token, logged_in)
+
+bb -> bb: Generate internal clients:\n- OIDC Client\n- SCIM Client
+bb -> bb: session.get("logged_in"), session.get("access_token")
+
+bb -> bb: scim_client.getAttributes(session.get('logged_user'))
+
+bb --> web: render_template("profile_management.html")
+
+User -> web: modify attributes
+
+web -> bb: modify_management(access_token, logged_in)
+
+bb -> bb: session.get("logged_in"), session.get("access_token")
+bb -> bb: scim_client.changeAttributes\n(session.get("logged_user"), request.form)
+
+bb -> web: redirect(url_for("profile_management")
+@enduml
