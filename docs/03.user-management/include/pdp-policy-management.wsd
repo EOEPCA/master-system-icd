@@ -1,0 +1,19 @@
+@startuml
+autonumber
+participant "Resource Owner Client" as RS
+participant "PDP" as PDP 
+PDP <-> "Login Service": PDP Authentication (PAT)
+RS <-> "Login Service": End-User Authentication (id_token)
+== Registration ==
+RS -> PDP : POST /policies (policy_model, id_token)
+PDP -> PDP : Local Persistence
+PDP --> RS: 201 Created
+== Retrieval ==
+RS -> PDP : GET /policies (id_token, resource_id)
+alt id_token = ownership_id
+PDP -> PDP : Get Local Persistence
+PDP -> RS: 200 OK (policy_list)
+else  id_token != ownership_id
+PDP -> RS: 401 Unauthorized
+end
+@enduml

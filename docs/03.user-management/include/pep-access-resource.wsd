@@ -5,7 +5,6 @@ participant "PEP" as PEP
 participant "Resource Server" as RS
 participant "Login Service" as AuthzAPI
 participant "PDP" as PDP
-Client <-> AuthzAPI: Authentication (id_token)
 Client -> RS: GET resource
 PEP -> PEP: Resolve Resource ID
 PEP -> AuthzAPI: Request Ticket (resource_id)

@@ -107,5 +107,21 @@ The endpoint protected by the PEP is a configurable parameter and depends on the
 == Example Scenarios
 
 === Resource Access
+
+[.text-center]
+[#img_pepAccessResource,reftext='{figure-caption} {counter:figure-num}']
+.Access Resource Scenario
+[plantuml, pep-access-resource, png] 
+....
+include::include/pep-access-resource.wsd[]
+....
+
 === Resource Management
 
+[.text-center]
+[#img_pepRegisterResource,reftext='{figure-caption} {counter:figure-num}']
+.Register and Retrive Resource Reference Scenario
+[plantuml, pep-register-resource, png] 
+....
+include::include/pep-register-resource.wsd[]
+....

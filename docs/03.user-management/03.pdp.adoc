@@ -111,5 +111,21 @@ Similarly to OIDC and UMA endpoints, this well-known endpoint allows to discover
 == Example Scenarios
 
 === Policy Access Check
+
+[.text-center]
+[#img_pdpAccessCheck,reftext='{figure-caption} {counter:figure-num}']
+.Authorization Server XACML Request Scenario
+[plantuml, pdp-access-check, png] 
+....
+include::include/pdp-access-check.wsd[]
+....
+
 === Policy Management
 
+[.text-center]
+[#img_pdpPolicyManagement,reftext='{figure-caption} {counter:figure-num}']
+.PDP Policy Management Scenarios
+[plantuml, pdp-policy-management, png] 
+....
+include::include/pdp-policy-management.wsd[]
+....
