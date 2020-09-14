@@ -1,0 +1,36 @@
+@startuml component
+
+hide stereotype
+
+component "Protected Resource\nServer" as res_server <<provider>>
+component "UMA Client" as uma <<provider>>
+component "OIDC Client" as oidc <<provider>>
+() "Server Endpoints" as srv_endpoints <<consumed>>
+() "UMA Library" as umaapi <<consumed>>
+() "OIDC Library" as oidcapi <<consumed>>
+res_server -up- srv_endpoints
+uma -up- umaapi
+oidc -up- oidcapi
+
+
+component "PEP" as PEP <<pep>>
+PEP -down-( srv_endpoints
+PEP -down-( umaapi
+PEP -down-( oidcapi
+
+skinparam component<<pep>> {
+    BackgroundColor #77ff77
+    BorderColor #007700
+}
+
+skinparam interface<<consumed>> {
+    BackgroundColor #7777ff
+    BorderColor #000077
+}
+
+skinparam component<<provider>> {
+    BackgroundColor #7777ff
+    BorderColor #000077
+}
+
+@enduml

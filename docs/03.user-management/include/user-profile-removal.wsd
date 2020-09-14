@@ -1,0 +1,21 @@
+@startuml
+actor User
+participant "Web Interface" as web
+participant "User Profile" as bb
+
+User -> web: Select account removal option
+web -> bb: profile_removal(access_token, logged_in)
+
+bb -> bb: Generate internal clients:\n- SMTP Client\n- OIDC Client\n- SCIM Client
+bb -> bb: confirmation_email()
+
+bb --> web: render_template("confirmation_mail.html")
+bb --> User: Send a confirmation Email
+
+User -> User: Click on the URL\nin the Email\n to confirm
+User -> bb: confirmation(token)
+
+bb -> bb: scim_client.deleteUser(session.get("logged_user"))
+
+bb -> web: render_template\n("confirmation_removal.html")
+@enduml

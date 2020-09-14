@@ -1,0 +1,32 @@
+@startuml component
+
+hide stereotype
+
+component PEP <<pep>>
+() "Platform Resource API" as pependpoints <<provided>>
+() "Secured Proxy" as secured_proxy <<provided>>
+
+PEP -down- pependpoints
+PEP -down- secured_proxy
+
+component "Client Application" as client <<consumer>>
+client -up-( pependpoints
+client -up-( secured_proxy
+
+  
+skinparam component<<pep>> {
+    BackgroundColor #77ff77
+    BorderColor #007700
+}
+
+skinparam interface<<provided>> {
+    BackgroundColor #ff7777
+    BorderColor #770000
+}
+
+skinparam component<<consumer>> {
+    BackgroundColor #ff7777
+    BorderColor #770000
+}
+
+@enduml

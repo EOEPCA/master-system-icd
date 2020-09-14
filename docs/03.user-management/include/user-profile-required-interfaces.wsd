@@ -1,0 +1,36 @@
+@startuml component
+
+hide stereotype
+
+component "SCIM Client" as scim <<provider>>
+component "Email Service" as email <<provider>>
+component "OIDC Client" as oidc <<provider>>
+() "SCIM Library" as scimapi <<consumed>>
+() "SMTP Client" as smtpapi <<consumed>>
+() "OIDC Library" as oidcapi <<consumed>>
+scim -up- scimapi
+email -up- smtpapi
+oidc -up- oidcapi
+
+
+component "User Profile" as user_profile <<user_profile>>
+user_profile -down-( scimapi
+user_profile -down-( smtpapi
+user_profile -down-( oidcapi
+
+skinparam component<<user_profile>> {
+    BackgroundColor #77ff77
+    BorderColor #007700
+}
+
+skinparam interface<<consumed>> {
+    BackgroundColor #7777ff
+    BorderColor #000077
+}
+
+skinparam component<<provider>> {
+    BackgroundColor #7777ff
+    BorderColor #000077
+}
+
+@enduml

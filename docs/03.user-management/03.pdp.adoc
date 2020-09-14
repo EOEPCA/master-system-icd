@@ -1,4 +1,131 @@
 [[mainPDP]]
 = Policy Decision Point (PDP)
 
-TBD
+Refer to PDP building block documentation - https://eoepca.github.io/um-pdp-engine/master
+
+== Description
+
+The Policy Decision Point (PDP) provides an XACML compliant decision endpoint that can be both consumed from entities which are external to the platform, and the components participanting in a UMA Flow (Login Service and PEP). It also allows to assign specific access policies to a resource.
+
+== Context
+
+The following context diagram identifies the major components interfacing with the PDP: +
+([red]#RED# ~ consumers of PDP provided interfaces, [blue]#BLUE# ~ providers of interfaces consumed by the PDP)
+
+[.text-center]
+[#img_pdpContext,reftext='{figure-caption} {counter:figure-num}']
+.Policy Decision Point context diagram
+[plantuml, pdp-context, png] 
+....
+include::include/pdp-context.wsd[]
+....
+
+
+EOEPCA's PDP Service interacts mainly with the Login Service to both consume its SCIM Endpoints (as source of End-User information) and serve an XACML compliant endpoint to support Policy-based Access Control. On the other hand, Client Applications used by Resource Owners can interact with the Policy Management API to manipulate the access contraints for any given resource.
+
+== Provided Interfaces
+
+[.text-center]
+[#img_pdpProvidedInterfaces,reftext='{figure-caption} {counter:figure-num}']
+.Policy Decision Point provided interfaces
+[plantuml, pdp-provided-interfaces, png] 
+....
+include::include/pdp-provided-interfaces.wsd[]
+....
+
+=== Platform Policy API
+
+==== Applicable Standards
+
+No applicable standards besides Hypertext Transfer Protocol (HTTP) and a RESTful API approach allowing CRUD operations over Resource reference objects.
+
+==== Endpoints
+
+URL: /policies/{id}
+
+=== XACML Policy Checks
+
+==== Applicable Standards
+
+* OASIS - eXtensible Access Control Markup Language (XACML) Version 3.0 ~
+* OASIS (Public Draft) - JSON Profile of XACML 3.0 Version 1.1 ~
+
+==== Endpoints
+
+URL: /policy/validate
+
+This XACML Policy Check endpoint can potentially be available as a Platform interface, allowing external entities to perform policy checks when a Platform Resource is being consumed from outside of its Platform.
+
+== Required Interfaces
+
+[.text-center]
+[#img_pdpRequiredInterfaces,reftext='{figure-caption} {counter:figure-num}']
+.Policy Decision Point required interfaces
+[plantuml, pdp-required-interfaces, png] 
+....
+include::include/pdp-required-interfaces.wsd[]
+....
+
+=== OIDC Authentication
+
+The PDP utilizes an OIDC Client implementation to consume OIDC endpoints, and authenticate itself as trusted platform component, and secure its Policy API endpoints.
+
+==== Applicable Standards
+
+* IETF - OpenID Connect 1.0 
+
+==== Remote Endpoints
+
+URL: <um-login-service>/.well-known/openid-configuration
+
+The Login Service exposes the standard discovery document, a JSON showcasing all the necessary metadata and endpoint enumeration for a client application to dynamically load all the needed endpoints.
+
+=== UMA Authorization
+
+The PDP utilizes a UMA Client implementation that allows to successfully access SCIM protected endpoints.
+
+==== Applicable Standards
+
+* Kantara Innitiative - UMA 2.0 
+
+==== Remote Endpoints
+
+URL: <um-login-service>/.well-known/uma2-configuration
+
+The Login Service exposes a dicovery document very much similar to OIDC well-known documents. Although this is not implicitly stated as necessary part of a UMA-compliant solution, serving a well-known endpoint makes client integration more familiar to developers that may be used to OIDC Client integration.
+
+=== SCIM Identity Management
+
+The PDP utilizes an SCIM Client implementation that allows to retrieve information about End-Users and take it into account for its policy decision functionality
+
+==== Applicable Standards
+
+* IETF RFC 7644 - System for Cross-domain Identity Management ~ 
+
+==== Remote Endpoints
+
+URL: <um-login-service>/.well-known/scim-configuration
+
+Similarly to OIDC and UMA endpoints, this well-known endpoint allows to discover all relevant SCIM operations, allowing the PDP to dynamically load the list of endpoints to use.
+
+== Example Scenarios
+
+=== Policy Access Check
+
+[.text-center]
+[#img_pdpAccessCheck,reftext='{figure-caption} {counter:figure-num}']
+.Authorization Server XACML Request Scenario
+[plantuml, pdp-access-check, png] 
+....
+include::include/pdp-access-check.wsd[]
+....
+
+=== Policy Management
+
+[.text-center]
+[#img_pdpPolicyManagement,reftext='{figure-caption} {counter:figure-num}']
+.PDP Policy Management Scenarios
+[plantuml, pdp-policy-management, png] 
+....
+include::include/pdp-policy-management.wsd[]
+....

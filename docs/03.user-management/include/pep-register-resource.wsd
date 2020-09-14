@@ -1,0 +1,22 @@
+@startuml
+autonumber
+participant "Resource Owner Client" as RS
+participant "PEP" as PEP
+participant "Login Service"
+PEP <-> "Login Service": PEP Authentication (PAT)
+RS <-> "Login Service": End-User Authentication (id_token)
+== Registration ==
+RS -> PEP: POST /resource (resource_model, id_token)
+PEP -> PEP: Local Persistence
+PEP -> "Login Service": /rsrc/resource_set (uma_resource_model, PAT)
+"Login Service" --> PEP: 201 Created
+PEP --> RS: 201 Created
+== Retrieval ==
+RS -> PEP: GET /resource/{resource_id} (id_token)
+alt id_token = ownership_id
+PEP -> PEP: Get Local Persistence
+PEP -> RS: 200 OK (resource)
+else  id_token != ownership_id
+PEP -> RS: 401 Unauthorized
+end
+@enduml

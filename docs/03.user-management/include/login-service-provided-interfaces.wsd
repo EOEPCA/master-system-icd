@@ -1,0 +1,44 @@
+@startuml component
+
+hide stereotype
+
+component "Login Service" as login_service <<login_service>>
+() "OIDC Endpoints" as oidclient <<provided>>
+login_service -down- oidclient
+() "UMA Endpoints" as umaclient <<provided>>
+login_service -down- umaclient
+() "SCIM Endpoints" as scimclient <<provided>>
+login_service -down- scimclient
+
+() "Administration / Operation" as invoke <<provided>>
+login_service -up- invoke
+
+component "Web Client" as webclient <<consumer>>
+webclient -down-( invoke
+
+component "OIDC Client" as oidc_client <<consumer>>
+  oidc_client -up-( oidclient
+
+component "UMA Client" as uma_client <<consumer>>
+  uma_client -up-( umaclient
+
+component "SCIM Client" as scim_client <<consumer>>
+  scim_client -up-( scimclient
+
+  
+skinparam component<<login_service>> {
+    BackgroundColor #77ff77
+    BorderColor #007700
+}
+
+skinparam interface<<provided>> {
+    BackgroundColor #ff7777
+    BorderColor #770000
+}
+
+skinparam component<<consumer>> {
+    BackgroundColor #ff7777
+    BorderColor #770000
+}
+
+@enduml

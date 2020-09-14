@@ -1,0 +1,16 @@
+@startuml
+participant Client
+box "Login Service"
+participant "XACML Client" as Client
+participant "SCIM API" as SCIM
+participant "Authn Sevice" as Authn
+endbox
+participant "PDP" as PDP
+PDP <-> Authn: Authentication as Component
+-> Client: UMA Flow Policy Check
+Client -> PDP: /access_check (XACML Request)
+PDP -> SCIM: /attributes/{subject_id}
+SCIM --> PDP: return (attributes)
+PDP -> PDP: Performs Access Check
+PDP --> Client: return (XACML Response: "Permit"/"Deny")
+@enduml

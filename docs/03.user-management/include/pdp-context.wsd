@@ -1,0 +1,47 @@
+@startuml "PDP Context"
+
+hide stereotype
+
+/'------------------------------------------------------------------------------
+  Components
+------------------------------------------------------------------------------'/
+[PDP] as PDP <<pdp>>
+["OIDC Client"] as "OIDC Client" <<provider>>
+["UMA Client"] as "UMA Client" <<provider>>
+["SCIM Client"] as "SCIM Client" <<provider>>
+["Login Service"] as "Login Service" <<consumer>>
+["Client Application"] as "Client Application" <<consumer>>
+["Login Service 2"] as "Login Service" <<provider>>
+
+/'------------------------------------------------------------------------------
+  Top row
+------------------------------------------------------------------------------'/
+["OIDC Client"] -- [PDP]: authentication
+["UMA Client"] -- [PDP]: authorization
+["SCIM Client"] -- [PDP]: end-user attribute\nprovisioning
+["Login Service 2"] -- ["OIDC Client"]
+["Login Service 2"] -- ["UMA Client"]
+["Login Service 2"] -- ["SCIM Client"]
+
+/'------------------------------------------------------------------------------
+  Bottom row
+------------------------------------------------------------------------------'/
+[PDP] -- ["Login Service"]
+[PDP] -- ["Client Application"]
+
+skinparam component<<pdp>> {
+    BackgroundColor #77ff77
+    BorderColor #007700
+}
+
+skinparam component<<consumer>> {
+    BackgroundColor #ff7777
+    BorderColor #770000
+}
+
+skinparam component<<provider>> {
+    BackgroundColor #7777ff
+    BorderColor #000077
+}
+
+@enduml

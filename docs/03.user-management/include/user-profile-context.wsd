@@ -1,0 +1,44 @@
+@startuml "User Profile Context"
+
+hide stereotype
+
+/'------------------------------------------------------------------------------
+  Components
+------------------------------------------------------------------------------'/
+["User Profile"] as "User Profile" <<user_profile>>
+["OIDC Client"] as "OIDC Client" <<provider>>
+["Email Service"] as "Email Service" <<provider>>
+["SCIM Client"] as "SCIM Client" <<provider>>
+["Login Service"] as "Login Service" <<provider>>
+["User"] as "User" <<consumer>>
+
+/'------------------------------------------------------------------------------
+  Top row
+------------------------------------------------------------------------------'/
+["OIDC Client"] -- ["User Profile"]: authentication
+["Email Service"] -- ["User Profile"]: notification
+["SCIM Client"] -- ["User Profile"]: end-user attribute\nprovisioning
+["Login Service"] -- ["OIDC Client"]
+["Login Service"] -- ["SCIM Client"]
+
+/'------------------------------------------------------------------------------
+  Bottom row
+------------------------------------------------------------------------------'/
+["User Profile"] -- ["User"]: Web Interface
+
+skinparam component<<user_profile>> {
+    BackgroundColor #77ff77
+    BorderColor #007700
+}
+
+skinparam component<<consumer>> {
+    BackgroundColor #ff7777
+    BorderColor #770000
+}
+
+skinparam component<<provider>> {
+    BackgroundColor #7777ff
+    BorderColor #000077
+}
+
+@enduml
