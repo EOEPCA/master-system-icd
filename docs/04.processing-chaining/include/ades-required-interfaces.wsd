@@ -7,7 +7,7 @@ component "Policy Enforcement\nPoint (PEP)" as pep <<provider>>
 pep -down- pepauth
 
 component "Resource\nCatalogue" as catalog <<provider>>
-() "OGC OpenSearch" as opensearch <<consumed>>
+() "OGC OpenSearch\nSTAC API" as opensearch <<consumed>>
 catalog -down- opensearch
 
 component "Data\nAccess\nServices" as dataaccess <<provider>>
