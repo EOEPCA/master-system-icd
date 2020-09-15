@@ -6,41 +6,47 @@ participant ADES
 participant "Processing\nCluster" as pc
 participant "Resources\nManager" as rm
 
+autonumber
+
 == Deploy Application ==
 
-EMS -> PEP : Requests\nDeploy App 
+EMS -> PEP : Requests\nDeploy App\n+Auth (JWT)
 activate PEP
 
 PEP -> ADES : Requests\nDeploy App\n+Auth (JWT)
 activate ADES
 
+ADES <- rm : Get the Application Package +Auth (JWT) 
 ADES -> ADES : Deploy App &\n Build Service
+ADES -> pc : Register service namespace\nand data volumes
 
 ADES -> PEP : Service\nLocation
 deactivate ADES
 
 PEP -> EMS : Service\nLocation
 deactivate PEP
+activate EMS
+EMS -> rm : Register de processing service +Auth (JWT)
+deactivate EMS
 
 == Submit Job ==
 
-EMS -> PEP : Job Request
+EMS -> PEP : Job Request\n+Auth (JWT)
 activate PEP
 
 PEP -> ADES : Job Request\n+Auth (JWT)
 activate ADES
 
+ADES -> ADES : Creates the job and start it
 ADES -> PEP : Job Id
 PEP -> EMS : Job Id
 deactivate PEP
 group "Data Stage-In"
 
 activate ADES #DarkSalmon
-ADES -> AUTH : Request Token
-activate AUTH
-AUTH -> ADES : ID Token
-deactivate AUTH
-ADES <-> rm : Get Data\n+Auth
+ADES -> rm : Query and filter data from references
+ADES <- rm : Get Data\n+Auth (JWT)
+ADES -> ADES : Prepare data + local catalogs
 end
 deactivate ADES #DarkSalmon
 
@@ -49,7 +55,7 @@ ADES -> ADES : Data References
 group "Workflow Execution"
 
 activate ADES #Crimson
-ADES -> pc : Send Workflow Execution
+ADES <-> pc : Submit one or more jobs for execution
 activate pc
 == Monitor Job ==
 ...
@@ -80,14 +86,13 @@ ADES -> ADES : Results References
 group "Data Stage-Out"
 activate ADES #LightGreen
 
-ADES -> AUTH : Request Token
-activate AUTH
-AUTH -> ADES : ID Token
-deactivate AUTH
-ADES <-> rm : Publish Results\n+Auth
+activate rm
+ADES -> rm : Copy assets\n+Auth
+deactivate rm
+ADES <-> rm : Publish Results as a Collection\n+Auth
 
 deactivate ADES
-ADES -> ADES : Store Results Reference
+ADES -> ADES : Keep Results Collection
 deactivate ADES
 end
 

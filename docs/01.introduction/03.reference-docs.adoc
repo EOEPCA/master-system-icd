@@ -180,4 +180,14 @@ http://portal.opengeospatial.org/files/?artifact_id=32319
 https://docs.aws.amazon.com/AmazonS3/latest/API
 | API Version 2006-03-01
 
+| [[STAC-SPEC]][STAC-SPEC]
+| SpatioTemporal Asset Catalog specification, +
+https://github.com/radiantearth/stac-spec
+| 1.0.0-beta.2
+
+| [[STAC-API]][STAC-API]
+| SpatioTemporal Asset Catalog API specification, +
+https://github.com/radiantearth/stac-api-spec/
+| 1.0-beta
+
 |===

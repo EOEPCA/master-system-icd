@@ -95,6 +95,8 @@ UndeployProcess::
 `Execute` operation with a process identifier of `eoepcaadesundeployprocess` +
 Allows a client to undeploy a previously deployed custom WPS process
 
+NOTE: The 2 previously described processes implement the transactional function of the WPS known at WPS-T in WPS 1.0 & 2.0. In the OGC API Processes described in the next section, those functions are embedded as HTTP methods (POST & DELETE) at process level.
+
 [[mainOgcApiProc]]
 === OGC API Processes
 
@@ -118,11 +120,169 @@ include::include/ogc-api-processes-t.adoc[]
 
 === Application Invocation
 
-TBD - need to describe the interface (contract) between the ADES and the application, e.g. use of STAC files etc...
+==== CWL as Application Descriptor
 
-* stage-in
-* stage-out
-* more?
+CWL is used as the application package descriptor. It covers the following elements necessary to describe the application:
+
+. Workflow directed acyclic graph orchestrating the steps in order mapping workflow input/output with steps input/output
+. Steps describing a command line with their input/output
+. CWL specification extensions that may be used to provide the additional information elements 
+
+The application package is thus composed of a CWL file with the role of the application descriptor.
+The container reference is included in the CWL as a requirement.
+
+==== Application Deployment to Web Processing Service
+
+The ADES offers an entry point to deploy the application package (see previous sections). 
+
+Regardless of the deployment mechanism, the CWL is used to convey the information to describe the web service inputs/outputs using WPS concepts. 
+
+The mapping between CWL and WPS follows the rules described in the following sections.
+
+===== CWL Workflow definition level
+
+The workflow level is the entry point to the workflow and thus the interface used to map the inputs/outputs. 
+The inputs/outputs description defined in the command line or  workflow steps are not taken into account directly since they are inked between steps or bound at workflow level as foreseen by the CWL specification.
+Indeed, at the web processing service level, only the “staged” input and output parameters are exposed. 
+
+==== CWL staged (in/out) files
+
+`File` or `Directory` are https://www.commonwl.org/v1.0/CommandLineTool.html#File[CWL parameters types] corresponding to files on a file system and thus require a specific mapping according to the implementation of the software component exposing the WPS. 
+Indeed, the software component executing the processes must manage physical files in the processing environment. At job submission, physical files may be a reference to a resource manager and the software component fetches them to make them available for processing as specified in the CWL using File or Directory type.
+
+Therefore, the following mapping rules integrate the resource reference management capabilities. 
+This is the type(s) of reference to a physical resource that the software component manages. For instance: HTTP link, S3 link, opensearch URL, STAC catalog, etc.
+
+The interface for the execution process must have a STAC local catalog (catalog.json and all downstream files: collection.json, items and assets including their associated files) referencing all the data staged-in corresponding collections as specified initially in the CWL.
+
+In the above example, the CWL describes a File in input. The parameter is extended with stac:catalog that defines the collection in which the “staged” data must be referenced to.
+A detailed example is described in section CWL data staging.
+
+* _CWL File mandatory parameter example_ *
+
+In this example, we assume the software component is able to handle the following resource description document or references:
+
+* Opensearch description document describing possible search endpoints to find input files
+* Atom feed with entries containing the input files (enclosures)
+* STAC catalogue with features describing assets as input files
+
+.CWL File mandatory parameter example
+|===
+| Resource
+
+| CWL
+a|[source,yaml] 
+----
+file_parameter:
+      label: Title of file_parameter 
+      doc: Abstract describing file_parameter
+      type: File
+      stac:catalog:
+         stac:collection: input_file
+         stac:href: catalog.json
+----
+| WPS 1.0
+a|[source,xml]
+----
+<Input minOccurs="0" maxOccurs="1">
+  <ows:Identifier>int_parameter</ows:Identifier>
+  <ows:Title>Title of int_parameter </ows:Title>
+  <ows:Abstract>Abstract describing int_parameter</ows:Abstract>
+  <ComplexData>
+    <Supported>
+      <Format>
+        <MimeType>application/opensearchdescription+xml</MimeType>
+      </Format>
+      <Format>
+        <MimeType>application/atom+xml</MimeType>
+      </Format>
+      <Format>
+        <MimeType>application/geo+json; profile=stac</MimeType>
+      </Format>
+    </Supported>
+  </ComplexData>
+</Input>
+----
+|WPS 2.0.2
+a|[source,xml]
+----
+<Input minOccurs="0" maxOccurs="1">
+  <ows:Identifier>int_parameter</ows:Identifier>
+  <ows:Title>Title of int_parameter </ows:Title>
+  <ows:Abstract>Abstract describing int_parameter</ows:Abstract>
+  <wps:ComplexData>
+    <wps:Format mimeType="application/opensearchdescription+xml" encoding="raw" />
+    <wps:Format mimeType="application/atom+xml" encoding="raw"/>
+    <wps:Format mimeType="application/geo+json; profile=stac-item" encoding="raw"/>
+  </wps:ComplexData>
+</Input>
+----
+|OGC API Processes (JSON)
+a|[source,json]
+----
+{
+  "inputs": [
+    {
+      "id": "int_parameter",
+      "title": "Title of int_parameter",
+      "description": "Abstract describing int_parameter",
+      "input": {
+        "formats": [
+          {
+            "Type": "application/opensearchdescription+xml"
+          },
+          {
+            "Type": "application/atom+xml"
+          },
+          {
+            "Type": "application/geo+json; profile=stac-item"
+          }
+        ],
+        "minOccurs": 0,
+        "maxOccurs": 1
+      }
+    }
+  ]
+}
+----
+|===
+
+
+CWL data referencing mechanism manages File and Directory data types
+
+.CWL Data staging
+|===
+|catalog.json
+a|[source,json]
+----
+{
+  "stac_version": "1.0.0-beta.1",
+  "id": "my_workflow",
+  "description": "Catalog of staged data for execution 45325-34214124 of my_workflow",
+  "links": [
+    { "rel": "self", "href": "catalog.json" },
+            { "rel": "root", "href": "catalog.json" },
+    { "rel": "child", "href": "collection-input_file.json" }
+  ]
+}
+----
+|collection-input_file.json
+a|[source,json]
+----
+{
+  "stac_version": "1.0.0-beta.1",
+  "id": "my_workflow",
+  "description": "Catalog of staged data for execution 45325-34214124 of my_workflow",
+  "links": [
+    { "rel": "self", "href": "catalog.json" },
+            { "rel": "root", "href": "catalog.json" },
+    { "rel": "child", "href": "collection-input_file.json" }
+  ]
+}
+----
+|===
+
+The complete example at the end of this section describes in details how data are staged in and STAC catalogs generated.
 
 == Required Interfaces
 
@@ -136,18 +296,27 @@ The ADES communicates to other components through the interfaces described in th
 include::include/ades-required-interfaces.wsd[]
 ....
 
-TBD:
+=== Resource Managers
 
-* resource catalogue for input data
-* data access services for data stage-in
-* cluster infrastructure for processing execution
-* Stage-out, either:
-** workspace for data stage-out
-** resource catalogue for output data? - or maybe ingestion does this
-* Stage-out, or:
-** ingestion for data stage-out
+==== Catalogue for referenced data
 
-TBD - design decision regarding whether stage-out is handed-off to the ingestion component. Nevertheless the ADES needs to know the 'published' location of the output in order to pass to user/EMS.
+Since all data (resources) for processing are passed (in or out) by reference, the ADES must be able to contact those resources' manager (e.g. catalog). 
+
+In input, the ADES supports both OpenSearch (<<CEOS-OS-BP>>), <<STAC-SPEC>> and <<STAC API>> as resources protocols.
+
+In output, the ADES supports the transactional functions of the <<STAC API>> to publish catalogs.
+
+==== Data Access Services for data stage-in
+
+The referenced assets in the catalogs (see previous section) are accessible from the same or another resource manager. Their enclosure URL allows to download entirely the asset or to access parts or it (e.g. COGs with HTTP range).
+The ADES supports the following protocols:
+- HTTP download
+- S3 Download
+- WebDAV upload
+
+==== Cluster infrastructure for processing execution
+
+The ADES uses a kubernestes API for deploying its services and to provision resources for processing.
 
 == Example Scenarios
 
@@ -162,4 +331,85 @@ This section provides examples of the ADES interfacing flows.
 ....
 include::include/ades-processing-flows.wsd[]
 ....
+
+*_Deploy Application_*
+
+The first sequence is the application deployment. In the EOEPCA scenario, this is initiated by the EMS that uses the transactional functions of the ADES. 
+
+. The EMS invoke a service or POST a request to the ADES with the reference to an Application Package and pass by the PEP that allows the deployment accoring to the policy
+. The request is transferred to the ADES along with an auth token
+. The ADES gets the Application Package referenced in the deployment request
+. The ADES registers internally the application as a service
+. The ADES sets a namespace for the service and data volume if necessary
+. The ADES returns the service location to the PEP
+. The PEP returns the service location to the EMS
+. The EMS registers the service deployed on the ADES on the catalog
+
++
+*_Submit Job_*
++
+The second sequence is the service invokation via a job submission.
++
+
+. The EMS makes a job request to the ADES via the PEP
+. The PEP authorizes and transfer the request to the ADES
+. The ADES instantiates the job and returns the job identifier
+. The ADES returns the job id to the PEP
+. The PEP returns the job id to the EMS
+
++
+_Data Stage-In_
++
+The first stage is about how the ADES prepares the data for the processing. This is a pre-processing step that must provision all the data needed for processing and referenced in the job execute request.
++
+
+. The ADES queries the data references passed as input of the job reequest to the resource manager (e.g. catalog)
+. With the results of the previous request, the ADES retrieves all the assets requested from the resource manager (e.g. data store)
+. The ADES organizes and prepare the data as nedded (e.g. unzip) and rebuild the catalog to point to locally copied data
+
+. The data references are passed to the next stage of the execution
+
++
+_Workflow Execution_
++
+Data is now ready to be processed by the main processing. The software component will ensure that the input data folder will be properly mounted on each cluster node and accessible from the container that executes the processing. This is the main stage where the processing is actually executed on the data.
++
+
+. The ADES submits and coordinates the necessary jobs as defined in the application workflow
+
++
+*_Monitor Job_*
++
+This sequence in a parallel sequence triggered by the EMS each time it requests for the job status during the asynchronous job execution
++
+
+. EMS makes a request for status with the Job Id previously returned (13) via the PEP
+. PEP passes the requests along
+. The ADES builds a job progress report based on the workflow execution status
+. The ADES returns the job status document via the PEP
+. The PEP returns the job status to the EMS
+. Once the job is completed, the job status reports the job results location
+. The results refertences are passed to next stage
+
++
+_Data Stage-Out_
++
+The last stage is about how the ADES publishes the data after the processing. This is a post-processing step that must copy the selected data to a persistent storage and registers theit reference to a catalog for further searches.
++
+
+. The ADES copies the results' assets to the persistent storage of the resource manager (e.g. WebDAV)
+. Publish a collection of the assets produced with the reference to the persistent storage to the catalog
+. Keep in the cache of the ADES a reference to the collection for further results query
+
++
+*_Get Results_*
++
+This ending sequence is the results report from the ADES
++
+
+. EMS makes a request for results with the Job Id previously returned (13) via the PEP
+. PEP passes the requests along
+. The ADES builds a results report based on the results collection (28)
+. The ADES returns the job results document via the PEP
+. The PEP returns the job results to the EMS
 
