@@ -5,18 +5,22 @@ hide stereotype
 component "Protected Resource\nServer" as res_server <<provider>>
 component "UMA Client" as uma <<provider>>
 component "OIDC Client" as oidc <<provider>>
+component "Policy Decision\nPoint" as pdp <<provider>>
 () "Server Endpoints" as srv_endpoints <<consumed>>
 () "UMA Library" as umaapi <<consumed>>
 () "OIDC Library" as oidcapi <<consumed>>
+() "PDP Policy\nEndpoint" as pdppoint <<consumed>>
 res_server -up- srv_endpoints
 uma -up- umaapi
 oidc -up- oidcapi
+pdp -up- pdppoint
 
 
 component "PEP" as PEP <<pep>>
 PEP -down-( srv_endpoints
 PEP -down-( umaapi
 PEP -down-( oidcapi
+PEP -down-( pdppoint
 
 skinparam component<<pep>> {
     BackgroundColor #77ff77
