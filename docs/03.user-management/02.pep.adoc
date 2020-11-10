@@ -104,6 +104,19 @@ No applicable standards besides the capability to parse and enrich Hypertext Tra
 
 The endpoint protected by the PEP is a configurable parameter and depends on the characteristics of the Resource Server running behing the PEP.
 
+=== Policy Decision Point (PDP)
+
+The PEP will interact with the PDP in order to assign a default access policy when registering a new resource.
+
+==== Applicable Standards
+
+No applicable standards besides the capability to parse and enrich Hypertext Transfer Protocol (HTTP) responses.
+
+==== Remote Endpoints
+
+URL: <um-pdp-engine>/policy
+The endpoint name is configurable on the PDP side, with this being the default configuration.
+
 == Example Scenarios
 
 === Resource Access
