@@ -42,7 +42,7 @@ No applicable standards besides Hypertext Transfer Protocol (HTTP) and a RESTful
 
 ==== Endpoints
 
-URL: /resources/{id}
+URL: <um-pep-engine>:<resources_port>/resources/{id}
 
 === Secured Proxy
 
@@ -52,7 +52,7 @@ No applicable standards besides the capability to parse and enrich Hypertext Tra
 
 ==== Endpoints
 
-URL: /secure/{back-end-url}
+URL: <um-pep-engine>:<proxy_port>/proxy/{back-end-url}
 
 == Required Interfaces
 
