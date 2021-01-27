@@ -42,10 +42,10 @@ echo -n "Generating HTML... "
 docker run ${DOCKER_RM} --user $(id -u):$(id -g) -v $PWD:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor asciidoctor -r asciidoctor-diagram -D /documents/output index.adoc
 echo "[done]"
 # PDF version
-# echo -n "Generating PDF... "
-# docker run ${DOCKER_RM} --user $(id -u):$(id -g) -v $PWD:/documents/ --name asciidoc-to-pdf asciidoctor/docker-asciidoctor asciidoctor-pdf -r asciidoctor-diagram -D /documents/output index.adoc
-# mv output/index.pdf output/EOEPCA-${GH_REPOS_NAME}.pdf
-# echo "[done]"
+echo -n "Generating PDF... "
+docker run ${DOCKER_RM} --user $(id -u):$(id -g) -v $PWD:/documents/ --name asciidoc-to-pdf asciidoctor/docker-asciidoctor asciidoctor-pdf -r asciidoctor-diagram -D /documents/output index.adoc
+mv output/index.pdf output/EOEPCA-${GH_REPOS_NAME}.pdf
+echo "[done]"
 
 # Output summary
 echo "Summary of output files generated..."
