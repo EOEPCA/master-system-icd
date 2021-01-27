@@ -4,13 +4,14 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.10">
+<meta name="generator" content="Asciidoctor 2.0.12">
 <meta name="description" content="Master System Interface Control Document for the Common Architecture">
 <meta name="keywords" content="common architecture master system interface">
 <meta name="author" content="TVUK System Team">
 <title>Master System Interface Control Document: EOEPCA.ICD.001</title>
 <link rel="stylesheet" href="stylesheets/eoepca.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
@@ -1485,7 +1486,7 @@ URL(2): /identity</p>
 <div class="sect5">
 <h6 id="_endpoints_5">3.2.3.1.2. Endpoints</h6>
 <div class="paragraph">
-<p>URL: /resources/{id}</p>
+<p>URL: &lt;um-pep-engine&gt;:&lt;resources_port&gt;/resources/{id}</p>
 </div>
 </div>
 </div>
@@ -1500,7 +1501,7 @@ URL(2): /identity</p>
 <div class="sect5">
 <h6 id="_endpoints_6">3.2.3.2.2. Endpoints</h6>
 <div class="paragraph">
-<p>URL: /secure/{back-end-url}</p>
+<p>URL: &lt;um-pep-engine&gt;:&lt;proxy_port&gt;/proxy/{back-end-url}</p>
 </div>
 </div>
 </div>
@@ -2845,9 +2846,8 @@ The ADES supports the following protocols:<br>
 <div id="footer">
 <div id="footer-text">
 Version Draft for 0.1<br>
-Last updated 2020-11-10 12:01:35 UTC
+Last updated 2020-09-15 13:43:15 UTC
 </div>
 </div>
-<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
 </body>
 </html>
