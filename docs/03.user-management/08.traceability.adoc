@@ -1,0 +1,18 @@
+[[umTraceability]]
+= Use Case Traceability
+
+[cols="<.^21,.^20,.^20,.^23"]
+|===
+| Identifier | Interface | Building Block | Related Test Procedures 
+
+| EOEPCAUM_LOG__WEB | Administration Web Interface | Login Service | EOEPCAUM-TP-LOG-0020 
+| EOEPCAUM_LOG_OIDC | OIDC Interface | Login Service | EOEPCAUM-TP-LOG-0010 
+| EOEPCAUM_LOG__UMA | UMA Interface | Login Service | EOEPCAUM-TP-PEP-0060 
+| EOEPCAUM_LOG_SCIM | SCIM Interface | Login Service | EOEPCAUM-TP-USP-0010 EOEPCAUM-TP-USP-0030 
+| EOEPCAUM_PEP__RES | Resource Protection API | Policy Enforcement Point | EOEPCAUM-TP-PEP-0010 EOEPCAUM-TP-PEP-0030 EOEPCAUM-TP-PEP-0040
+| EOEPCAUM_PEP_PROX | Service Proxy | Policy Enforcement Point | EOEPCAUM-TP-PEP-0060 
+| EOEPCAUM_PDP__POL | Policy API | Policy Decision Point | EOEPCAUM-TP-PDP-0010 EOEPCAUM-TP-PDP-0020 EOEPCAUM-TP-PDP-0030 
+| EOEPCAUM_PDP__CHK | XACML Policy Checks | Policy Decision Point | EOEPCAUM-TP-PDP-0050 EOEPCAUM-TP-PDP-0060 
+| EOEPCAUM_USP__WEB | Web Interface | User Profile | EOEPCAUM-TP-USP-0010 EOEPCAUM-TP-USP-0030 
+ 
+|===
